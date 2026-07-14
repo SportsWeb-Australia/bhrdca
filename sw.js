@@ -1,6 +1,6 @@
 /* BHRDCA service worker — bump CACHE to invalidate on deploy.
    Network-first for pages + app code (css/js/json); cache-first for images/icons. */
-var CACHE = "bhrdca-v3";
+var CACHE = "bhrdca-v5";
 var CORE = [
   "/", "/index.html",
   "/_shared.css", "/_pages.css",

@@ -99,7 +99,7 @@
     var el = build(
       '<div class="rdca-pwa-row">' +
         '<div class="rdca-pwa-ic"><img src="/icon-192.png" alt=""></div>' +
-        '<div><div class="rdca-pwa-tt">Add RDCA to your home screen</div>' +
+        '<div><div class="rdca-pwa-tt">Add BHRDCA to your home screen</div>' +
         '<div class="rdca-pwa-sb">Get the app experience on your iPhone or iPad.</div></div>' +
         '<button class="rdca-pwa-x" aria-label="Dismiss"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
       '</div>' +
@@ -140,14 +140,14 @@
 (function () {
   "use strict";
   var SAMPLES = [
-    { title: "AGM \u2014 28 January", body: "The RDCA AGM is set for 28 January. All member clubs are invited.", url: "/notices.html#agm" },
+    { title: "AGM \u2014 28 January", body: "The BHRDCA AGM is set for 28 January. All member clubs are invited.", url: "/notices.html#agm" },
     { title: "Ground closures in effect", body: "Some grounds are closed \u2014 check conditions before you travel.", url: "/notices.html#ground-closures" },
-    { title: "Awards Night nominations open", body: "Nominations for the RDCA Awards Night are open until 31 January.", url: "/notices.html#awards" },
+    { title: "Awards Night nominations open", body: "Nominations for the BHRDCA Awards Night are open until 31 January.", url: "/notices.html#awards" },
     { title: "Round 15 fixtures are live", body: "See who your club plays this Saturday across all grades.", url: "/competition.html" },
     { title: "Wet weather update", body: "Some grounds may be affected today \u2014 tap for the latest ground status.", url: "/competition.html" },
-    { title: "Live now on FrogBox", body: "Ringwood CC v Croydon CC is streaming live. Tap to watch.", url: "/video.html" },
+    { title: "Round results are in", body: "See how your club went across all grades this weekend.", url: "/clubs.html" },
     { title: "New photos added", body: "Around-the-grounds shots from the weekend are up in the gallery.", url: "/photos.html" },
-    { title: "Registrations are open", body: "2026/27 player registrations are now open across the RDCA.", url: "/competition.html" }
+    { title: "Registrations are open", body: "2026/27 player registrations are now open across the BHRDCA.", url: "/competition.html" }
   ];
   function pick() { return SAMPLES[Math.floor(Math.random() * SAMPLES.length)]; }
 
@@ -170,7 +170,7 @@
                  data: { url: s.url }, vibrate: [60, 40, 60] };
     if (navigator.serviceWorker && navigator.serviceWorker.ready) {
       navigator.serviceWorker.ready.then(function (reg) {
-        try { reg.showNotification(s.title + "  \u00b7  RDCA", opts); }
+        try { reg.showNotification(s.title + "  \u00b7  BHRDCA", opts); }
         catch (_) { try { new Notification(s.title, opts); } catch (e) {} }
       });
     } else {

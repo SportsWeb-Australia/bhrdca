@@ -807,33 +807,46 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 .tti .tti-live{color:var(--gold);font-weight:700;letter-spacing:.5px}
 @keyframes tt-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.sb-oval-wrap{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);border-radius:var(--r);box-shadow:var(--shadow2);overflow:hidden;color:#fff}
-.sb-oval-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px 0;flex-wrap:wrap}
-.sb-oval-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.5px;display:flex;align-items:center;gap:8px}
-.sb-oval-title i{color:var(--gold)}
-.sb-oval-sub{font-size:12px;color:rgba(255,255,255,.6)}
-.sb-figures{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);margin:16px 20px 0;border-radius:var(--rsm);overflow:hidden}
-.sb-fig{background:rgba(0,0,0,.18);padding:16px 10px;text-align:center}
-.sb-num{font-family:'JetBrains Mono',monospace;font-size:clamp(22px,4vw,34px);font-weight:700;color:var(--gold);line-height:1}
-.sb-lbl{font-size:11px;letter-spacing:.4px;color:rgba(255,255,255,.65);margin-top:6px;text-transform:uppercase}
-.sb-updated{font-size:11px;color:rgba(255,255,255,.5);padding:10px 20px 18px;font-family:'JetBrains Mono',monospace}
+/* Split-flap "Adelaide Oval" scoreboard */
+.split-board{background:#0b0b0c;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35);border:1px solid #000}
+.split-board-crown{background:linear-gradient(180deg,#efe3c6,#d9c99e);color:var(--navy);text-align:center;padding:14px 20px;position:relative}
+.split-board-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px}
+.split-board-sub{font-size:11px;letter-spacing:1.5px;color:var(--navy3);margin-top:2px;font-weight:700}
+.split-board-clock{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#fff;border:3px solid var(--navy);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:15px}
 
-.lb-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
-.lb-tabs{display:flex;border-bottom:1px solid var(--border)}
-.lb-tab{flex:1;padding:12px;background:none;border:none;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.4px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent}
-.lb-tab.active{color:var(--navy);border-bottom-color:var(--gold)}
-.lb-list{padding:6px 0}
-.lb-row{display:flex;align-items:center;gap:10px;padding:8px 16px;font-size:13px;border-bottom:1px solid var(--border)}
-.lb-row:last-child{border-bottom:none}
-.lb-rank{width:20px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--gold-deep);font-size:12px}
-.lb-nm{flex:1;min-width:0}
-.lb-nm b{color:var(--navy);font-weight:700}
-.lb-nm span{display:block;font-size:11px;color:var(--muted)}
-.lb-val{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--navy);font-size:13px}
-.lb-note{padding:10px 16px;font-size:11px;color:var(--muted);border-top:1px solid var(--border)}
+.split-board-face{padding:22px 20px;background:#0b0b0c}
 
-.sb-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
-@media (max-width:760px){.sb-figures{grid-template-columns:1fr}.sb-grid{grid-template-columns:1fr}}
+.split-totals{display:flex;flex-wrap:wrap;gap:22px;justify-content:center;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:18px}
+.split-total-block{text-align:center}
+.split-total-lbl{font-size:11px;letter-spacing:1.5px;color:var(--gold);font-weight:700;margin-bottom:8px}
+
+.flap-row{display:flex;gap:3px;justify-content:center}
+.flap-tile{position:relative;width:30px;height:42px;background:#161616;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:24px;color:#f6c21c;box-shadow:inset 0 0 0 1px #000,0 1px 0 rgba(255,255,255,.06);overflow:hidden}
+.flap-tile::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:#000;transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.05)}
+.flap-tile.is-sep{background:none;box-shadow:none;width:12px}
+.flap-tile.is-sep::after{display:none}
+.flap-tile.is-flip{animation:flap-bounce .16s ease}
+@keyframes flap-bounce{0%{transform:scaleY(.72);filter:brightness(1.6)}100%{transform:scaleY(1);filter:brightness(1)}}
+
+.split-leaders-tabs{display:flex;gap:2px;margin-bottom:10px}
+.split-leaders-tabs .lb-tab{flex:1;background:#161616;color:rgba(255,255,255,.5);border:none;padding:10px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;font-size:14px;cursor:pointer;border-radius:3px}
+.split-leaders-tabs .lb-tab.active{background:var(--gold);color:var(--ink-gold)}
+.split-leaders-head{display:grid;grid-template-columns:2.2fr 1.6fr .8fr;padding:6px 10px;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,.4);font-weight:700}
+.split-leaders-rows{display:flex;flex-direction:column;gap:2px}
+.split-row{display:grid;grid-template-columns:2.2fr 1.6fr .8fr;align-items:center;background:#141414;border-radius:3px;padding:7px 10px;gap:6px;transform-origin:top center}
+.split-row.flap-in{animation:row-flap .38s ease both}
+@keyframes row-flap{0%{transform:rotateX(85deg);opacity:0}55%{transform:rotateX(-6deg);opacity:1}100%{transform:rotateX(0deg);opacity:1}}
+.split-row-rank{color:var(--gold);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;margin-right:6px}
+.split-row-name{color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.split-row-club{color:rgba(255,255,255,.5);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.split-row-val{color:var(--gold);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;text-align:right}
+
+.split-board-foot{background:#000;color:rgba(255,255,255,.35);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-align:center;padding:8px;border-top:1px solid rgba(255,255,255,.06)}
+
+@media (max-width:760px){
+  .split-leaders-head,.split-row{grid-template-columns:1.6fr 1.1fr .7fr}
+  .flap-tile{width:24px;height:36px;font-size:19px}
+}
 
 /* ===== BHRDCA cascade-final overrides (navy text on gold accents) ===== */
 .album-tag.is-latest{color:var(--ink-gold)}

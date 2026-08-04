@@ -52,27 +52,37 @@
 <!-- ASSOCIATION SCOREBOARD (concept — demo data, whole-of-association) -->
 <section class="page-wrap wide" style="margin-top:28px">
   <div class="sb-concept-flag"><i class="ti ti-flask"></i> Concept preview &mdash; demo data, connects to a live PlayHQ feed once API access is confirmed</div>
-  <div class="sb-grid">
-    <div class="sb-oval-wrap">
-      <div class="sb-oval-head">
-        <div class="sb-oval-title"><i class="ti ti-scoreboard"></i> Association Scoreboard</div>
-        <div class="sb-oval-sub">All grades &middot; updates as games are scored</div>
-      </div>
-      <div class="sb-figures">
-        <div class="sb-fig"><div class="sb-num" id="sb-runs">0</div><div class="sb-lbl">Total Runs</div></div>
-        <div class="sb-fig"><div class="sb-num" id="sb-overs">0</div><div class="sb-lbl">Total Overs</div></div>
-        <div class="sb-fig"><div class="sb-num" id="sb-wkts">0</div><div class="sb-lbl">Total Wickets</div></div>
-      </div>
-      <div class="sb-updated" id="sb-updated">Round 8 &middot; demo data</div>
+  <div class="split-board">
+    <div class="split-board-crown">
+      <div class="split-board-clock"><i class="ti ti-clock"></i></div>
+      <div class="split-board-title">ASSOCIATION SCOREBOARD</div>
+      <div class="split-board-sub">ALL GRADES &middot; UPDATES AS GAMES ARE SCORED</div>
     </div>
-    <div class="lb-panel">
-      <div class="lb-tabs">
-        <button class="lb-tab active" data-lb="bat" type="button">Top 10 Batters</button>
-        <button class="lb-tab" data-lb="bowl" type="button">Top 10 Bowlers</button>
+    <div class="split-board-face">
+      <div class="split-totals">
+        <div class="split-total-block">
+          <div class="split-total-lbl">TOTAL RUNS</div>
+          <div class="flap-row" id="flap-runs"></div>
+        </div>
+        <div class="split-total-block">
+          <div class="split-total-lbl">TOTAL OVERS</div>
+          <div class="flap-row" id="flap-overs"></div>
+        </div>
+        <div class="split-total-block">
+          <div class="split-total-lbl">TOTAL WICKETS</div>
+          <div class="flap-row" id="flap-wkts"></div>
+        </div>
       </div>
-      <div class="lb-list" id="lb-list"></div>
-      <div class="lb-note">All grades &mdash; Seniors, Juniors, Women's &amp; Veterans &middot; resets weekly</div>
+      <div class="split-leaders">
+        <div class="split-leaders-tabs">
+          <button class="lb-tab active" data-lb="bat" type="button">BATSMEN</button>
+          <button class="lb-tab" data-lb="bowl" type="button">BOWLERS</button>
+        </div>
+        <div class="split-leaders-head"><span>PLAYER</span><span>CLUB / GRADE</span><span id="sb-unit-head" style="text-align:right">RUNS</span></div>
+        <div class="split-leaders-rows" id="sb-rows"></div>
+      </div>
     </div>
+    <div class="split-board-foot">ROUND 8 &middot; DEMO DATA &middot; UPDATED JUST NOW</div>
   </div>
 </section>
 
@@ -153,45 +163,82 @@
       track.innerHTML = ttItems.map(mk).join("") + ttItems.map(mk).join("");
     }
 
-    var sbFinal = { runs: 4812, overs: 1206.3, wkts: 318 };
-    var runsEl = document.getElementById("sb-runs"), oversEl = document.getElementById("sb-overs"), wktsEl = document.getElementById("sb-wkts");
-    var start = null, dur = 900;
-    function step(ts){
-      if (!start) start = ts;
-      var p = Math.min(1, (ts - start) / dur);
-      if (runsEl) runsEl.textContent = Math.round(sbFinal.runs * p).toLocaleString();
-      if (oversEl) oversEl.textContent = (sbFinal.overs * p).toFixed(1);
-      if (wktsEl) wktsEl.textContent = Math.round(sbFinal.wkts * p);
-      if (p < 1) requestAnimationFrame(step);
+    /* split-flap character engine — cycles random chars then lands on target,
+       staggered per tile, like an airport/train departure board */
+    var DIGITS = "0123456789";
+    var LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    function flapChar(el, target, delay, charset){
+      var steps = 7 + Math.floor(Math.random() * 6);
+      var i = 0;
+      setTimeout(function(){
+        var iv = setInterval(function(){
+          if (i < steps - 1) {
+            el.textContent = charset[Math.floor(Math.random() * charset.length)];
+          } else {
+            el.textContent = target;
+            clearInterval(iv);
+          }
+          el.classList.remove("is-flip");
+          void el.offsetWidth;
+          el.classList.add("is-flip");
+          i++;
+        }, 50);
+      }, delay);
     }
-    requestAnimationFrame(step);
-    var upd = document.getElementById("sb-updated");
-    if (upd) upd.textContent = "Round 8 · demo data · updated just now";
+    function flapRowRender(containerId, text){
+      var el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = "";
+      text.split("").forEach(function(ch, idx){
+        var tile = document.createElement("div");
+        if (!/[a-zA-Z0-9]/.test(ch)) {
+          tile.className = "flap-tile is-sep";
+          tile.textContent = ch === " " ? "" : ch;
+          el.appendChild(tile);
+          return;
+        }
+        tile.className = "flap-tile";
+        tile.textContent = "0";
+        el.appendChild(tile);
+        flapChar(tile, ch, idx * 90, /[0-9]/.test(ch) ? DIGITS : LETTERS);
+      });
+    }
+
+    var sbFinal = { runs: "4,812", overs: "1206.3", wkts: "318" };
+    function runScoreboardFlap(){
+      flapRowRender("flap-runs", sbFinal.runs);
+      flapRowRender("flap-overs", sbFinal.overs);
+      flapRowRender("flap-wkts", sbFinal.wkts);
+    }
+    runScoreboardFlap();
+    setInterval(runScoreboardFlap, 25000);
 
     var LB = {
       bat: [
-        ["J. Whitfield","Box Hill CC — Seniors","412"],["S. Kaur","Wantirna South CC — Women's","387"],
-        ["M. Delaney","Vermont CC — Seniors","356"],["A. Osei","Forest Hill CC — Juniors","341"],
-        ["R. Thompson","Balwyn CC — Seniors","329"],["L. Nguyen","Bayswater CC — Women's","318"],
-        ["D. Marsh","Croydon CC — Veterans","304"],["T. Iqbal","Blackburn CC — Seniors","297"],
-        ["C. Fenwick","Nunawading CC — Juniors","281"],["P. Costa","Mont Albert CC — Seniors","266"]
+        ["J WHITFIELD","Box Hill — Sen","412"],["S KAUR","Wantirna Sth — Wmn","387"],
+        ["M DELANEY","Vermont — Sen","356"],["A OSEI","Forest Hill — Jnr","341"],
+        ["R THOMPSON","Balwyn — Sen","329"],["L NGUYEN","Bayswater — Wmn","318"],
+        ["D MARSH","Croydon — Vet","304"],["T IQBAL","Blackburn — Sen","297"],
+        ["C FENWICK","Nunawading — Jnr","281"],["P COSTA","Mont Albert — Sen","266"]
       ],
       bowl: [
-        ["K. Papadopoulos","Ringwood CC — Seniors","24"],["H. Bell","Reporter CC — Seniors","22"],
-        ["Z. Ahmed","Box Hill CC — Juniors","21"],["E. Sharma","Wantirna South CC — Women's","20"],
-        ["G. Molloy","Vermont CC — Veterans","19"],["N. Whitworth","Forest Hill CC — Seniors","18"],
-        ["B. Carrucan","Balwyn CC — Seniors","17"],["F. Okafor","Bayswater CC — Women's","16"],
-        ["W. Sutton","Croydon CC — Juniors","15"],["O. Baxter","Blackburn CC — Seniors","14"]
+        ["K PAPADOPOULOS","Ringwood — Sen","24"],["H BELL","Reporter — Sen","22"],
+        ["Z AHMED","Box Hill — Jnr","21"],["E SHARMA","Wantirna Sth — Wmn","20"],
+        ["G MOLLOY","Vermont — Vet","19"],["N WHITWORTH","Forest Hill — Sen","18"],
+        ["B CARRUCAN","Balwyn — Sen","17"],["F OKAFOR","Bayswater — Wmn","16"],
+        ["W SUTTON","Croydon — Jnr","15"],["O BAXTER","Blackburn — Sen","14"]
       ]
     };
-    var lbList = document.getElementById("lb-list");
-    var lbUnit = { bat: "runs", bowl: "wkts" };
+    var rowsEl = document.getElementById("sb-rows");
+    var unitHead = document.getElementById("sb-unit-head");
     function renderLB(key){
-      if (!lbList) return;
-      lbList.innerHTML = LB[key].map(function(row, i){
-        return '<div class="lb-row"><div class="lb-rank">' + (i+1) + '</div>'
-          + '<div class="lb-nm"><b>' + row[0] + '</b><span>' + row[1] + '</span></div>'
-          + '<div class="lb-val">' + row[2] + ' ' + lbUnit[key] + '</div></div>';
+      if (!rowsEl) return;
+      unitHead.textContent = key === "bat" ? "RUNS" : "WKTS";
+      rowsEl.innerHTML = LB[key].map(function(row, i){
+        return '<div class="split-row flap-in" style="animation-delay:' + (i * 45) + 'ms">'
+          + '<div class="split-row-name"><span class="split-row-rank">' + (i + 1) + '</span>' + row[0] + '</div>'
+          + '<div class="split-row-club">' + row[1] + '</div>'
+          + '<div class="split-row-val">' + row[2] + '</div></div>';
       }).join("");
     }
     var tabs = document.querySelectorAll(".lb-tab");

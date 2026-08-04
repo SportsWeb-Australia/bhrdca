@@ -24,16 +24,53 @@
     return out;
   }
 
+  var GRADE_META = {
+    M: { lbl: "Men's / Seniors", cls: "gm" },
+    F: { lbl: "Women's / Girls", cls: "gf" },
+    J: { lbl: "Juniors", cls: "gj" },
+    V: { lbl: "Veterans", cls: "gv" }
+  };
+  function normClub(s){ return String(s || "").toLowerCase().replace(/cricket club|c\.c\.c?\.?/g,"").replace(/[^a-z0-9]/g,""); }
+  function findClubContact(name){
+    var list = D.clubContacts || [];
+    var target = normClub(name);
+    if (!target) return null;
+    var hit = null;
+    for (var i = 0; i < list.length; i++) {
+      var rn = normClub(list[i].club);
+      if (rn === target || rn.indexOf(target) === 0 || target.indexOf(rn) === 0) { hit = list[i]; break; }
+    }
+    return hit;
+  }
+
   var render = {
     clubs: function (sel) {
       var m = $(sel); if (!m) return;
       var clubs = D.clubs || [];
       m.innerHTML = '<div class="bh-clubgrid">' + clubs.map(function (c) {
-        return '<a class="bh-club" href="' + esc(c.url) + '" target="_blank" rel="noopener">'
+        var badges = (c.grades || []).map(function (g) {
+          var gm = GRADE_META[g] || { lbl: g, cls: "gx" };
+          return '<span class="grade-badge ' + gm.cls + '" title="' + esc(gm.lbl) + '">' + esc(g) + '</span>';
+        }).join("");
+        var jc = findClubContact(c.name);
+        var hover = '<div class="club-hover">'
+          + '<div class="ch-row"><span class="ch-role">President</span><span class="ch-val">TBC</span></div>'
+          + '<div class="ch-row"><span class="ch-role">Secretary</span><span class="ch-val">TBC</span></div>'
+          + '<div class="ch-row"><span class="ch-role">Treasurer</span><span class="ch-val">TBC</span></div>'
+          + '<div class="ch-row"><span class="ch-role">Junior Coordinator</span><span class="ch-val">' + (jc ? esc(jc.contact) : "TBC") + '</span></div>'
+          + (jc && jc.email ? '<div class="ch-contact"><i class="ti ti-mail"></i> ' + esc(jc.email) + '</div>' : '')
+          + (jc && jc.number ? '<div class="ch-contact"><i class="ti ti-phone"></i> ' + esc(jc.number) + '</div>' : '')
+          + '<div class="ch-flag">Demo preview &mdash; committee details to be confirmed with the club</div>'
+          + '</div>';
+        return '<div class="bh-club-wrap" tabindex="0">'
+          + '<a class="bh-club" href="' + esc(c.url) + '" target="_blank" rel="noopener">'
           + '<div class="crest">' + esc(initials(c.name)) + '</div>'
           + '<div class="cn">' + esc(c.name) + '</div>'
+          + '<div class="grade-row">' + badges + '</div>'
           + '<div class="cx"><i class="ti ti-external-link"></i> Visit site</div>'
-          + '</a>';
+          + '</a>'
+          + hover
+          + '</div>';
       }).join("") + '</div>';
     },
 

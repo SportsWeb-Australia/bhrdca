@@ -754,6 +754,31 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 .bh-club .cn{font-size:13px;font-weight:600;color:var(--navy);line-height:1.25}
 .bh-club .cx{font-size:11px;color:var(--gold-deep);font-weight:700;display:inline-flex;align-items:center;gap:4px}
 
+/* grade key + badges */
+.grade-legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rsm);padding:10px 14px;margin-bottom:14px;font-size:12px}
+.grade-legend-item{display:flex;align-items:center;gap:6px;color:var(--navy);font-weight:600}
+.grade-legend-note{margin-left:auto;font-size:11px;color:var(--muted)}
+.grade-row{display:flex;gap:4px;justify-content:center}
+.grade-badge{width:20px;height:20px;flex:0 0 20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.grade-badge.gm{background:#0a2242}
+.grade-badge.gf{background:#c2185b}
+.grade-badge.gj{background:#2e7d32}
+.grade-badge.gv{background:#6a4c93}
+.grade-badge.gx{background:var(--muted)}
+
+/* club hover card (President/Secretary/Treasurer/Junior Coordinator preview) */
+.bh-club-wrap{position:relative}
+.bh-club-wrap .bh-club{height:100%}
+.club-hover{position:absolute;left:50%;bottom:calc(100% + 10px);width:230px;background:var(--navy);color:#fff;border-radius:10px;padding:12px 14px;box-shadow:0 14px 32px rgba(0,0,0,.32);opacity:0;visibility:hidden;transform:translate(-50%,6px);transition:opacity .15s ease,transform .15s ease;z-index:30;text-align:left;pointer-events:none}
+.club-hover::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:7px solid transparent;border-top-color:var(--navy)}
+.bh-club-wrap:hover .club-hover,.bh-club-wrap:focus-within .club-hover{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.ch-row{display:flex;justify-content:space-between;gap:8px;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.ch-row:last-of-type{border-bottom:none}
+.ch-role{color:rgba(255,255,255,.6)}
+.ch-val{font-weight:700;color:#fff;text-align:right}
+.ch-contact{font-size:11px;color:var(--gold);margin-top:6px;display:flex;align-items:center;gap:5px}
+.ch-flag{margin-top:8px;font-size:9px;line-height:1.4;color:rgba(255,255,255,.45);border-top:1px solid rgba(255,255,255,.08);padding-top:6px}
+
 /* honours tiles */
 .bh-hongrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
 .bh-hon{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);border-left:4px solid var(--gold);transition:transform .15s,box-shadow .15s;display:block}
@@ -808,7 +833,13 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 @keyframes tt-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* Split-flap "Adelaide Oval" scoreboard */
-.split-board{background:#0b0b0c;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35);border:1px solid #000}
+.split-board-outer{position:relative;padding-top:34px;max-width:760px;margin:0 auto}
+.split-board-vane{position:absolute;top:-2px;left:50%;transform:translateX(-50%) rotate(-6deg);transform-origin:bottom center;display:flex;flex-direction:column;align-items:center;animation:vane-sway 4.5s ease-in-out infinite;z-index:2}
+.split-board-vane .pole{width:2px;height:20px;background:#3a3a3a}
+.split-board-vane .flag{width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:14px solid var(--gold);margin-top:-1px}
+@keyframes vane-sway{0%,100%{transform:translateX(-50%) rotate(-9deg)}50%{transform:translateX(-50%) rotate(9deg)}}
+.split-board-roof{width:180px;height:30px;margin:0 auto;background:linear-gradient(180deg,#f2e8cf,#dbc99e);clip-path:polygon(50% 0%,100% 100%,0% 100%);position:relative;z-index:1}
+.split-board{background:#0b0b0c;border-radius:6px 6px 10px 10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35);border:1px solid #000;margin-top:-1px}
 .split-board-crown{background:linear-gradient(180deg,#efe3c6,#d9c99e);color:var(--navy);text-align:center;padding:14px 20px;position:relative}
 .split-board-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px}
 .split-board-sub{font-size:11px;letter-spacing:1.5px;color:var(--navy3);margin-top:2px;font-weight:700}
@@ -843,9 +874,32 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 
 .split-board-foot{background:#000;color:rgba(255,255,255,.35);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-align:center;padding:8px;border-top:1px solid rgba(255,255,255,.06)}
 
+.split-board-title{font-size:clamp(16px,4.2vw,22px)}
+.split-board-sub{font-size:clamp(9px,2.4vw,11px)}
+
 @media (max-width:760px){
-  .split-leaders-head,.split-row{grid-template-columns:1.6fr 1.1fr .7fr}
+  .split-leaders-head,.split-row{grid-template-columns:1.5fr 1fr .7fr;gap:4px}
   .flap-tile{width:24px;height:36px;font-size:19px}
+  .split-total-block{flex:1 1 30%}
+  .split-total-lbl{font-size:10px}
+}
+@media (max-width:480px){
+  .split-board-outer{padding-top:26px}
+  .split-board-roof{width:120px;height:20px}
+  .split-board-vane .pole{height:14px}
+  .split-board-vane .flag{border-top-width:5px;border-bottom-width:5px;border-left-width:11px}
+  .split-board-crown{padding:12px 10px}
+  .split-board-clock{display:none}
+  .split-board-face{padding:16px 10px}
+  .split-totals{gap:10px 14px}
+  .flap-tile{width:19px;height:30px;font-size:15px;border-radius:2px}
+  .flap-row{gap:2px}
+  .split-leaders-head{display:none}
+  .split-row{grid-template-columns:1fr auto;padding:8px}
+  .split-row-club{display:none}
+  .split-row-name{white-space:normal;font-size:11px}
+  .split-row-val{font-size:14px}
+  .split-leaders-tabs .lb-tab{font-size:12px;padding:8px}
 }
 
 /* ===== BHRDCA cascade-final overrides (navy text on gold accents) ===== */

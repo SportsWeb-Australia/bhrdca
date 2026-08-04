@@ -27,6 +27,9 @@
 <div data-bhrdca="masthead"></div>
 <div data-bhrdca="ticker"></div>
 
+<!-- LIVE TICKER TAPE (concept — demo data) -->
+<div class="tt-wrap"><div class="tt-track" id="tt-track"></div></div>
+
 <!-- HERO -->
 <section class="bh-hero">
   <div class="bh-hero-inner">
@@ -45,6 +48,33 @@
 
 <!-- STATS -->
 <section class="bh-stats"><div class="bh-stats-inner" id="stats-mount"></div></section>
+
+<!-- ASSOCIATION SCOREBOARD (concept — demo data, whole-of-association) -->
+<section class="page-wrap wide" style="margin-top:28px">
+  <div class="sb-concept-flag"><i class="ti ti-flask"></i> Concept preview &mdash; demo data, connects to a live PlayHQ feed once API access is confirmed</div>
+  <div class="sb-grid">
+    <div class="sb-oval-wrap">
+      <div class="sb-oval-head">
+        <div class="sb-oval-title"><i class="ti ti-scoreboard"></i> Association Scoreboard</div>
+        <div class="sb-oval-sub">All grades &middot; updates as games are scored</div>
+      </div>
+      <div class="sb-figures">
+        <div class="sb-fig"><div class="sb-num" id="sb-runs">0</div><div class="sb-lbl">Total Runs</div></div>
+        <div class="sb-fig"><div class="sb-num" id="sb-overs">0</div><div class="sb-lbl">Total Overs</div></div>
+        <div class="sb-fig"><div class="sb-num" id="sb-wkts">0</div><div class="sb-lbl">Total Wickets</div></div>
+      </div>
+      <div class="sb-updated" id="sb-updated">Round 8 &middot; demo data</div>
+    </div>
+    <div class="lb-panel">
+      <div class="lb-tabs">
+        <button class="lb-tab active" data-lb="bat" type="button">Top 10 Batters</button>
+        <button class="lb-tab" data-lb="bowl" type="button">Top 10 Bowlers</button>
+      </div>
+      <div class="lb-list" id="lb-list"></div>
+      <div class="lb-note">All grades &mdash; Seniors, Juniors, Women's &amp; Veterans &middot; resets weekly</div>
+    </div>
+  </div>
+</section>
 
 <!-- QUICK TILES -->
 <section class="bh-quick">
@@ -86,7 +116,7 @@
   <div class="section-block">
     <div class="callout callout-navy">
       <i class="ti ti-broadcast"></i>
-      <div><strong>Never miss a washout, a fixture change or a result.</strong> See how the BHRDCA keeps clubs, players, parents and volunteers informed — and what to switch on so nothing important gets missed. <a href="/communications.html" style="color:var(--gold);font-weight:700">Explore Communications →</a></div>
+      <div><strong>Photos, socials and the podcast, all in one place.</strong> Follow the BHRDCA on Facebook and Instagram, browse match photography and catch up on the podcast. <a href="/communications.html" style="color:var(--gold);font-weight:700">Explore Media →</a></div>
     </div>
   </div>
 
@@ -105,6 +135,75 @@
     var n = (d.clubs||[]).length;
     document.getElementById("clubs-note").innerHTML =
       "Showing <strong>" + n + "</strong> member clubs — tap any club to visit its website. " + (d.clubsNote || "");
+  })();
+
+  /* ---- Association Scoreboard concept — DEMO DATA ONLY, not a live feed ---- */
+  (function(){
+    var ttItems = [
+      "LIVE &middot; Box Hill CC 6/187 (38.4) v Reporter CC 4/142 (33.1)",
+      "LIVE &middot; Vermont CC 3/94 (22.0) v Blackburn CC 2/88 (20.3)",
+      "RESULT &middot; Forest Hill CC def. Nunawading CC by 42 runs",
+      "RESULT &middot; Balwyn CC def. Mont Albert CC by 5 wickets",
+      "JUNIORS &middot; Ringwood CC 8/156 (32) v Croydon CC 7/149 (32)",
+      "WOMEN'S &middot; Wantirna South CC 2/121 (30) v Bayswater CC 5/118 (30)"
+    ];
+    var track = document.getElementById("tt-track");
+    if (track) {
+      var mk = function(t){ return '<span class="tti"><span class="tti-live">&#9679;</span> ' + t + '</span>'; };
+      track.innerHTML = ttItems.map(mk).join("") + ttItems.map(mk).join("");
+    }
+
+    var sbFinal = { runs: 4812, overs: 1206.3, wkts: 318 };
+    var runsEl = document.getElementById("sb-runs"), oversEl = document.getElementById("sb-overs"), wktsEl = document.getElementById("sb-wkts");
+    var start = null, dur = 900;
+    function step(ts){
+      if (!start) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      if (runsEl) runsEl.textContent = Math.round(sbFinal.runs * p).toLocaleString();
+      if (oversEl) oversEl.textContent = (sbFinal.overs * p).toFixed(1);
+      if (wktsEl) wktsEl.textContent = Math.round(sbFinal.wkts * p);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+    var upd = document.getElementById("sb-updated");
+    if (upd) upd.textContent = "Round 8 · demo data · updated just now";
+
+    var LB = {
+      bat: [
+        ["J. Whitfield","Box Hill CC — Seniors","412"],["S. Kaur","Wantirna South CC — Women's","387"],
+        ["M. Delaney","Vermont CC — Seniors","356"],["A. Osei","Forest Hill CC — Juniors","341"],
+        ["R. Thompson","Balwyn CC — Seniors","329"],["L. Nguyen","Bayswater CC — Women's","318"],
+        ["D. Marsh","Croydon CC — Veterans","304"],["T. Iqbal","Blackburn CC — Seniors","297"],
+        ["C. Fenwick","Nunawading CC — Juniors","281"],["P. Costa","Mont Albert CC — Seniors","266"]
+      ],
+      bowl: [
+        ["K. Papadopoulos","Ringwood CC — Seniors","24"],["H. Bell","Reporter CC — Seniors","22"],
+        ["Z. Ahmed","Box Hill CC — Juniors","21"],["E. Sharma","Wantirna South CC — Women's","20"],
+        ["G. Molloy","Vermont CC — Veterans","19"],["N. Whitworth","Forest Hill CC — Seniors","18"],
+        ["B. Carrucan","Balwyn CC — Seniors","17"],["F. Okafor","Bayswater CC — Women's","16"],
+        ["W. Sutton","Croydon CC — Juniors","15"],["O. Baxter","Blackburn CC — Seniors","14"]
+      ]
+    };
+    var lbList = document.getElementById("lb-list");
+    var lbUnit = { bat: "runs", bowl: "wkts" };
+    function renderLB(key){
+      if (!lbList) return;
+      lbList.innerHTML = LB[key].map(function(row, i){
+        return '<div class="lb-row"><div class="lb-rank">' + (i+1) + '</div>'
+          + '<div class="lb-nm"><b>' + row[0] + '</b><span>' + row[1] + '</span></div>'
+          + '<div class="lb-val">' + row[2] + ' ' + lbUnit[key] + '</div></div>';
+      }).join("");
+    }
+    var tabs = document.querySelectorAll(".lb-tab");
+    var current = "bat";
+    function setTab(key){
+      current = key;
+      tabs.forEach(function(t){ t.classList.toggle("active", t.getAttribute("data-lb") === key); });
+      renderLB(key);
+    }
+    tabs.forEach(function(t){ t.addEventListener("click", function(){ setTab(t.getAttribute("data-lb")); }); });
+    setTab("bat");
+    setInterval(function(){ setTab(current === "bat" ? "bowl" : "bat"); }, 6000);
   })();
 </script>
   <script src="/sitepulse-widget.js" data-club-id="c944eff6-3d36-4b70-8b49-23dc70673397" data-source="onboarding"></script>

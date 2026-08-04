@@ -795,6 +795,46 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 .bh-field input,.bh-field textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--rsm);font-family:inherit;font-size:13px;background:#fff;color:var(--text)}
 .bh-field input:focus,.bh-field textarea:focus{outline:none;border-color:var(--gold)}
 
+/* ===== Association Scoreboard concept (ticker tape + Adelaide Oval scoreboard) ===== */
+.sb-concept-flag{display:inline-flex;align-items:center;gap:6px;background:rgba(246,194,28,.14);border:1px solid rgba(246,194,28,.4);color:var(--ink-gold,#a9770a);font-size:11px;font-weight:700;letter-spacing:.3px;padding:5px 10px;border-radius:20px;margin-bottom:10px}
+.sb-concept-flag i{font-size:13px}
+
+.tt-wrap{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden}
+.tt-track{display:flex;width:max-content;animation:tt-scroll 38s linear infinite}
+.tt-wrap:hover .tt-track{animation-play-state:paused}
+.tti{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:9px 26px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#fff;border-right:1px solid rgba(255,255,255,.12)}
+.tti i{color:var(--gold);font-size:13px}
+.tti .tti-live{color:var(--gold);font-weight:700;letter-spacing:.5px}
+@keyframes tt-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.sb-oval-wrap{background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);border-radius:var(--r);box-shadow:var(--shadow2);overflow:hidden;color:#fff}
+.sb-oval-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px 0;flex-wrap:wrap}
+.sb-oval-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.5px;display:flex;align-items:center;gap:8px}
+.sb-oval-title i{color:var(--gold)}
+.sb-oval-sub{font-size:12px;color:rgba(255,255,255,.6)}
+.sb-figures{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);margin:16px 20px 0;border-radius:var(--rsm);overflow:hidden}
+.sb-fig{background:rgba(0,0,0,.18);padding:16px 10px;text-align:center}
+.sb-num{font-family:'JetBrains Mono',monospace;font-size:clamp(22px,4vw,34px);font-weight:700;color:var(--gold);line-height:1}
+.sb-lbl{font-size:11px;letter-spacing:.4px;color:rgba(255,255,255,.65);margin-top:6px;text-transform:uppercase}
+.sb-updated{font-size:11px;color:rgba(255,255,255,.5);padding:10px 20px 18px;font-family:'JetBrains Mono',monospace}
+
+.lb-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.lb-tabs{display:flex;border-bottom:1px solid var(--border)}
+.lb-tab{flex:1;padding:12px;background:none;border:none;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:.4px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent}
+.lb-tab.active{color:var(--navy);border-bottom-color:var(--gold)}
+.lb-list{padding:6px 0}
+.lb-row{display:flex;align-items:center;gap:10px;padding:8px 16px;font-size:13px;border-bottom:1px solid var(--border)}
+.lb-row:last-child{border-bottom:none}
+.lb-rank{width:20px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--gold-deep);font-size:12px}
+.lb-nm{flex:1;min-width:0}
+.lb-nm b{color:var(--navy);font-weight:700}
+.lb-nm span{display:block;font-size:11px;color:var(--muted)}
+.lb-val{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--navy);font-size:13px}
+.lb-note{padding:10px 16px;font-size:11px;color:var(--muted);border-top:1px solid var(--border)}
+
+.sb-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
+@media (max-width:760px){.sb-figures{grid-template-columns:1fr}.sb-grid{grid-template-columns:1fr}}
+
 /* ===== BHRDCA cascade-final overrides (navy text on gold accents) ===== */
 .album-tag.is-latest{color:var(--ink-gold)}
 .soc-btn:hover{color:var(--ink-gold)}

@@ -26,7 +26,7 @@ window.BHRDCA_DATA = (function () {
 
   // Homepage headline stats (from the live site's "BHRDCA Community" band)
   var stats = [
-    { n: "28",   label: "Clubs" },
+    { n: "29",   label: "Clubs" },
     { n: "127",  label: "Men's & Women's Teams" },
     { n: "103",  label: "Boys & Girls Teams" },
     { n: "14",   label: "Veterans Teams" },
@@ -106,34 +106,35 @@ window.BHRDCA_DATA = (function () {
   // Member clubs (recognised on the association's "Our Clubs" wall) with websites.
   // NOTE: full 28-club member set + official club logos to be confirmed with BHRDCA.
   var clubs = [
-    { name: "Blackburn", url: "https://www.blackburn.org.au/" },
-    { name: "Blackburn North", url: "http://blackburnnorth.vic.cricket.com.au/" },
-    { name: "Blackburn South", url: "http://blackburnsouthcc.com.au/" },
+    { name: "Blackburn", url: "https://www.blackburn.org.au/", logo: "/club-logos/blackburn.png" },
+    { name: "Blackburn North", url: "http://blackburnnorth.vic.cricket.com.au/", logo: "/club-logos/blackburn-north.png" },
+    { name: "Blackburn South", url: "http://blackburnsouthcc.com.au/", logo: "/club-logos/blackburn-south.png" },
     { name: "Box Hill North Super Kings", url: "https://www.facebook.com/BoxHillNorthSuperKingsCricketClub/" },
-    { name: "Bulleen-Templestowe", url: "https://www.bulleentemplestowecc.com/" },
+    { name: "Bulleen-Templestowe", url: "https://www.bulleentemplestowecc.com/", logo: "/club-logos/bulleen-templestowe.png" },
     { name: "Burwood District", url: "http://bdcc.vic.cricket.com.au/" },
     { name: "Deakin", url: "http://deakin.vic.cricket.com.au/" },
     { name: "Doncaster", url: "http://www.doncastercc.com.au/" },
-    { name: "East Box Hill", url: "http://eastboxhill.vic.cricket.com.au/" },
+    { name: "East Box Hill", url: "http://eastboxhill.vic.cricket.com.au/", logo: "/club-logos/east-box-hill.png" },
     { name: "East Burwood", url: "http://ebcc.vic.cricket.com.au/" },
-    { name: "East Doncaster", url: "https://www.edcc.com.au/" },
+    { name: "East Doncaster", url: "https://www.edcc.com.au/", logo: "/club-logos/east-doncaster.png" },
     { name: "Forest Hill", url: "http://www.foresthillcc.com.au/" },
-    { name: "Glen Waverley Cougars", url: "https://cougars.net.au/?page_id=298" },
-    { name: "Heatherdale", url: "https://www.heatherdalecricketclub.com.au/" },
-    { name: "Heathmont", url: "https://www.heathmontcc.org.au/" },
+    { name: "Glen Waverley", url: "https://www.glenwaverleycc.com", logo: "/club-logos/glen-waverley.jpg" },
+    { name: "Glen Waverley Cougars", url: "https://cougars.net.au/?page_id=298", logo: "/club-logos/glen-waverley-cougars.jpeg" },
+    { name: "Heatherdale", url: "https://www.heatherdalecricketclub.com.au/", logo: "/club-logos/heatherdale.png" },
+    { name: "Heathmont", url: "https://www.heathmontcc.org.au/", logo: "/club-logos/heathmont.png" },
     { name: "Kerrimuir United", url: "http://kerrimuircc.com.au/" },
-    { name: "Koonung Heights", url: "http://www.koonungheightscc.com/" },
-    { name: "Laburnum", url: "http://laburnumcc.vic.cricket.com.au/" },
+    { name: "Koonung Heights", url: "http://www.koonungheightscc.com/", logo: "/club-logos/koonung-heights.png" },
+    { name: "Laburnum", url: "http://laburnumcc.vic.cricket.com.au/", logo: "/club-logos/laburnum.png" },
     { name: "Manningham", url: "https://mycricket.cricket.com.au/home.aspx?entityid=27035&save=0" },
-    { name: "Mitcham", url: "https://www.mitcham.cc/" },
-    { name: "Mulgrave", url: "https://www.mulgravecricketclub.com.au/" },
+    { name: "Mitcham", url: "https://www.mitcham.cc/", logo: "/club-logos/mitcham.webp" },
+    { name: "Mulgrave", url: "https://www.mulgravecricketclub.com.au/", logo: "/club-logos/mulgrave.png" },
     { name: "Notting Hill / Brandon Park", url: "http://nhbpcc.vic.cricket.com.au/" },
-    { name: "Nunawading", url: "https://nunawadingcc.com/" },
-    { name: "Park Orchards", url: "https://pocc.com.au/" },
-    { name: "St David's", url: "https://www.stdavidscc.com/" },
-    { name: "Templestowe", url: "https://www.templestowecc.com/" },
-    { name: "Templeton", url: "https://www.templetoncc.com.au/" },
-    { name: "Vermont", url: "https://www.vermontcricket.com.au/" }
+    { name: "Nunawading", url: "https://nunawadingcc.com/", logo: "/club-logos/nunawading.jpg" },
+    { name: "Park Orchards", url: "https://pocc.com.au/", logo: "/club-logos/park-orchards.png" },
+    { name: "St David's", url: "https://www.stdavidscc.com/", logo: "/club-logos/st-davids.png" },
+    { name: "Templestowe", url: "https://www.templestowecc.com/", logo: "/club-logos/templestowe.png" },
+    { name: "Templeton", url: "https://www.templetoncc.com.au/", logo: "/club-logos/templeton.jpeg" },
+    { name: "Vermont", url: "https://www.vermontcricket.com.au/", logo: "/club-logos/vermont.png" }
   ];
 
   // Which grades each club fields — DEMO/INDICATIVE ONLY, to be confirmed with each club.
@@ -250,6 +251,6 @@ window.BHRDCA_DATA = (function () {
     committee: committee, subCommittees: subCommittees,
     sections: sections, clubs: clubs, clubContacts: clubContacts,
     sponsors: sponsors, history: history, childSafety: childSafety,
-    clubsNote: "Member clubs shown with their websites. Full 28-club member list and official club crests to be confirmed with the BHRDCA."
+    clubsNote: "Member clubs shown with their websites and logos where available. Full member list and any remaining crests to be confirmed with the BHRDCA."
   };
 })();

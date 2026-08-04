@@ -62,9 +62,12 @@
           + (jc && jc.number ? '<div class="ch-contact"><i class="ti ti-phone"></i> ' + esc(jc.number) + '</div>' : '')
           + '<div class="ch-flag">Demo preview &mdash; committee details to be confirmed with the club</div>'
           + '</div>';
+        var crest = c.logo
+          ? '<div class="crest has-logo"><img src="' + esc(c.logo) + '" alt="' + esc(c.name) + ' crest" loading="lazy" onerror="this.parentNode.classList.remove(\'has-logo\');this.remove();this.parentNode.textContent=\'' + esc(initials(c.name)) + '\'"></div>'
+          : '<div class="crest">' + esc(initials(c.name)) + '</div>';
         return '<div class="bh-club-wrap" tabindex="0">'
           + '<a class="bh-club" href="' + esc(c.url) + '" target="_blank" rel="noopener">'
-          + '<div class="crest">' + esc(initials(c.name)) + '</div>'
+          + crest
           + '<div class="cn">' + esc(c.name) + '</div>'
           + '<div class="grade-row">' + badges + '</div>'
           + '<div class="cx"><i class="ti ti-external-link"></i> Visit site</div>'

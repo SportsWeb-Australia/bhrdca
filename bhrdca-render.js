@@ -58,8 +58,8 @@
           + '<div class="ch-row"><span class="ch-role">Secretary</span><span class="ch-val">TBC</span></div>'
           + '<div class="ch-row"><span class="ch-role">Treasurer</span><span class="ch-val">TBC</span></div>'
           + '<div class="ch-row"><span class="ch-role">Junior Coordinator</span><span class="ch-val">' + (jc ? esc(jc.contact) : "TBC") + '</span></div>'
-          + (jc && jc.email ? '<div class="ch-contact"><i class="ti ti-mail"></i> ' + esc(jc.email) + '</div>' : '')
-          + (jc && jc.number ? '<div class="ch-contact"><i class="ti ti-phone"></i> ' + esc(jc.number) + '</div>' : '')
+          + (jc && jc.email ? '<div class="ch-contact"><i class="ti ti-mail"></i><span>' + esc(jc.email) + '</span></div>' : '')
+          + (jc && jc.number ? '<div class="ch-contact"><i class="ti ti-phone"></i><span>' + esc(jc.number) + '</span></div>' : '')
           + '<div class="ch-flag">Demo preview &mdash; committee details to be confirmed with the club</div>'
           + '</div>';
         var crest = c.logo

@@ -778,7 +778,9 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 .ch-row:last-of-type{border-bottom:none}
 .ch-role{color:rgba(255,255,255,.6)}
 .ch-val{font-weight:700;color:#fff;text-align:right}
-.ch-contact{font-size:11px;color:var(--gold);margin-top:6px;display:flex;align-items:center;gap:5px}
+.ch-contact{font-size:11px;color:var(--gold);margin-top:6px;display:flex;align-items:flex-start;gap:5px;line-height:1.4}
+.ch-contact span{overflow-wrap:anywhere;word-break:break-word}
+.ch-contact i{flex:0 0 auto;margin-top:2px}
 .ch-flag{margin-top:8px;font-size:9px;line-height:1.4;color:rgba(255,255,255,.45);border-top:1px solid rgba(255,255,255,.08);padding-top:6px}
 
 /* honours tiles */

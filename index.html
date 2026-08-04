@@ -50,17 +50,18 @@
 <section class="bh-stats"><div class="bh-stats-inner" id="stats-mount"></div></section>
 
 <!-- ASSOCIATION SCOREBOARD (concept — demo data, whole-of-association) -->
-<section class="page-wrap wide" style="margin-top:28px">
+<section class="page-wrap wide" style="margin-top:28px" id="scoreboard-section">
   <div class="sb-concept-flag"><i class="ti ti-flask"></i> Concept preview &mdash; demo data, connects to a live PlayHQ feed once API access is confirmed</div>
   <div class="split-board-outer">
     <div class="split-board-vane"><span class="pole"></span><span class="flag"></span></div>
-    <div class="split-board-roof"></div>
+    <div class="split-board-roof"><span class="split-board-finial fl"></span><span class="split-board-finial fr"></span></div>
     <div class="split-board">
     <div class="split-board-crown">
-      <div class="split-board-clock"><i class="ti ti-clock"></i></div>
+      <div class="split-board-clockface"><span class="hr"></span><span class="mn"></span><span class="pin"></span></div>
       <div class="split-board-title">ASSOCIATION SCOREBOARD</div>
       <div class="split-board-sub">ALL GRADES &middot; UPDATES AS GAMES ARE SCORED</div>
     </div>
+    <div class="split-board-ribbon">B.H.R.D.C.A. &middot; EST. 1890</div>
     <div class="split-board-face">
       <div class="split-totals">
         <div class="split-total-block">
@@ -87,6 +88,7 @@
     </div>
     <div class="split-board-foot">ROUND 8 &middot; DEMO DATA &middot; UPDATED JUST NOW</div>
     </div>
+    <div class="split-board-struts"><span></span><span></span><span></span><span></span><span></span><span></span></div>
   </div>
 </section>
 
@@ -222,8 +224,6 @@
       flapRowRender("flap-overs", sbFinal.overs);
       flapRowRender("flap-wkts", sbFinal.wkts);
     }
-    runScoreboardFlap();
-    setInterval(runScoreboardFlap, 25000);
 
     var LB = {
       bat: [
@@ -261,8 +261,32 @@
       renderLB(key);
     }
     tabs.forEach(function(t){ t.addEventListener("click", function(){ setTab(t.getAttribute("data-lb")); }); });
-    setTab("bat");
-    setInterval(function(){ setTab(current === "bat" ? "bowl" : "bat"); }, 6000);
+
+    /* animate the whole board (totals + leaderboard) whenever it scrolls into view,
+       not just once on page load — replays the flap-in each time it re-enters */
+    var sbSection = document.getElementById("scoreboard-section");
+    var sbLoopsStarted = false;
+    function startScoreboardLoops(){
+      if (sbLoopsStarted) return;
+      sbLoopsStarted = true;
+      setInterval(runScoreboardFlap, 25000);
+      setInterval(function(){ setTab(current === "bat" ? "bowl" : "bat"); }, 6000);
+    }
+    function revealScoreboard(){
+      runScoreboardFlap();
+      setTab(current);
+      startScoreboardLoops();
+    }
+    if (sbSection && "IntersectionObserver" in window) {
+      var sbObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) revealScoreboard();
+        });
+      }, { threshold: 0.35 });
+      sbObserver.observe(sbSection);
+    } else {
+      revealScoreboard();
+    }
   })();
 </script>
   <script src="/sitepulse-widget.js" data-club-id="c944eff6-3d36-4b70-8b49-23dc70673397" data-source="onboarding"></script>

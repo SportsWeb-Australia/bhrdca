@@ -726,7 +726,7 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 .bh-stats-label{flex:0 0 auto;display:flex;align-items:baseline;gap:10px;padding-right:20px;border-right:1px solid rgba(255,255,255,.15)}
 .bh-stats-eyebrow{color:var(--gold);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap}
 .bh-stats-label h2{font-family:'Bebas Neue',sans-serif;color:#fff;font-size:18px;letter-spacing:.5px;white-space:nowrap;margin:0}
-.bh-stats-nums{display:flex;gap:36px;flex:1;justify-content:flex-end}
+.bh-stats-nums{display:flex;gap:36px;flex:1;justify-content:center}
 .bh-stat{text-align:center;color:#fff}
 .bh-stat .n{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;color:var(--gold)}
 .bh-stat .l{font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.78);margin-top:3px;white-space:nowrap}

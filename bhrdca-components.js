@@ -54,6 +54,7 @@
       + '<a href="' + IG + '" target="_blank" rel="noopener" aria-label="BHRDCA on Instagram"><i class="ti ti-brand-instagram"></i></a>'
       + '</div>'
       + '<a href="' + PLAYHQ + '" target="_blank" rel="noopener" style="background:var(--gold);color:var(--ink-gold);padding:4px 14px;border-radius:6px;font-size:11px;font-weight:700">Fixtures &amp; Ladders</a>'
+      + '<div class="wx-widget" id="wx-widget"></div>'
       + '</div>'
       + '</div>',
 

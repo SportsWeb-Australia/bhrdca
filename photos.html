@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Photos — BHRDCA</title>
+<meta name="description" content="Match photography from around the Box Hill Reporter District Cricket Association — finals, grand finals and junior cricket action.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link rel="stylesheet" href="/_shared.css">
+<link rel="stylesheet" href="/_pages.css">
+<script src="/bhrdca-components.js"></script>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#0a2242">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<script src="/pwa.js" defer></script>
+</head>
+<body data-page="photos">
+
+<div data-bhrdca="masthead"></div>
+<div data-bhrdca="ticker"></div>
+
+<header class="page-hero">
+  <div class="page-hero-inner wide">
+    <div class="crumb"><a href="/index.html">Home</a> <i class="ti ti-chevron-right"></i> <a href="/communications.html">Media</a> <i class="ti ti-chevron-right"></i> Photos</div>
+    <div class="eyebrow">Match Photography</div>
+    <h1>Photos</h1>
+    <p class="page-sub">Finals, grand finals and cricket action from around the Association &mdash; tap any photo to view it full size.</p>
+  </div>
+</header>
+
+<div class="page-wrap wide">
+  <div class="section-block">
+    <div class="block-sub" id="gal-note"></div>
+    <div class="gal-grid" id="gal-grid"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="gal-lb" id="gal-lb">
+  <button class="gal-lb-close" id="gal-lb-close" type="button" aria-label="Close"><i class="ti ti-x"></i></button>
+  <button class="gal-lb-nav prev" id="gal-lb-prev" type="button" aria-label="Previous photo"><i class="ti ti-chevron-left"></i></button>
+  <button class="gal-lb-nav next" id="gal-lb-next" type="button" aria-label="Next photo"><i class="ti ti-chevron-right"></i></button>
+  <div class="gal-lb-inner">
+    <img id="gal-lb-img" src="" alt="">
+    <div class="gal-lb-cap" id="gal-lb-cap"></div>
+  </div>
+</div>
+
+<div data-bhrdca="sponsor-carousel"></div>
+<div data-bhrdca="footer"></div>
+<script src="/gallery-data.js"></script>
+<script>
+(function () {
+  var G = window.BHRDCA_GALLERY || [];
+  var grid = document.getElementById("gal-grid");
+  document.getElementById("gal-note").innerHTML = "Showing <strong>" + G.length + "</strong> photos.";
+  grid.innerHTML = G.map(function (g, i) {
+    return '<a class="gal-item" href="' + g.full + '" data-i="' + i + '">'
+      + '<img src="' + g.thumb + '" alt="' + g.caption.replace(/"/g, "&quot;") + '" loading="lazy">'
+      + '<span class="gal-cap">' + g.caption + '</span>'
+      + '</a>';
+  }).join("");
+
+  var lb = document.getElementById("gal-lb");
+  var lbImg = document.getElementById("gal-lb-img");
+  var lbCap = document.getElementById("gal-lb-cap");
+  var cur = -1;
+
+  function open(i) {
+    cur = i;
+    var g = G[i];
+    lbImg.src = g.full;
+    lbImg.alt = g.caption;
+    lbCap.textContent = g.caption + " (" + (i + 1) + " / " + G.length + ")";
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function close() {
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  function step(d) {
+    if (cur < 0) return;
+    open((cur + d + G.length) % G.length);
+  }
+
+  grid.addEventListener("click", function (e) {
+    var a = e.target.closest(".gal-item");
+    if (!a) return;
+    e.preventDefault();
+    open(parseInt(a.getAttribute("data-i"), 10));
+  });
+  document.getElementById("gal-lb-close").addEventListener("click", close);
+  document.getElementById("gal-lb-prev").addEventListener("click", function () { step(-1); });
+  document.getElementById("gal-lb-next").addEventListener("click", function () { step(1); });
+  lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
+  document.addEventListener("keydown", function (e) {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "ArrowRight") step(1);
+  });
+})();
+</script>
+  <script src="/sitepulse-widget.js" data-club-id="c944eff6-3d36-4b70-8b49-23dc70673397" data-source="onboarding"></script>
+</body>
+</html>

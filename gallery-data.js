@@ -1,0 +1,60 @@
+/* ============================================================================
+   BHRDCA — photo gallery data. Real match photography supplied by the
+   association / Field of View Sports Photography, optimised to WebP.
+   ========================================================================== */
+window.BHRDCA_GALLERY = [
+  { slug: "img-01-20260117-bhrdca-peter-white-shield-burwo", caption: "Peter White Shield — Burwood District v Vermont South" },
+  { slug: "img-02-20260207-bhrdca-f-grade-east-box-hill-v-",  caption: "F Grade — East Box Hill v Burwood District" },
+  { slug: "img-03-20260210-bhrdca-t20-b-grade-gf-laburnum-", caption: "T20 B Grade Grand Final — Laburnum v Bulleen-Templestowe" },
+  { slug: "img-04-20260210-bhrdca-t20-b-grade-gf-laburnum-", caption: "T20 B Grade Grand Final — Laburnum v Bulleen-Templestowe" },
+  { slug: "img-05-20260210-bhrdca-t20-e-grade-gf-blackburn", caption: "T20 E Grade Grand Final — Blackburn South v Park Orchards" },
+  { slug: "img-06-20260210-bhrdca-t20-e-grade-gf-blackburn", caption: "T20 E Grade Grand Final — Blackburn South v Park Orchards" },
+  { slug: "img-07-20260307-bhrdca-d-grade-sf-east-box-hill", caption: "D Grade Semi Final — East Box Hill v Mitcham" },
+  { slug: "img-08-20260307-bhrdca-d-grade-sf-east-box-hill", caption: "D Grade Semi Final — East Box Hill v Mitcham" },
+  { slug: "img-09-20260308-bhrdca-dorothy-mcintosh-shield-", caption: "Dorothy McIntosh Shield Semi Final — Mitcham v Glen Waverley Cougars" },
+  { slug: "img-10-20260308-bhrdca-dorothy-mcintosh-shield-", caption: "Dorothy McIntosh Shield Semi Final — Mitcham v Glen Waverley Cougars" },
+  { slug: "img-11-20260308-bhrdca-howard-wilson-shield-sf2", caption: "Howard Wilson Shield Semi Final — Box Hill North Super Kings v Blackburn North" },
+  { slug: "img-12-20260308-bhrdca-ray-mcintosh-shield-sf1-", caption: "Ray McIntosh Shield Semi Final — Blackburn v Vermont South" },
+  { slug: "img-13-20260308-bhrdca-ray-mcintosh-shield-sf1-", caption: "Ray McIntosh Shield Semi Final — Blackburn v Vermont South" },
+  { slug: "img-14-7-12-vets-action000000149", caption: "Veterans Cricket — match action" },
+  { slug: "img-15-7-12-vets-action000000344", caption: "Veterans Cricket — match action" },
+  { slug: "img-16-7-12-vets-action000000381", caption: "Veterans Cricket — match action" },
+  { slug: "img-17-9-12-t20-a-glen-waverley-hawks-v-bhnsk18", caption: "Junior T20 A Grade — Glen Waverley Hawks v Box Hill North Super Kings" },
+  { slug: "img-18-9-12-t20-a-glen-waverley-hawks-v-bhnsk36", caption: "Junior T20 A Grade — Glen Waverley Hawks v Box Hill North Super Kings" },
+  { slug: "img-19-9-12-t20-a-wyclif-v-mitcham1", caption: "Junior T20 A Grade — Wyclif v Mitcham" },
+  { slug: "img-20-9-12-t20-a-wyclif-v-mitcham31", caption: "Junior T20 A Grade — Wyclif v Mitcham" },
+  { slug: "img-21-9-12-t20-c-forest-hill-v-deakin22", caption: "Junior T20 C Grade — Forest Hill v Deakin" },
+  { slug: "img-22-9-12-t20-c-forest-hill-v-deakin64", caption: "Junior T20 C Grade — Forest Hill v Deakin" },
+  { slug: "img-23-cricketaction140226ds0524", caption: "BHRDCA — match action" },
+  { slug: "img-24-fov-bhrdca-blackbsth-v-glwav-62", caption: "Blackburn South v Glen Waverley" },
+  { slug: "img-25-fov-bhrdca-boxhnth-v-blackbnth-56", caption: "Box Hill North v Blackburn North" },
+  { slug: "img-26-t20gf100226ds1489", caption: "T20 Grand Final — match action" },
+  { slug: "img-27-t20gf100226ds2144", caption: "T20 Grand Final — match action" },
+  { slug: "img-28-t20gf100226ds7056", caption: "T20 Grand Final — match action" },
+  { slug: "img-29-t20gf100226ds7692", caption: "T20 Grand Final — match action" },
+  { slug: "img-30-blackburn-v-koonung-ray-mac-shield-grade", caption: "Ray McIntosh Shield — Blackburn v Koonung Heights" },
+  { slug: "img-31-blackburn-v-koonung-ray-mac-shield-grade", caption: "Ray McIntosh Shield — Blackburn v Koonung Heights" },
+  { slug: "img-32-mitcham-vs-st-davids-t20-gf-169", caption: "T20 Grand Final — Mitcham v St David's" },
+  { slug: "img-33-mitcham-vs-st-davids-t20-gf-94", caption: "T20 Grand Final — Mitcham v St David's" },
+  { slug: "img-34-t20-gf-blackburn-v-heatherdale-57", caption: "T20 Grand Final — Blackburn v Heatherdale" },
+  { slug: "img-35-blackburn-2nd-xi-glen-waverly-hawks-1st-", caption: "Blackburn 2nd XI v Glen Waverley Hawks 1st XI" },
+  { slug: "img-36-blackburn-2nd-xi-glen-waverly-hawks-1st-", caption: "Blackburn 2nd XI v Glen Waverley Hawks 1st XI" },
+  { slug: "img-37-east-burwood-1st-xi-mitcham-2nd-xi-58", caption: "East Burwood 1st XI v Mitcham 2nd XI" },
+  { slug: "img-38-forest-hill-1st-xi-v-kerrimuir-united-1s", caption: "Forest Hill 1st XI v Kerrimuir United 1st XI" },
+  { slug: "img-39-forest-hill-1st-xi-v-kerrimuir-united-1s", caption: "Forest Hill 1st XI v Kerrimuir United 1st XI" },
+  { slug: "img-40-forest-hill-1st-xi-v-kerrimuir-united-1s", caption: "Forest Hill 1st XI v Kerrimuir United 1st XI" },
+  { slug: "img-41-mitcham-1st-xi-v-box-hill-north-super-ki", caption: "Mitcham 1st XI v Box Hill North Super Kings 1st XI" },
+  { slug: "img-42-mitcham-1st-xi-v-box-hill-north-super-ki", caption: "Mitcham 1st XI v Box Hill North Super Kings 1st XI" },
+  { slug: "img-43-mitcham-1st-xi-v-box-hill-north-super-ki", caption: "Mitcham 1st XI v Box Hill North Super Kings 1st XI" },
+  { slug: "img-44-mulgrave-wheelers-hill-1st-xi-glen-waver", caption: "Mulgrave-Wheelers Hill 1st XI v Glen Waverley Cougars 1st XI" },
+  { slug: "img-45-t20-b-grade-bulleen-templestowe-v-doncas", caption: "T20 B Grade — Bulleen-Templestowe v Doncaster" },
+  { slug: "img-46-t20-b-grade-bulleen-templestowe-v-doncas", caption: "T20 B Grade — Bulleen-Templestowe v Doncaster" },
+  { slug: "img-47-t20-b-grade-bulleen-templestowe-v-doncas", caption: "T20 B Grade — Bulleen-Templestowe v Doncaster" },
+  { slug: "img-48-t20-c-grade-templestowe-v-yarraleen-43", caption: "T20 C Grade — Templestowe v Yarraleen" },
+  { slug: "img-49-t20-c-grade-templestowe-v-yarraleen-86", caption: "T20 C Grade — Templestowe v Yarraleen" },
+  { slug: "img-50-wycliff-1st-xi-laburnum-1st-xi-44", caption: "Wyclif 1st XI v Laburnum 1st XI" }
+].map(function (g) {
+  g.thumb = "/gallery/thumb/" + g.slug + ".webp";
+  g.full = "/gallery/full/" + g.slug + ".webp";
+  return g;
+});

@@ -69,26 +69,92 @@ window.BHRDCA_DATA = (function () {
         { label: "Coaches Code of Behaviour", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_9ced7a2e55504257a291b053bc9b183f.pdf" },
         { label: "U12 Rules Summary", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_3e47dc29944f4aaf91a5e279d98e4b12.pdf" },
         { label: "U14 Rules Summary", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_569e03d05715420b90b2d1abeb46df64.pdf" },
-        { label: "U16/U18 Rules Summary", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_40aa10fece5346adb0e3f8a6ecdc63d5.pdf" }
+        { label: "U16/U18 Rules Summary", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_40aa10fece5346adb0e3f8a6ecdc63d5.pdf" },
+        { label: "Cricket Balls Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_11456fc48f1143edbf258809b8f16018.pdf" },
+        { label: "Attire Policy", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_e2b1db03d3ef4a0db42503a42e67f1f1.pdf" },
+        { label: "Code of Conduct", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_349388776e5e43a388d75e40d44e2ca3.pdf" },
+        { label: "Social Media Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_912cee1e6e4741c58bd9abd93c09caaf.pdf" },
+        { label: "Tribunal Procedures", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_bfa25359e9824b2dbf2a0a281ff68df3.pdf" },
+        { label: "Appeal Procedure", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_9651cf1343e2469ba7efde29f56bb08f.pdf" },
+        { label: "Refund Policy", url: "https://www.bhrdca.com.au/_files/ugd/23872a_aadd89f9e6d3497fab7924f41e9e9679.docx?dn=BHRDCA%20Refund%20Policy.docx" },
+        { label: "Tribunal Summary Sheet", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_0ba2afa322954774a132ab36fdad4998.pdf" },
+        { label: "Extreme Weather Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_9052c8216d2446129a3bf7f38118c93a.pdf" },
+        { label: "eScoring Quick Reference", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_0a48d47e86914ee4827dab65c048a9e1.pdf" },
+        { label: "Child Safety Policy", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_a5c18eda506246c7810af79585a2c228.pdf" },
+        { label: "Conduct / Incident Form", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_077859f9c52b4e9699d8aada4fd2f586.pdf" },
+        { label: "Procedure for Reports", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_5a4e2848560a423d8e086888abd99986.pdf" },
+        { label: "Player Misconduct", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_9d2adb3233c046f4915f8bcfb1f28f88.pdf" },
+        { label: "Match Ratio Ladder", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_5f3fa6f25ba148d99f1d3effb27e364a.xlsx?dn=Match-Ratio-Ladder-22-23.xlsx" },
+        { label: "Junior Dispensation Form", url: "https://forms.cloud.microsoft/pages/responsepage.aspx?id=0D83hL-_4EasEee-C1iddxsgAZ5m1TxIi_rcBtyQ2LZUNENHOUlCRVRUNDlHR01IV1lIR1NGTUtPSC4u&route=shorturl" }
       ]
     },
     seniors: {
       key: "seniors", name: "Seniors", icon: "ti-trophy",
       blurb: "More than 12 Senior grades on Saturdays, plus a mid-week twilight T20 competition. For information on Senior cricket, contact the Competition Assistant or your local club.",
       contacts: [ { role: "Senior Cricket", name: "Aryan Meghani", phone: "0416 218 669", email: "ameghani@cricketvictoria.com.au" } ],
-      resources: []
+      resources: [
+        { label: "Senior Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/23872a_115c337c83204140b6b39db35310f793.pdf" },
+        { label: "T20 Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/23872a_f6a5fab5c5474ca9b1a34c70c0efc59f.pdf" },
+        { label: "Cricket Balls Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_11456fc48f1143edbf258809b8f16018.pdf" },
+        { label: "Attire Policy", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_e2b1db03d3ef4a0db42503a42e67f1f1.pdf" },
+        { label: "Code of Conduct", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_349388776e5e43a388d75e40d44e2ca3.pdf" },
+        { label: "Social Media Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_912cee1e6e4741c58bd9abd93c09caaf.pdf" },
+        { label: "Tribunal Procedures", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_bfa25359e9824b2dbf2a0a281ff68df3.pdf" },
+        { label: "Appeal Procedure", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_9651cf1343e2469ba7efde29f56bb08f.pdf" },
+        { label: "Refund Policy", url: "https://www.bhrdca.com.au/_files/ugd/23872a_aadd89f9e6d3497fab7924f41e9e9679.docx?dn=BHRDCA%20Refund%20Policy.docx" },
+        { label: "Tribunal Summary Sheet", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_0ba2afa322954774a132ab36fdad4998.pdf" },
+        { label: "Extreme Weather Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_9052c8216d2446129a3bf7f38118c93a.pdf" },
+        { label: "eScoring Quick Reference", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_0a48d47e86914ee4827dab65c048a9e1.pdf" },
+        { label: "Player Movement & Finals Eligibility", url: "https://www.bhrdca.com.au/_files/ugd/23872a_eb1c0f22c20046dea1a837e53dd9aaaa.pdf" },
+        { label: "MCC Laws of Cricket", url: "https://www.lords.org/mcc/the-laws-of-cricket" },
+        { label: "Cricket Australia Rules & Regulations", url: "https://www.cricketaustralia.com.au/cricket/rules-and-regulations" },
+        { label: "Conduct / Incident Form", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_8c354e48b16b4a07bfb8bf72fff6a6ac.pdf" },
+        { label: "Player Misconduct", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_9d2adb3233c046f4915f8bcfb1f28f88.pdf" },
+        { label: "Procedure for Reports", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_5a4e2848560a423d8e086888abd99986.pdf" },
+        { label: "Match Ratio Ladder", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_10d948ddf40a4866a52670774b88e5eb.pdf" },
+        { label: "Set Penalty Table", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_3d02542eca8645d0906faf70e22a0136.pdf" },
+        { label: "Captains Report — Umpires (PDF)", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_7d55ca1b533a47c6a8c032c3abb8b1b4.pdf" },
+        { label: "Captains Report — Umpires (Word)", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_1a82fd1762734f3383631acfadb2c0d2.docx" },
+        { label: "Player Permit Form — Senior Saturday (PDF)", url: "https://www.bhrdca.com.au/_files/ugd/23872a_adcac4869df9403796238023dcd2391b.pdf" },
+        { label: "Player Permit Form — Senior Saturday (Word)", url: "https://www.bhrdca.com.au/_files/ugd/23872a_86e15ef497a846ed84f0c5a50e2d9e8f.docx" },
+        { label: "Player Permit Form — Senior Tuesday (PDF)", url: "https://www.bhrdca.com.au/_files/ugd/23872a_d2d35a8336da44e591fac00078c70ebd.pdf" },
+        { label: "Player Permit Form — Senior Tuesday (Word)", url: "https://www.bhrdca.com.au/_files/ugd/23872a_76f630719870446189b843d50794907a.docx" },
+        { label: "Senior Dispensation Form", url: "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=0D83hL-_4EasEee-C1iddxsgAZ5m1TxIi_rcBtyQ2LZUREpUQTc3T0NYNURXR0xFT1lNU1M4OTRFRS4u" },
+        { label: "Insurance — Make a Claim", url: "https://www.au.marsh.com/sport/make-a-claim.html" },
+        { label: "Insurance — Game Day Checklist", url: "https://info-pacific.marsh.com/acton/media/44357/cricket-check-list-marsh" }
+      ]
     },
     womens: {
       key: "womens", name: "Women's", icon: "ti-cricket",
       blurb: "Women’s and girls’ cricket is a growing part of the BHRDCA. For information on Women’s cricket, get in touch with our Women’s Cricket contact.",
       contacts: [ { role: "Women's Cricket", name: "Lynda Richardson", phone: "0499 784 888", email: "bhrdca.femalecricket@gmail.com" } ],
-      resources: []
+      resources: [
+        { label: "Senior Women's Rules (EGWC)", url: "https://egwc.au/images/documents/EGWC-S-2025_26-Senior-Womens-Rules.pdf" },
+        { label: "Social Media Policy", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_0168cb7a77b84842a3da5136626c8378.pdf" },
+        { label: "eScoring Quick Reference", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_0a48d47e86914ee4827dab65c048a9e1.pdf" },
+        { label: "Insurance — Game Day Checklist", url: "https://info-pacific.marsh.com/acton/media/44357/cricket-check-list-marsh" }
+      ]
     },
     veterans: {
       key: "veterans", name: "Veterans", icon: "ti-medal",
       blurb: "Over 40 & Over 50 Veterans cricket across 8 grades, played Sunday afternoons. A great way to keep playing the game you love.",
       contacts: [ { role: "Veterans Cricket", name: "Michael Whitehead", phone: "0419 523 183", email: "mick_019@msn.com" } ],
-      resources: []
+      resources: [
+        { label: "Veteran Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_42cd9ab70d2d44f19f7218b26080d128.pdf" },
+        { label: "Cricket Balls Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_11456fc48f1143edbf258809b8f16018.pdf" },
+        { label: "Attire Policy", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_e2b1db03d3ef4a0db42503a42e67f1f1.pdf" },
+        { label: "Code of Conduct", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_bc36287868774147900c51df2b827756.pdf" },
+        { label: "Social Media Policy", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_0168cb7a77b84842a3da5136626c8378.pdf" },
+        { label: "Tribunal Procedures", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_bfa25359e9824b2dbf2a0a281ff68df3.pdf" },
+        { label: "Appeal Procedure", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_9651cf1343e2469ba7efde29f56bb08f.pdf" },
+        { label: "Extreme Weather Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_9052c8216d2446129a3bf7f38118c93a.pdf" },
+        { label: "eScoring Quick Reference", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_0a48d47e86914ee4827dab65c048a9e1.pdf" },
+        { label: "Conduct / Incident Form", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_6c854729034443cbb1e721c3a9652fd9.pdf" },
+        { label: "Player Misconduct", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_1c5d5488f32548429f70137ca05d55ff.pdf" },
+        { label: "Procedure for Reports", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_5a4e2848560a423d8e086888abd99986.pdf" },
+        { label: "Match Ratio Ladder", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_5f3fa6f25ba148d99f1d3effb27e364a.xlsx?dn=Match-Ratio-Ladder-22-23.xlsx" },
+        { label: "Set Penalty Table", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_3d02542eca8645d0906faf70e22a0136.pdf" }
+      ]
     },
     umpires: {
       key: "umpires", name: "Umpires", icon: "ti-gavel",
@@ -99,7 +165,32 @@ window.BHRDCA_DATA = (function () {
         { role: "Umpires Appointments", name: "Trevor McGarry", phone: "0488 287 676", email: "trevormcgary6@gmail.com" },
         { role: "Umpires Advisor", name: "Mark Thomas", phone: "0455 207 864", email: "mark.thomas@tile.com.au" }
       ],
-      resources: [ { label: "Umpire Fees", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_28f8655c4480433980a6d9a94363414f.pdf" } ]
+      resources: [
+        { label: "Umpire Fees", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_28f8655c4480433980a6d9a94363414f.pdf" },
+        { label: "Senior Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/23872a_115c337c83204140b6b39db35310f793.pdf" },
+        { label: "Veteran Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_42cd9ab70d2d44f19f7218b26080d128.pdf" },
+        { label: "Junior Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_a32c999446a14cca9d265145f40d0e65.pdf" },
+        { label: "T20 Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_47814bd75bd9473987eb8ad6dffab682.pdf" },
+        { label: "Cricket Balls Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_965f34c8c0484aa5a24da7039a8dc84c.pdf" },
+        { label: "Attire Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_61d2f33b1d524aaaa53feb075c71bf13.pdf" },
+        { label: "Code of Conduct", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_d3549f8829e84d08a5b8c04ec8e4fc00.pdf" },
+        { label: "Social Media Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_912cee1e6e4741c58bd9abd93c09caaf.pdf" },
+        { label: "Appeal Procedure", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_9651cf1343e2469ba7efde29f56bb08f.pdf" },
+        { label: "Tribunal Procedures", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_bfa25359e9824b2dbf2a0a281ff68df3.pdf" },
+        { label: "Tribunal Summary Sheet", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_0ba2afa322954774a132ab36fdad4998.pdf" },
+        { label: "Extreme Weather Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_9052c8216d2446129a3bf7f38118c93a.pdf" },
+        { label: "MCC Laws of Cricket", url: "https://www.lords.org/mcc/the-laws-of-cricket" },
+        { label: "Cricket Australia Rules & Regulations", url: "https://www.cricketaustralia.com.au/cricket/rules-and-regulations" },
+        { label: "Conduct / Incident Form", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_077859f9c52b4e9699d8aada4fd2f586.pdf" },
+        { label: "Player Misconduct", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_9d2adb3233c046f4915f8bcfb1f28f88.pdf" },
+        { label: "Procedure for Reports", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_5a4e2848560a423d8e086888abd99986.pdf" },
+        { label: "Match Ratio Ladder", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_10d948ddf40a4866a52670774b88e5eb.pdf" },
+        { label: "Set Penalty Table", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_3d02542eca8645d0906faf70e22a0136.pdf" },
+        { label: "Umpires Match Report (PDF)", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_1bca2301c0fb4e43987e7c4ab8de2cfa.pdf" },
+        { label: "Umpires Match Report (Word)", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_0f3d380c322f4514836566beab32ca22.docx" },
+        { label: "Insurance — Make a Claim", url: "https://au.marsh.com/sport/make-a-claim.html" },
+        { label: "Insurance — Game Day Checklist", url: "https://info-pacific.marsh.com/acton/media/44357/cricket-check-list-marsh" }
+      ]
     }
   };
 

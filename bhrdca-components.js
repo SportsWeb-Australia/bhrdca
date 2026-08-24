@@ -13,39 +13,42 @@
 
   // sponsor names for the moving carousel (static chrome, matches association wall)
   var SPONSORS = [
-    ["Century Cricket Centre","https://www.cricketcentre.com.au/"],
-    ["Kookaburra Sport","https://www.kookaburrasport.com.au/cricket/"],
+    ["Century Cricket Centre","https://www.cricketcentre.com.au/","/sponsor-logos/century-cricket-centre.webp"],
+    ["Kookaburra Sport","https://www.kookaburrasport.com.au/cricket/","/sponsor-logos/kookaburra-sport.webp"],
     ["Cricket Victoria","https://www.cricketvictoria.com.au/"],
-    ["Field of View","https://www.fieldofview.com.au/"],
-    ["SportsWeb Australia","https://sportsweb.com.au"],
-    ["Topline Cricket","https://www.toplinecricket.com.au/"],
-    ["Top Notch Trophies","https://www.topnotchtrophies.com.au/"],
+    ["Field of View","https://www.fieldofview.com.au/","/sponsor-logos/field-of-view.webp"],
+    ["SportsWeb Australia","https://sportsweb.com.au","/sponsor-logos/sportsweb-australia.webp"],
+    ["Topline Cricket","https://www.toplinecricket.com.au/","/sponsor-logos/topline-cricket.webp"],
+    ["Top Notch Trophies","https://www.topnotchtrophies.com.au/","/sponsor-logos/top-notch-trophies.webp"],
     ["SEDA College","https://seda.vic.edu.au/"],
     ["Box Hill Indoor Sports","https://boxhillindoorsports.com.au/sports-and-activities/indoor-cricket/"],
-    ["Mulgrave Country Club","https://mulgravecc.com.au/sports/"],
-    ["Geyer Accountants","https://geyeraccountants.com.au/"],
-    ["Grant Professionals","https://au.linkedin.com/company/grant-professionals"],
-    ["Club Builder","https://www.club-builder.com.au/"],
-    ["Michael Sukkar MP","https://www.michaelsukkar.com.au/"],
-    ["Club Connect","https://clubconnect.net.au"],
-    ["Melbourne Metro Refrigeration","https://www.melbournemetrorefrigeration.com.au/"],
-    ["APMG Painting","https://apmgpainting.com.au/"],
-    ["HGCB","https://hgcb.com.au/"],
+    ["Mulgrave Country Club","https://mulgravecc.com.au/sports/","/sponsor-logos/mulgrave-country-club.webp",1],
+    ["Geyer Accountants","https://geyeraccountants.com.au/","/sponsor-logos/geyer-accountants.webp"],
+    ["Grant Professionals","https://au.linkedin.com/company/grant-professionals","/sponsor-logos/grant-professionals.webp"],
+    ["Club Builder","https://www.club-builder.com.au/","/sponsor-logos/club-builder.webp"],
+    ["Michael Sukkar MP","https://www.michaelsukkar.com.au/","/sponsor-logos/michael-sukkar-mp.webp"],
+    ["Club Connect","https://clubconnect.net.au","/sponsor-logos/club-connect.webp"],
+    ["Melbourne Metro Refrigeration","https://www.melbournemetrorefrigeration.com.au/","/sponsor-logos/melbourne-metro-refrigeration.webp"],
+    ["APMG Painting","https://apmgpainting.com.au/","/sponsor-logos/apmg-painting.webp",1],
+    ["HGCB","https://hgcb.com.au/","/sponsor-logos/hgcb.webp"],
     ["Altegra","https://www.altegra.com.au/"],
-    ["Good Sports","https://goodsports.com.au/"],
-    ["Child Safe","https://www.childsafe.org.au/"],
-    ["Carina Garland MP","https://www.carinagarland.com.au/"],
+    ["Good Sports","https://goodsports.com.au/","/sponsor-logos/good-sports.webp"],
+    ["Child Safe","https://www.childsafe.org.au/","/sponsor-logos/child-safe.svg"],
+    ["Carina Garland MP","https://www.carinagarland.com.au/","/sponsor-logos/carina-garland-mp.webp"],
     ["Compare & Connect","https://www.compareandconnect.com.au/"],
-    ["Connector World","https://www.connectorworld.com.au/"],
+    ["Connector World","https://www.connectorworld.com.au/","/sponsor-logos/connector-world.webp"],
     ["LCF Linemarking & Logos","https://grassup.com.au/services"],
-    ["Modern Orthodontics","https://www.modernorthodontics.com.au/"],
-    ["Six Star Plus","https://www.sixstarplus.com.au/"],
-    ["Tobin Brothers Funerals","https://tobinbrothers.com.au/in-partnership/"],
-    ["3WBC Radio","https://www.3wbc.org.au/shows/the-cordon/"]
+    ["Modern Orthodontics","https://www.modernorthodontics.com.au/","/sponsor-logos/modern-orthodontics.webp"],
+    ["Six Star Plus","https://www.sixstarplus.com.au/","/sponsor-logos/six-star-plus.webp"],
+    ["Tobin Brothers Funerals","https://tobinbrothers.com.au/in-partnership/","/sponsor-logos/tobin-brothers-funerals.webp"],
+    ["3WBC Radio","https://www.3wbc.org.au/shows/the-cordon/","/sponsor-logos/3wbc-radio.webp"]
   ];
   function scItems() {
     var set = SPONSORS.map(function (s) {
-      return '<a href="' + s[1] + '" target="_blank" rel="noopener" class="sci scitxt">' + s[0] + '</a>';
+      var inner = s[2]
+        ? '<img src="' + s[2] + '" alt="' + s[0] + '" loading="lazy" onerror="this.parentNode.classList.add(\'scitxt\');this.parentNode.classList.remove(\'sci-dark\');this.replaceWith(document.createTextNode(\'' + s[0].replace(/'/g, "\\'") + '\'))">'
+        : s[0];
+      return '<a href="' + s[1] + '" target="_blank" rel="noopener" class="sci' + (s[2] ? '' : ' scitxt') + (s[3] ? ' sci-dark' : '') + '">' + inner + '</a>';
     }).join("");
     return set + set; // doubled for seamless loop
   }

@@ -106,8 +106,11 @@
         if (!list.length) return;
         html += '<div class="block-hed" style="margin-top:26px">' + t + (t === "Community" ? " & Compliance" : "") + ' Partners</div>';
         html += '<div class="bh-clubgrid">' + list.map(function (s) {
+          var crest = s.logo
+            ? '<div class="crest has-logo' + (s.darkLogo ? ' dark-logo' : '') + '"><img src="' + esc(s.logo) + '" alt="' + esc(s.name) + ' logo" loading="lazy" onerror="this.parentNode.classList.remove(\'has-logo\',\'dark-logo\');this.remove();this.parentNode.textContent=\'' + esc(initials(s.name)) + '\'"></div>'
+            : '<div class="crest">' + esc(initials(s.name)) + '</div>';
           return '<a class="bh-club" href="' + esc(s.url) + '" target="_blank" rel="noopener">'
-            + '<div class="crest">' + esc(initials(s.name)) + '</div>'
+            + crest
             + '<div class="cn">' + esc(s.name) + '</div>'
             + '<div class="cx"><i class="ti ti-external-link"></i> Visit</div>'
             + '</a>';

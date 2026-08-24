@@ -32,7 +32,16 @@
     ["APMG Painting","https://apmgpainting.com.au/"],
     ["HGCB","https://hgcb.com.au/"],
     ["Altegra","https://www.altegra.com.au/"],
-    ["Good Sports","https://goodsports.com.au/"]
+    ["Good Sports","https://goodsports.com.au/"],
+    ["Child Safe","https://www.childsafe.org.au/"],
+    ["Carina Garland MP","https://www.carinagarland.com.au/"],
+    ["Compare & Connect","https://www.compareandconnect.com.au/"],
+    ["Connector World","https://www.connectorworld.com.au/"],
+    ["LCF Linemarking & Logos","https://grassup.com.au/services"],
+    ["Modern Orthodontics","https://www.modernorthodontics.com.au/"],
+    ["Six Star Plus","https://www.sixstarplus.com.au/"],
+    ["Tobin Brothers Funerals","https://tobinbrothers.com.au/in-partnership/"],
+    ["3WBC Radio","https://www.3wbc.org.au/shows/the-cordon/"]
   ];
   function scItems() {
     var set = SPONSORS.map(function (s) {

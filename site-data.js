@@ -222,7 +222,15 @@ window.BHRDCA_DATA = (function () {
     { name: "HGCB", url: "https://hgcb.com.au/", tier: "Partner" },
     { name: "Altegra", url: "https://www.altegra.com.au/", tier: "Community" },
     { name: "Good Sports", url: "https://goodsports.com.au/", tier: "Community" },
-    { name: "Child Safe", url: "https://www.childsafe.org.au/", tier: "Community" }
+    { name: "Child Safe", url: "https://www.childsafe.org.au/", tier: "Community" },
+    { name: "Carina Garland MP", url: "https://www.carinagarland.com.au/", tier: "Community" },
+    { name: "Compare & Connect", url: "https://www.compareandconnect.com.au/", tier: "Partner" },
+    { name: "Connector World", url: "https://www.connectorworld.com.au/", tier: "Partner" },
+    { name: "LCF Linemarking & Logos", url: "https://grassup.com.au/services", tier: "Partner" },
+    { name: "Modern Orthodontics", url: "https://www.modernorthodontics.com.au/", tier: "Partner" },
+    { name: "Six Star Plus", url: "https://www.sixstarplus.com.au/", tier: "Partner" },
+    { name: "Tobin Brothers Funerals", url: "https://tobinbrothers.com.au/in-partnership/", tier: "Partner" },
+    { name: "3WBC Radio", url: "https://www.3wbc.org.au/shows/the-cordon/", tier: "Community" }
   ];
 
   var history = [

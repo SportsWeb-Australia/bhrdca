@@ -156,8 +156,11 @@
     honours: function (sel) {
       var m = $(sel); if (!m) return;
       m.innerHTML = '<div class="bh-hongrid">' + (D.history || []).map(function (h) {
-        return '<a class="bh-hon" href="' + esc(h.url) + '" target="_blank" rel="noopener">'
-          + '<i class="ti ' + esc(h.icon) + '"></i><h3>' + esc(h.label) + '</h3><p>' + esc(h.desc) + '</p></a>';
+        var body = '<i class="ti ' + esc(h.icon) + '"></i><h3>' + esc(h.label) + '</h3><p>' + esc(h.desc) + '</p>';
+        if (!h.url) {
+          return '<div class="bh-hon bh-hon-soon">' + body + '<span class="bh-hon-badge">Coming soon</span></div>';
+        }
+        return '<a class="bh-hon" href="' + esc(h.url) + '" target="_blank" rel="noopener">' + body + '</a>';
       }).join("") + '</div>';
     },
 

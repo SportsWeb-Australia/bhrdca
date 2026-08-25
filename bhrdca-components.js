@@ -58,7 +58,7 @@
       + '<div style="display:flex;align-items:center;gap:18px">'
       + '<div class="tb-item"><i class="ti ti-map-pin"></i> Melbourne\'s Eastern Suburbs</div>'
       + '<div class="tb-item"><i class="ti ti-mail"></i> bhrdca.media@gmail.com</div>'
-      + '<div class="tb-item"><i class="ti ti-ball-baseball"></i> Est. 1890 &middot; 135th Season</div>'
+      + '<div class="tb-item"><i class="ti ti-ball-baseball"></i> Est. 1890 &middot; 137th Season</div>'
       + '</div>'
       + '<div style="display:flex;align-items:center;gap:12px">'
       + '<div class="t-soc">'

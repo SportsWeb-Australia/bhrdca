@@ -17,7 +17,7 @@ window.BHRDCA_DATA = (function () {
   var assoc = {
     name: "Box Hill Reporter District Cricket Association",
     short: "BHRDCA",
-    tagline: "Melbourne's east. 135 seasons of cricket.",
+    tagline: "Melbourne's east. 137 seasons of cricket.",
     established: "1890/91",
     reg: "Registered with Consumer Affairs Victoria — BOX HILL REPORTER DISTRICT CRICKET ASSOCIATION INC. Registered 26/9/1995, Registration #A0032112P.",
     postal: "604 Mountain Highway, Bayswater VIC 3153",

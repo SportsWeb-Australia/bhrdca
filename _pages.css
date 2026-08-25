@@ -1018,3 +1018,17 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 .bio-arrow{color:rgba(255,255,255,.35);font-size:16px;transition:transform .15s ease}
 .bio-card:hover .bio-arrow{transform:translateX(3px);color:var(--gold)}
 @media (max-width:480px){.bio-grid{grid-template-columns:1fr 1fr;gap:8px}.bio-card{padding:12px}.bio-nm{font-size:12.5px}}
+
+/* ===== Podcasts ===== */
+.pod-hero-card{display:flex;align-items:center;gap:20px;flex-wrap:wrap;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);border-radius:var(--r);padding:26px 28px;box-shadow:var(--shadow2)}
+.pod-hero-ic{flex:0 0 60px;width:60px;height:60px;border-radius:50%;background:rgba(246,194,28,.15);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:30px}
+.pod-hero-copy{flex:1;min-width:200px}
+.pod-hero-kicker{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.pod-hero-copy h2{font-family:'Bebas Neue',sans-serif;color:#fff;font-size:26px;letter-spacing:.4px;margin-bottom:4px}
+.pod-hero-copy p{color:rgba(255,255,255,.75);font-size:13px}
+.pod-empty{grid-column:1/-1;text-align:center;padding:40px 20px;background:var(--card);border:1px dashed var(--border);border-radius:var(--r)}
+.pod-empty i{font-size:34px;color:var(--gold-deep);display:block;margin-bottom:10px}
+.pod-empty h3{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--navy);margin-bottom:6px}
+.pod-empty p{font-size:13px;color:var(--muted);max-width:420px;margin:0 auto}
+.pod-season-block{margin-bottom:30px}
+@media (max-width:600px){.pod-hero-card{flex-direction:column;align-items:flex-start;text-align:left}.pod-hero-card .btn{width:100%;justify-content:center}}

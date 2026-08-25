@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Podcasts — BHRDCA</title>
+<meta name="description" content="The Cordon Radio Show — the BHRDCA podcast. Listen to the latest episodes and browse the archive.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,26 +27,69 @@
 
 <header class="page-hero">
   <div class="page-hero-inner wide">
-    <div class="crumb"><a href="/index.html">Home</a> <i class="ti ti-chevron-right"></i> Association · Podcasts</div>
-    <div class="eyebrow">Listen in</div>
-    <h1>Podcasts</h1>
-    <p class="page-sub">The BHRDCA podcast — the stories from around the grades.</p>
+    <div class="crumb"><a href="/index.html">Home</a> <i class="ti ti-chevron-right"></i> Association &middot; Podcasts</div>
+    <div class="eyebrow">Listen In</div>
+    <h1>The Cordon Radio Show</h1>
+    <p class="page-sub" id="pod-sub">The BHRDCA podcast &mdash; stories from around the grades.</p>
   </div>
 </header>
 
 <div class="page-wrap wide">
+
+  <!-- LISTEN NOW -->
   <div class="section-block">
-    <div class="callout callout-blue" style="margin-bottom:18px"><i class="ti ti-microphone"></i><div><strong>BHRDCA Podcasts — 2025/26.</strong> Episodes and player features will be embedded here as they're released. Follow our socials so you don't miss a drop.</div></div>
-    <div class="bh-feature">
-      <a class="bh-fcard" href="https://www.facebook.com/bhrdca" target="_blank" rel="noopener"><i class="ti ti-brand-facebook"></i><h3>Follow on Facebook</h3><p>New episodes are announced on @bhrdca.</p></a>
-      <a class="bh-fcard" href="https://www.instagram.com/bhrdca1/" target="_blank" rel="noopener"><i class="ti ti-brand-instagram"></i><h3>Follow on Instagram</h3><p>Clips and highlights — @bhrdca1.</p></a>
+    <div class="pod-hero-card">
+      <div class="pod-hero-ic"><i class="ti ti-microphone-2"></i></div>
+      <div class="pod-hero-copy">
+        <div class="pod-hero-kicker">On Air &amp; On Demand</div>
+        <h2>Catch every episode</h2>
+        <p id="pod-host-line">Hosted by Paul Hooper, live on 3WBC 94.1FM.</p>
+      </div>
+      <a class="btn btn-red" id="pod-listen-btn" href="https://tinyurl.com/yw39ksoy" target="_blank" rel="noopener"><i class="ti ti-brand-spotify"></i> Listen on Spotify</a>
     </div>
   </div>
+
+  <!-- CURRENT SEASON EPISODES -->
+  <div class="section-block">
+    <div class="sec-head">
+      <div><div class="eyebrow">Latest</div><div class="block-hed" id="pod-season-hed">Episodes</div></div>
+      <a class="view-all" href="/podcasts-archive.html">Past seasons <i class="ti ti-arrow-right"></i></a>
+    </div>
+    <div class="tile-grid" id="pod-list"></div>
+  </div>
+
 </div>
 
 <div data-bhrdca="sponsor-carousel"></div>
 <div data-bhrdca="footer"></div>
+<script src="/podcasts-data.js"></script>
+<script>
+(function () {
+  var P = window.BHRDCA_PODCASTS || {};
+  document.getElementById("pod-sub").textContent = "The BHRDCA podcast — stories from around the grades. " + (P.currentSeason ? P.currentSeason + " season." : "");
+  document.getElementById("pod-season-hed").textContent = (P.currentSeason || "") + " Episodes";
+  if (P.host) document.getElementById("pod-host-line").textContent = P.host;
+  if (P.spotifyShow) document.getElementById("pod-listen-btn").href = P.spotifyShow;
 
+  var list = document.getElementById("pod-list");
+  var eps = P.episodes || [];
+  if (!eps.length) {
+    list.innerHTML = '<div class="pod-empty">'
+      + '<i class="ti ti-microphone-2"></i>'
+      + '<h3>New season, first episode coming soon</h3>'
+      + '<p>The ' + (P.currentSeason || "") + ' season is just getting underway &mdash; check back here or follow our socials, and the first episode will land right here.</p>'
+      + '</div>';
+    return;
+  }
+  list.innerHTML = eps.map(function (e) {
+    return '<a class="tile" href="' + e.url + '" target="_blank" rel="noopener">'
+      + '<div class="tile-ic"><i class="ti ti-microphone-2"></i></div>'
+      + '<div><div class="tile-tt">' + e.title + '</div><div class="tile-tx">' + (e.date ? e.date + ' — ' : '') + (e.blurb || '') + '</div></div>'
+      + '<i class="ti ti-chevron-right"></i>'
+      + '</a>';
+  }).join("");
+})();
+</script>
   <script src="/sitepulse-widget.js" data-club-id="c944eff6-3d36-4b70-8b49-23dc70673397" data-source="onboarding"></script>
 </body>
 </html>

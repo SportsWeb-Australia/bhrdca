@@ -335,8 +335,8 @@ window.BHRDCA_DATA = (function () {
   ];
 
   var childSafety = {
-    officer: { role: "Child Safety Officer", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" },
-    complaints: { role: "Complaints Manager", name: "Aryan Meghani", phone: "0416 218 669", email: "ameghani@cricketvictoria.com.au" },
+    officer: { role: "Child Safety & Complaints Manager", name: "Ross Kainey", phone: "0457 828 574", email: "ross.kainey@bigpond.com" },
+    complaints: null,
     policies: [
       { label: "Australian Cricket’s Policy for Safeguarding Children & Young People", url: "https://resources.playcommunity.pulselive.com/playcommunity/document/2024/11/27/9ddd3384-e1e0-4488-9d3a-dc25eaeefa71/Australian-Cricket-s-Policy-for-Safeguarding-Children-Young-People.pdf" },
       { label: "Australian Cricket’s ‘Looking After Our Kids’ Code of Behaviour", url: "https://resources.playcommunity.pulselive.com/playcommunity/document/2024/11/27/7587ce1b-83d1-4c80-aa92-8d085ec1faf0/Australian-Cricket-s-Looking-After-Our-Kids-Code-of-Behaviour.pdf" },

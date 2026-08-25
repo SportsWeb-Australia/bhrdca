@@ -20,7 +20,7 @@ window.BHRDCA_DATA = (function () {
     tagline: "Melbourne's east. 137 seasons of cricket.",
     established: "1890/91",
     reg: "Registered with Consumer Affairs Victoria — BOX HILL REPORTER DISTRICT CRICKET ASSOCIATION INC. Registered 26/9/1995, Registration #A0032112P.",
-    postal: "604 Mountain Highway, Bayswater VIC 3153",
+    postal: "92 King Arthur Drive, Glen Waverley VIC 3150",
     blurb: "The BHRDCA is an amateur ‘hard wicket’ cricket association centred around Melbourne’s eastern suburbs, first established in 1890/91. It can lay claim to being the longest-running cricket association in Victoria, supporting Junior Boys & Girls, Senior, Women’s and Veterans (Over 40 & Over 50) competitions — more than 3,500 cricketers of all ages and abilities playing every week."
   };
 
@@ -43,6 +43,7 @@ window.BHRDCA_DATA = (function () {
     { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" },
     { role: "Veterans Section Manager", name: "Michael Whitehead", phone: "0419 523 183", email: "mick_019@msn.com" },
     { role: "Competition Assistant", name: "Aryan Meghani", phone: "0416 218 669", email: "ameghani@cricketvictoria.com.au" },
+    { role: "Competition Administrator", name: "Beau Nixon", phone: "61 3 9085 8846", email: "bnixon@cricketvictoria.com.au" },
     { role: "Chairman, BHRDCA Umpires Assoc.", name: "Phil Hermann", phone: "0402 384 642", email: "hermanndianne@hotmail.com" },
     { role: "Secretary, BHRDCA Umpires Assoc.", name: "Michael Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" },
     { role: "Umpires Assoc. Advisor", name: "Mark Thomas", phone: "0455 207 864", email: "mark.thomas@tile.com.au" },

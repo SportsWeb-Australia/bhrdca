@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Biographies — BHRDCA</title>
+<meta name="description" content="Profiles of the people who shaped the Box Hill Reporter District Cricket Association — tap a name to read their biography.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link rel="stylesheet" href="/_shared.css">
+<link rel="stylesheet" href="/_pages.css">
+<script src="/bhrdca-components.js"></script>
+<script src="/weather-widget.js"></script>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#0a2242">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<script src="/pwa.js" defer></script>
+</head>
+<body data-page="honours">
+
+<div data-bhrdca="masthead"></div>
+<div data-bhrdca="ticker"></div>
+
+<header class="page-hero">
+  <div class="page-hero-inner wide">
+    <div class="crumb"><a href="/index.html">Home</a> <i class="ti ti-chevron-right"></i> <a href="/honours.html">Honours</a> <i class="ti ti-chevron-right"></i> Biographies</div>
+    <div class="eyebrow">People of the BHRDCA</div>
+    <h1>Biographies</h1>
+    <p class="page-sub">Profiles of the people who shaped the Association &mdash; tap a name to read their biography.</p>
+  </div>
+</header>
+
+<div class="page-wrap wide">
+  <div class="section-block">
+    <div class="block-sub" id="bio-note"></div>
+    <div class="bio-grid" id="bio-grid"></div>
+  </div>
+</div>
+
+<div data-bhrdca="sponsor-carousel"></div>
+<div data-bhrdca="footer"></div>
+<script src="/biographies-data.js"></script>
+<script>
+(function () {
+  var B = window.BHRDCA_BIOS || [];
+  var grid = document.getElementById("bio-grid");
+  document.getElementById("bio-note").innerHTML = "Showing <strong>" + B.length + "</strong> biographies.";
+  grid.innerHTML = B.map(function (b) {
+    return '<a class="bio-card" href="' + b.url + '" target="_blank" rel="noopener">'
+      + '<span class="bio-ic"><i class="ti ti-file-text"></i></span>'
+      + '<span class="bio-nm">' + b.name + '</span>'
+      + '<i class="ti ti-chevron-right bio-arrow"></i>'
+      + '</a>';
+  }).join("");
+})();
+</script>
+  <script src="/sitepulse-widget.js" data-club-id="c944eff6-3d36-4b70-8b49-23dc70673397" data-source="onboarding"></script>
+</body>
+</html>

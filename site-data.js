@@ -330,7 +330,7 @@ window.BHRDCA_DATA = (function () {
     { label: "Office Bearers", desc: "Past presidents, secretaries and officials.", icon: "ti-users", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_61d23488e3a74922a34e415c7f9dc0ac.pdf" },
     { label: "BHRDCA Records", desc: "Maintained records, 1890 to 1985/86.", icon: "ti-chart-bar", url: "" },
     { label: "Life Members", desc: "Those honoured for outstanding service.", icon: "ti-award", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_583c74764c6a49b5bf64665cf87a8178.pdf" },
-    { label: "Biographies", desc: "Profiles of the people who shaped the Association.", icon: "ti-user-star", url: "https://www.bhrdca.com.au/biographies" },
+    { label: "Biographies", desc: "Profiles of the people who shaped the Association.", icon: "ti-user-star", url: "/biographies.html" },
     { label: "Hall of Fame", desc: "The BHRDCA's most celebrated cricketers.", icon: "ti-trophy", url: "https://www.bhrdca.com.au/_files/ugd/23872a_a728ad62055d40ae85fb29d05e7a8794.pdf" }
   ];
 

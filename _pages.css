@@ -1008,3 +1008,13 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 @media (max-width:480px){
   .gal-lb{padding:70px 10px}
 }
+
+/* ===== Biographies grid ===== */
+.bio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.bio-card{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);border-left:4px solid var(--gold);border-radius:10px;padding:14px 16px;text-decoration:none;box-shadow:var(--shadow);transition:transform .15s ease,box-shadow .15s ease}
+.bio-card:hover{transform:translateY(-3px) translateX(2px);box-shadow:var(--shadow2)}
+.bio-ic{flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:rgba(246,194,28,.14);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:16px}
+.bio-nm{flex:1;color:#fff;font-weight:600;font-size:13.5px;letter-spacing:.2px}
+.bio-arrow{color:rgba(255,255,255,.35);font-size:16px;transition:transform .15s ease}
+.bio-card:hover .bio-arrow{transform:translateX(3px);color:var(--gold)}
+@media (max-width:480px){.bio-grid{grid-template-columns:1fr 1fr;gap:8px}.bio-card{padding:12px}.bio-nm{font-size:12.5px}}

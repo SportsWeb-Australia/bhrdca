@@ -53,7 +53,7 @@
     var eps = (season.episodes || []).map(function (e) {
       return '<a class="tile" href="' + e.url + '" target="_blank" rel="noopener">'
         + '<div class="tile-ic"><i class="ti ti-microphone-2"></i></div>'
-        + '<div><div class="tile-tt">' + e.title + '</div></div>'
+        + '<div><div class="tile-tt">' + e.title + '</div>' + (e.date ? '<div class="tile-tx">' + e.date + '</div>' : '') + '</div>'
         + '<i class="ti ti-chevron-right"></i>'
         + '</a>';
     }).join("");

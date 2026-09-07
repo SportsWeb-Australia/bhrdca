@@ -36,9 +36,11 @@
 <div class="page-wrap wide">
   <div class="section-block">
     <div class="cc-folder">
-      <div class="cc-tabs" id="cc-tabs" role="tablist"></div>
-      <div class="cc-body">
+      <div class="cc-tabbar">
+        <div class="cc-tabs" id="cc-tabs" role="tablist"></div>
         <div class="cc-tag" id="cc-season"></div>
+      </div>
+      <div class="cc-body">
         <div id="cc-panel"></div>
       </div>
     </div>
@@ -47,28 +49,53 @@
 
 <div data-bhrdca="sponsor-carousel"></div>
 <div data-bhrdca="footer"></div>
+<script src="/site-data.js"></script>
 <script src="/club-contacts-data.js"></script>
 <script>
 (function () {
   var D = window.BHRDCA_CLUB_CONTACTS || {};
+  var CLUBS = (window.BHRDCA_DATA || {}).clubs || [];
   function esc(t){ return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
   function tel(p){ return p ? p.replace(/[^0-9+]/g,"") : ""; }
+  function initials(name){
+    var words = String(name).replace(/[^A-Za-z0-9 &\/-]/g," ").split(/[ \/&-]+/).filter(Boolean);
+    return (words.slice(0,3).map(function(w){ return w[0]; }).join("").toUpperCase()) || "C";
+  }
+  function normClub(s){ return String(s || "").toLowerCase().replace(/cricket club|c\.c\.c?\.?/g,"").replace(/[^a-z0-9]/g,""); }
 
-  document.getElementById("cc-season").textContent = "BHRDCA · " + (D.season || "");
+  var CLUB_LOOKUP = CLUBS.map(function (c) { return { norm: normClub(c.name), logo: c.logo, name: c.name }; });
+  function findLogo(clubName) {
+    var target = normClub(clubName);
+    if (!target) return null;
+    for (var i = 0; i < CLUB_LOOKUP.length; i++) {
+      var rn = CLUB_LOOKUP[i].norm;
+      if (rn === target || rn.indexOf(target) === 0 || target.indexOf(rn) === 0) return CLUB_LOOKUP[i];
+    }
+    return null;
+  }
+  function crestFor(clubName) {
+    var hit = findLogo(clubName);
+    if (hit && hit.logo) {
+      return '<span class="cc-crest has-logo"><img src="' + esc(hit.logo) + '" alt="" loading="lazy" onerror="this.parentNode.classList.remove(\'has-logo\');this.remove();this.parentNode.textContent=\'' + esc(initials(clubName)) + '\'"></span>';
+    }
+    return '<span class="cc-crest">' + esc(initials(clubName)) + '</span>';
+  }
+
+  document.getElementById("cc-season").innerHTML = '<i class="ti ti-calendar-event"></i> ' + esc(D.season || "");
 
   var TABS = [
-    { key: "committee",        label: "Committee of Management", icon: "ti-users-group",  n: (D.committee || []).length },
-    { key: "seniorClubs",      label: "Senior Clubs",             icon: "ti-ball-cricket", n: (D.seniorClubs || []).length },
-    { key: "treasurers",       label: "Club Treasurers",          icon: "ti-cash",         n: (D.treasurers || []).length },
-    { key: "juniorClubs",      label: "Junior Clubs",             icon: "ti-shirt-sport",  n: (D.juniorClubs || []).length },
-    { key: "femaleClubs",      label: "Female Clubs",             icon: "ti-shirt-sport",  n: (D.femaleClubs || []).length },
-    { key: "juniorFemaleClubs",label: "Junior Female Clubs",      icon: "ti-shirt-sport",  n: (D.juniorFemaleClubs || []).length }
+    { key: "committee",        label: "BHRDCA Committee",    icon: "ti-shield-star",  n: (D.committee || []).length },
+    { key: "seniorClubs",      label: "Senior Clubs",        icon: "ti-ball-cricket", n: (D.seniorClubs || []).length },
+    { key: "treasurers",       label: "Club Treasurers",     icon: "ti-cash",         n: (D.treasurers || []).length },
+    { key: "juniorClubs",      label: "Junior Clubs",        icon: "ti-shirt-sport",  n: (D.juniorClubs || []).length },
+    { key: "femaleClubs",      label: "Female Clubs",        icon: "ti-shirt-sport",  n: (D.femaleClubs || []).length },
+    { key: "juniorFemaleClubs",label: "Junior Female Clubs", icon: "ti-shirt-sport",  n: (D.juniorFemaleClubs || []).length }
   ];
 
   var tabsEl = document.getElementById("cc-tabs");
   tabsEl.innerHTML = TABS.map(function (t, i) {
     return '<button class="cc-tab' + (i === 0 ? ' active' : '') + '" data-key="' + t.key + '" role="tab">'
-      + '<i class="ti ' + t.icon + '"></i>' + esc(t.label) + '<span class="cc-tab-n">' + t.n + '</span></button>';
+      + '<i class="ti ' + t.icon + '"></i><span>' + esc(t.label) + '</span><span class="cc-tab-n">' + t.n + '</span></button>';
   }).join("");
 
   function contactRow(p) {
@@ -98,7 +125,7 @@
           }).join("")
         : '<div class="cc-none">Contact details to come</div>';
       return '<div class="cc-club" data-hay="' + esc(hay) + '">'
-        + '<div class="cc-club-hd">' + esc(c.club) + '</div>'
+        + '<div class="cc-club-hd">' + crestFor(c.club) + '<span>' + esc(c.club) + '</span></div>'
         + '<div class="cc-club-body">' + body + '</div>'
         + '</div>';
     }).join("") + '</div>';
@@ -109,7 +136,7 @@
       var hay = (r.club + " " + (r.name||"") + " " + (r.role||"")).toLowerCase();
       var hasPerson = !!r.name;
       return '<div class="cc-club" data-hay="' + esc(hay) + '">'
-        + '<div class="cc-club-hd">' + esc(r.club) + '</div>'
+        + '<div class="cc-club-hd">' + crestFor(r.club) + '<span>' + esc(r.club) + '</span></div>'
         + '<div class="cc-club-body">'
         + (hasPerson
             ? '<div class="cc-person"><div class="cc-person-l"><div class="cc-person-nm">' + esc(r.name) + '</div>' + (r.role ? '<div class="cc-person-role">' + esc(r.role) + '</div>' : '') + '</div><div class="cc-person-c">' + contactRow(r).phone + contactRow(r).email + '</div></div>'
@@ -143,7 +170,7 @@
     var list = D[key] || [];
     var html = '<div class="cc-panel-head">'
       + '<div><div class="cc-panel-title">' + esc(tab.label) + '</div><div class="cc-panel-sub">' + esc(SUBS[key] || "") + '</div></div>'
-      + '<input class="cc-search" type="search" id="cc-search" placeholder="Search ' + esc(tab.label).toLowerCase() + '…" aria-label="Search">'
+      + '<div class="cc-search-wrap"><i class="ti ti-search"></i><input class="cc-search" type="search" id="cc-search" placeholder="Search ' + esc(tab.label).toLowerCase() + '…" aria-label="Search"></div>'
       + '</div>'
       + RENDERERS[key](list);
     panel.innerHTML = html;

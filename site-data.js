@@ -86,7 +86,8 @@ window.BHRDCA_DATA = (function () {
         { label: "Procedure for Reports", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_5a4e2848560a423d8e086888abd99986.pdf" },
         { label: "Player Misconduct", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_9d2adb3233c046f4915f8bcfb1f28f88.pdf" },
         { label: "Match Ratio Ladder", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_5f3fa6f25ba148d99f1d3effb27e364a.xlsx?dn=Match-Ratio-Ladder-22-23.xlsx" },
-        { label: "Junior Dispensation Form", url: "https://forms.cloud.microsoft/pages/responsepage.aspx?id=0D83hL-_4EasEee-C1iddxsgAZ5m1TxIi_rcBtyQ2LZUNENHOUlCRVRUNDlHR01IV1lIR1NGTUtPSC4u&route=shorturl" }
+        { label: "Junior Dispensation Form", url: "https://forms.cloud.microsoft/pages/responsepage.aspx?id=0D83hL-_4EasEee-C1iddxsgAZ5m1TxIi_rcBtyQ2LZUNENHOUlCRVRUNDlHR01IV1lIR1NGTUtPSC4u&route=shorturl" },
+        { label: "Player Registration Form", url: "/documents/bhrdca-player-registration-form.docx" }
       ]
     },
     seniors: {

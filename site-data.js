@@ -94,8 +94,8 @@ window.BHRDCA_DATA = (function () {
       blurb: "More than 12 Senior grades on Saturdays, plus a mid-week twilight T20 competition. For information on Senior cricket, contact the Competition Assistant or your local club.",
       contacts: [ { role: "Senior Cricket", name: "Aryan Meghani", phone: "0416 218 669", email: "ameghani@cricketvictoria.com.au" } ],
       resources: [
-        { label: "Senior Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/23872a_115c337c83204140b6b39db35310f793.pdf" },
-        { label: "T20 Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/23872a_f6a5fab5c5474ca9b1a34c70c0efc59f.pdf" },
+        { label: "Senior Playing Conditions", url: "/documents/bhrdca-senior-competition-playing-rules-2025-26.docx" },
+        { label: "T20 Playing Conditions", url: "/documents/bhrdca-t20-rules-2025-26.pdf" },
         { label: "Cricket Balls Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_11456fc48f1143edbf258809b8f16018.pdf" },
         { label: "Attire Policy", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_e2b1db03d3ef4a0db42503a42e67f1f1.pdf" },
         { label: "Code of Conduct", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_349388776e5e43a388d75e40d44e2ca3.pdf" },
@@ -168,10 +168,10 @@ window.BHRDCA_DATA = (function () {
       ],
       resources: [
         { label: "Umpire Fees", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_28f8655c4480433980a6d9a94363414f.pdf" },
-        { label: "Senior Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/23872a_115c337c83204140b6b39db35310f793.pdf" },
+        { label: "Senior Playing Conditions", url: "/documents/bhrdca-senior-competition-playing-rules-2025-26.docx" },
         { label: "Veteran Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_42cd9ab70d2d44f19f7218b26080d128.pdf" },
         { label: "Junior Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_a32c999446a14cca9d265145f40d0e65.pdf" },
-        { label: "T20 Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_47814bd75bd9473987eb8ad6dffab682.pdf" },
+        { label: "T20 Playing Conditions", url: "/documents/bhrdca-t20-rules-2025-26.pdf" },
         { label: "Cricket Balls Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_965f34c8c0484aa5a24da7039a8dc84c.pdf" },
         { label: "Attire Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_61d2f33b1d524aaaa53feb075c71bf13.pdf" },
         { label: "Code of Conduct", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_d3549f8829e84d08a5b8c04ec8e4fc00.pdf" },

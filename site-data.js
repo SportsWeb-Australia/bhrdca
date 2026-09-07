@@ -309,18 +309,13 @@ window.BHRDCA_DATA = (function () {
     { name: "Club Builder", url: "https://www.club-builder.com.au/", tier: "Partner", logo: "/sponsor-logos/club-builder.webp" },
     { name: "Michael Sukkar MP", url: "https://www.michaelsukkar.com.au/", tier: "Partner", logo: "/sponsor-logos/michael-sukkar-mp.webp" },
     { name: "Club Connect", url: "https://clubconnect.net.au", tier: "Partner", logo: "/sponsor-logos/club-connect.webp" },
-    { name: "Melbourne Metro Refrigeration", url: "https://www.melbournemetrorefrigeration.com.au/", tier: "Partner", logo: "/sponsor-logos/melbourne-metro-refrigeration.webp" },
-    { name: "APMG Painting", url: "https://apmgpainting.com.au/", tier: "Partner", logo: "/sponsor-logos/apmg-painting.webp", darkLogo: true },
-    { name: "HGCB", url: "https://hgcb.com.au/", tier: "Partner", logo: "/sponsor-logos/hgcb.webp" },
     { name: "Altegra", url: "https://www.altegra.com.au/", tier: "Community" },
     { name: "Good Sports", url: "https://goodsports.com.au/", tier: "Community", logo: "/sponsor-logos/good-sports.webp" },
     { name: "Child Safe", url: "https://www.childsafe.org.au/", tier: "Community", logo: "/sponsor-logos/child-safe.svg" },
     { name: "Carina Garland MP", url: "https://www.carinagarland.com.au/", tier: "Community", logo: "/sponsor-logos/carina-garland-mp.webp" },
     { name: "Compare & Connect", url: "https://www.compareandconnect.com.au/", tier: "Partner" },
-    { name: "Connector World", url: "https://www.connectorworld.com.au/", tier: "Partner", logo: "/sponsor-logos/connector-world.webp" },
     { name: "LCF Linemarking & Logos", url: "https://grassup.com.au/services", tier: "Partner" },
     { name: "Modern Orthodontics", url: "https://www.modernorthodontics.com.au/", tier: "Partner", logo: "/sponsor-logos/modern-orthodontics.webp" },
-    { name: "Six Star Plus", url: "https://www.sixstarplus.com.au/", tier: "Partner", logo: "/sponsor-logos/six-star-plus.webp" },
     { name: "Tobin Brothers Funerals", url: "https://tobinbrothers.com.au/in-partnership/", tier: "Partner", logo: "/sponsor-logos/tobin-brothers-funerals.webp" },
     { name: "3WBC Radio", url: "https://www.3wbc.org.au/shows/the-cordon/", tier: "Community", logo: "/sponsor-logos/3wbc-radio.webp" }
   ];
@@ -328,7 +323,8 @@ window.BHRDCA_DATA = (function () {
   var history = [
     { label: "Heritage", desc: "The BHRDCA story since 1890/91.", icon: "ti-books", url: "https://www.bhrdca.com.au/_files/ugd/23872a_318cc73c815640ecb9bddbf90166433c.pdf" },
     { label: "Office Bearers", desc: "Past presidents, secretaries and officials.", icon: "ti-users", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_61d23488e3a74922a34e415c7f9dc0ac.pdf" },
-    { label: "BHRDCA Records", desc: "Maintained records, 1890 to 1985/86.", icon: "ti-chart-bar", url: "" },
+    { label: "BHRDCA Records", desc: "Statistical and historical records, 1890/91 to 1985/86.", icon: "ti-chart-bar", url: "/documents/bhrdca-records-1890-1985-86.pdf" },
+    { label: "BHRDCA Statistics", desc: "Batting, bowling and premiership records, 2008/09 to 2025/26.", icon: "ti-chart-histogram", url: "/documents/bhrdca-statistics-2008-2026.pdf" },
     { label: "Life Members", desc: "Those honoured for outstanding service.", icon: "ti-award", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_583c74764c6a49b5bf64665cf87a8178.pdf" },
     { label: "Biographies", desc: "Profiles of the people who shaped the Association.", icon: "ti-user-star", url: "/biographies.html" },
     { label: "Hall of Fame", desc: "The BHRDCA's most celebrated cricketers.", icon: "ti-trophy", url: "https://www.bhrdca.com.au/_files/ugd/23872a_a728ad62055d40ae85fb29d05e7a8794.pdf" }

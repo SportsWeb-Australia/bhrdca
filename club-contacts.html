@@ -29,23 +29,157 @@
     <div class="crumb"><a href="/index.html">Home</a> <i class="ti ti-chevron-right"></i> Association · Club Contacts</div>
     <div class="eyebrow">Directory</div>
     <h1>Club Contacts</h1>
-    <p class="page-sub">Every affiliated club's primary contact for the current season.</p>
+    <p class="page-sub">The Association's committee and every affiliated club's contacts for the current season, all in one place.</p>
   </div>
 </header>
 
 <div class="page-wrap wide">
   <div class="section-block">
-    <div class="block-sub">Contacts for all clubs affiliated with the BHRDCA for the 2025/26 season. Search by club or contact name.</div>
-    <div id="m"></div>
+    <div class="cc-folder">
+      <div class="cc-tabs" id="cc-tabs" role="tablist"></div>
+      <div class="cc-body">
+        <div class="cc-tag" id="cc-season"></div>
+        <div id="cc-panel"></div>
+      </div>
+    </div>
   </div>
 </div>
 
 <div data-bhrdca="sponsor-carousel"></div>
 <div data-bhrdca="footer"></div>
-<script src="/site-data.js"></script>
-<script src="/bhrdca-render.js"></script>
+<script src="/club-contacts-data.js"></script>
 <script>
-BHRDCA.render.clubContacts("#m");
+(function () {
+  var D = window.BHRDCA_CLUB_CONTACTS || {};
+  function esc(t){ return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function tel(p){ return p ? p.replace(/[^0-9+]/g,"") : ""; }
+
+  document.getElementById("cc-season").textContent = "BHRDCA · " + (D.season || "");
+
+  var TABS = [
+    { key: "committee",        label: "Committee of Management", icon: "ti-users-group",  n: (D.committee || []).length },
+    { key: "seniorClubs",      label: "Senior Clubs",             icon: "ti-ball-cricket", n: (D.seniorClubs || []).length },
+    { key: "treasurers",       label: "Club Treasurers",          icon: "ti-cash",         n: (D.treasurers || []).length },
+    { key: "juniorClubs",      label: "Junior Clubs",             icon: "ti-shirt-sport",  n: (D.juniorClubs || []).length },
+    { key: "femaleClubs",      label: "Female Clubs",             icon: "ti-shirt-sport",  n: (D.femaleClubs || []).length },
+    { key: "juniorFemaleClubs",label: "Junior Female Clubs",      icon: "ti-shirt-sport",  n: (D.juniorFemaleClubs || []).length }
+  ];
+
+  var tabsEl = document.getElementById("cc-tabs");
+  tabsEl.innerHTML = TABS.map(function (t, i) {
+    return '<button class="cc-tab' + (i === 0 ? ' active' : '') + '" data-key="' + t.key + '" role="tab">'
+      + '<i class="ti ' + t.icon + '"></i>' + esc(t.label) + '<span class="cc-tab-n">' + t.n + '</span></button>';
+  }).join("");
+
+  function contactRow(p) {
+    var email = p.email ? '<a href="mailto:' + esc(p.email) + '" title="' + esc(p.email) + '"><i class="ti ti-mail"></i></a>' : "";
+    var phone = p.phone ? '<a href="tel:' + tel(p.phone) + '" title="' + esc(p.phone) + '"><i class="ti ti-phone"></i></a>' : "";
+    return { email: email, phone: phone };
+  }
+
+  function renderCommittee(list) {
+    return '<div class="cc-grid" id="cc-grid">' + list.map(function (c) {
+      return '<div class="cc-card" data-hay="' + esc((c.name + " " + c.role).toLowerCase()) + '">'
+        + '<div class="cc-card-nm">' + esc(c.name) + '</div>'
+        + '<div class="cc-card-role">' + esc(c.role) + '</div>'
+        + (c.phone ? '<a href="tel:' + tel(c.phone) + '"><i class="ti ti-phone"></i>' + esc(c.phone) + '</a>' : '')
+        + (c.email ? '<a href="mailto:' + esc(c.email) + '"><i class="ti ti-mail"></i>' + esc(c.email) + '</a>' : '')
+        + '</div>';
+    }).join("") + '</div>';
+  }
+
+  function renderSeniorClubs(list) {
+    return '<div class="cc-grid" id="cc-grid">' + list.map(function (c) {
+      var hay = (c.club + " " + c.people.map(function(p){return p.name + " " + p.role;}).join(" ")).toLowerCase();
+      var body = c.people.length
+        ? c.people.map(function (p) {
+            var cr = contactRow(p);
+            return '<div class="cc-person"><div class="cc-person-l"><div class="cc-person-nm">' + esc(p.name) + '</div><div class="cc-person-role">' + esc(p.role || "") + '</div></div><div class="cc-person-c">' + cr.phone + cr.email + '</div></div>';
+          }).join("")
+        : '<div class="cc-none">Contact details to come</div>';
+      return '<div class="cc-club" data-hay="' + esc(hay) + '">'
+        + '<div class="cc-club-hd">' + esc(c.club) + '</div>'
+        + '<div class="cc-club-body">' + body + '</div>'
+        + '</div>';
+    }).join("") + '</div>';
+  }
+
+  function renderFlatList(list) {
+    return '<div class="cc-grid" id="cc-grid">' + list.map(function (r) {
+      var hay = (r.club + " " + (r.name||"") + " " + (r.role||"")).toLowerCase();
+      var hasPerson = !!r.name;
+      return '<div class="cc-club" data-hay="' + esc(hay) + '">'
+        + '<div class="cc-club-hd">' + esc(r.club) + '</div>'
+        + '<div class="cc-club-body">'
+        + (hasPerson
+            ? '<div class="cc-person"><div class="cc-person-l"><div class="cc-person-nm">' + esc(r.name) + '</div>' + (r.role ? '<div class="cc-person-role">' + esc(r.role) + '</div>' : '') + '</div><div class="cc-person-c">' + contactRow(r).phone + contactRow(r).email + '</div></div>'
+            : '<div class="cc-none">Contact details to come</div>')
+        + '</div></div>';
+    }).join("") + '</div>';
+  }
+
+  var RENDERERS = {
+    committee: renderCommittee,
+    seniorClubs: renderSeniorClubs,
+    treasurers: renderFlatList,
+    juniorClubs: renderFlatList,
+    femaleClubs: renderFlatList,
+    juniorFemaleClubs: renderFlatList
+  };
+
+  var SUBS = {
+    committee: "The Association's Committee of Management, " + D.season + ".",
+    seniorClubs: "Senior club presidents, secretaries and other office bearers, " + D.season + ".",
+    treasurers: "One treasurer contact per affiliated club, " + D.season + ".",
+    juniorClubs: "Junior coordinators for every affiliated club (mixed), " + D.season + ".",
+    femaleClubs: "Senior female/women's cricket coordinators by club, " + D.season + ".",
+    juniorFemaleClubs: "Junior girls' cricket coordinators by club, " + D.season + "."
+  };
+
+  var panel = document.getElementById("cc-panel");
+
+  function showTab(key) {
+    var tab = TABS.filter(function (t) { return t.key === key; })[0];
+    var list = D[key] || [];
+    var html = '<div class="cc-panel-head">'
+      + '<div><div class="cc-panel-title">' + esc(tab.label) + '</div><div class="cc-panel-sub">' + esc(SUBS[key] || "") + '</div></div>'
+      + '<input class="cc-search" type="search" id="cc-search" placeholder="Search ' + esc(tab.label).toLowerCase() + '…" aria-label="Search">'
+      + '</div>'
+      + RENDERERS[key](list);
+    panel.innerHTML = html;
+
+    var input = document.getElementById("cc-search");
+    input.addEventListener("input", function () {
+      var q = this.value.toLowerCase().trim();
+      var cards = document.querySelectorAll("#cc-grid > [data-hay]");
+      var hits = 0;
+      cards.forEach(function (el) {
+        var show = !q || el.getAttribute("data-hay").indexOf(q) > -1;
+        el.style.display = show ? "" : "none";
+        if (show) hits++;
+      });
+      var empty = document.getElementById("cc-empty-hit");
+      if (!hits) {
+        if (!empty) {
+          var d = document.createElement("div");
+          d.id = "cc-empty-hit"; d.className = "cc-empty-hit";
+          d.textContent = "No matches for “" + this.value + "”.";
+          document.getElementById("cc-grid").appendChild(d);
+        }
+      } else if (empty) empty.remove();
+    });
+  }
+
+  tabsEl.addEventListener("click", function (e) {
+    var btn = e.target.closest(".cc-tab");
+    if (!btn) return;
+    tabsEl.querySelectorAll(".cc-tab").forEach(function (b) { b.classList.remove("active"); });
+    btn.classList.add("active");
+    showTab(btn.getAttribute("data-key"));
+  });
+
+  showTab(TABS[0].key);
+})();
 </script>
   <script src="https://sportsweb-one-v1.vercel.app/sitepulse-widget.js"
         data-club-id="c944eff6-3d36-4b70-8b49-23dc70673397"

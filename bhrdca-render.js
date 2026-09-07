@@ -43,6 +43,34 @@
     return hit;
   }
 
+  var CC = window.BHRDCA_CLUB_CONTACTS || null;
+  function ccFindByClub(list, name){
+    var target = normClub(name);
+    if (!target || !list) return null;
+    for (var i = 0; i < list.length; i++) {
+      var rn = normClub(list[i].club);
+      if (rn === target || rn.indexOf(target) === 0 || target.indexOf(rn) === 0) return list[i];
+    }
+    return null;
+  }
+  function findCommittee(name){
+    if (!CC) return null;
+    var out = { president: null, secretary: null, treasurer: null, junior: null };
+    var senior = ccFindByClub(CC.seniorClubs || [], name);
+    if (senior && senior.people) {
+      senior.people.forEach(function (p) {
+        var role = String(p.role || "").toLowerCase();
+        if (role.indexOf("president") > -1 && !out.president) out.president = p;
+        else if (role.indexOf("secretary") > -1 && !out.secretary) out.secretary = p;
+      });
+    }
+    var treas = ccFindByClub(CC.treasurers || [], name);
+    if (treas && treas.name) out.treasurer = treas;
+    var junior = ccFindByClub(CC.juniorClubs || [], name);
+    if (junior && junior.name) out.junior = junior;
+    return out;
+  }
+
   var render = {
     clubs: function (sel) {
       var m = $(sel); if (!m) return;
@@ -52,20 +80,27 @@
           var gm = GRADE_META[g] || { lbl: g, cls: "gx" };
           return '<span class="grade-badge ' + gm.cls + '" title="' + esc(gm.lbl) + '">' + esc(g) + '</span>';
         }).join("");
-        var jc = findClubContact(c.name);
+        var committee = findCommittee(c.name);
+        var jc = ccFindByClub(CC && CC.juniorClubs, c.name) || findClubContact(c.name);
+        var pres = committee && committee.president;
+        var sec = committee && committee.secretary;
+        var treas = committee && committee.treasurer;
+        var jun = committee && committee.junior;
+        var anyReal = !!(pres || sec || treas || jun);
         var hover = '<div class="club-hover">'
-          + '<div class="ch-row"><span class="ch-role">President</span><span class="ch-val">TBC</span></div>'
-          + '<div class="ch-row"><span class="ch-role">Secretary</span><span class="ch-val">TBC</span></div>'
-          + '<div class="ch-row"><span class="ch-role">Treasurer</span><span class="ch-val">TBC</span></div>'
-          + '<div class="ch-row"><span class="ch-role">Junior Coordinator</span><span class="ch-val">' + (jc ? esc(jc.contact) : "TBC") + '</span></div>'
-          + (jc && jc.email ? '<div class="ch-contact"><i class="ti ti-mail"></i><span>' + esc(jc.email).replace(/([@.])/g, '$1<wbr>') + '</span></div>' : '')
-          + (jc && jc.number ? '<div class="ch-contact"><i class="ti ti-phone"></i><span>' + esc(jc.number) + '</span></div>' : '')
-          + '<div class="ch-flag">Demo preview &mdash; committee details to be confirmed with the club</div>'
+          + '<div class="ch-row"><span class="ch-role">President</span><span class="ch-val">' + (pres ? esc(pres.name) : "TBC") + '</span></div>'
+          + '<div class="ch-row"><span class="ch-role">Secretary</span><span class="ch-val">' + (sec ? esc(sec.name) : "TBC") + '</span></div>'
+          + '<div class="ch-row"><span class="ch-role">Treasurer</span><span class="ch-val">' + (treas ? esc(treas.name) : "TBC") + '</span></div>'
+          + '<div class="ch-row"><span class="ch-role">Junior Coordinator</span><span class="ch-val">' + (jun ? esc(jun.name) : (jc ? esc(jc.contact) : "TBC")) + '</span></div>'
+          + (jun && jun.email ? '<div class="ch-contact"><i class="ti ti-mail"></i><span>' + esc(jun.email).replace(/([@.])/g, '$1<wbr>') + '</span></div>' : (jc && jc.email ? '<div class="ch-contact"><i class="ti ti-mail"></i><span>' + esc(jc.email).replace(/([@.])/g, '$1<wbr>') + '</span></div>' : ''))
+          + (jun && jun.phone ? '<div class="ch-contact"><i class="ti ti-phone"></i><span>' + esc(jun.phone) + '</span></div>' : (jc && jc.number ? '<div class="ch-contact"><i class="ti ti-phone"></i><span>' + esc(jc.number) + '</span></div>' : ''))
+          + (anyReal ? '' : '<div class="ch-flag">Committee details to be confirmed with the club</div>')
           + '</div>';
         var crest = c.logo
           ? '<div class="crest has-logo"><img src="' + esc(c.logo) + '" alt="' + esc(c.name) + ' crest" loading="lazy" onerror="this.parentNode.classList.remove(\'has-logo\');this.remove();this.parentNode.textContent=\'' + esc(initials(c.name)) + '\'"></div>'
           : '<div class="crest">' + esc(initials(c.name)) + '</div>';
-        return '<div class="bh-club-wrap" tabindex="0">'
+        var gradeKey = (c.grades && c.grades.length) ? c.grades.join(",") : "AFFILIATE";
+        return '<div class="bh-club-wrap" tabindex="0" data-grades="' + esc(gradeKey) + '">'
           + '<a class="bh-club" href="' + esc(c.url) + '" target="_blank" rel="noopener">'
           + crest
           + '<div class="cn">' + esc(c.name) + '</div>'

@@ -229,14 +229,6 @@ window.BHRDCA_DATA = (function () {
     { name: "Vermont", url: "https://www.vermontcricket.com.au/", logo: "/club-logos/vermont.png", grades: ["M", "F", "J"] }
   ];
 
-  // Which grades each club fields — DEMO/INDICATIVE ONLY, to be confirmed with each club.
-  // M = Men's/Seniors, F = Women's/Girls, J = Juniors, V = Veterans.
-  var GRADE_CYCLE = [
-    ["M","J"], ["M","F","J"], ["M","V"], ["M","F","J","V"], ["M","J","V"],
-    ["M","F"], ["M","J"], ["M","F","J","V"], ["M","J","V"], ["M","F","J"]
-  ];
-  clubs.forEach(function (c, i) { c.grades = GRADE_CYCLE[i % GRADE_CYCLE.length]; });
-
   // Full club contact directory (all affiliated clubs — 2025/26). From live site.
   var clubContacts = [
     ["Ainslie Park","Karen Ridley","0448 448 421",""],

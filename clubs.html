@@ -40,6 +40,14 @@
       <div><strong>Member clubs.</strong> Tap any club to visit its website. The full member set and any remaining official club crests are <strong>to be confirmed with the BHRDCA</strong> — a few tiles below still use a placeholder crest.</div>
     </div>
     <div class="block-sub" id="clubs-note"></div>
+    <div class="cc-tabs" id="club-cat-tabs" role="tablist" style="margin-bottom:16px">
+      <button class="cc-tab active" data-cat="all"><i class="ti ti-layout-grid"></i><span>All Clubs</span><span class="cc-tab-n" id="cat-n-all"></span></button>
+      <button class="cc-tab" data-cat="M"><i class="ti ti-ball-cricket"></i><span>Seniors</span><span class="cc-tab-n" id="cat-n-M"></span></button>
+      <button class="cc-tab" data-cat="J"><i class="ti ti-shirt-sport"></i><span>Juniors</span><span class="cc-tab-n" id="cat-n-J"></span></button>
+      <button class="cc-tab" data-cat="F"><i class="ti ti-shirt-sport"></i><span>Women</span><span class="cc-tab-n" id="cat-n-F"></span></button>
+      <button class="cc-tab" data-cat="V"><i class="ti ti-shirt-sport"></i><span>Veterans</span><span class="cc-tab-n" id="cat-n-V"></span></button>
+      <button class="cc-tab" data-cat="AFFILIATE"><i class="ti ti-building-bank"></i><span>Affiliates</span><span class="cc-tab-n" id="cat-n-AFFILIATE"></span></button>
+    </div>
     <div class="grade-legend">
       <strong>Key:</strong>
       <span class="grade-legend-item"><span class="grade-badge gm">M</span> Men's / Seniors</span>
@@ -49,16 +57,50 @@
       <span class="grade-legend-note">Indicative &mdash; to be confirmed with each club. Hover a club for committee contacts.</span>
     </div>
     <div id="m"></div>
+    <div class="cc-empty-hit" id="club-cat-empty" hidden>No clubs in this category yet.</div>
   </div>
 </div>
 
 <div data-bhrdca="sponsor-carousel"></div>
 <div data-bhrdca="footer"></div>
 <script src="/site-data.js"></script>
+<script src="/club-contacts-data.js"></script>
 <script src="/bhrdca-render.js"></script>
 <script>
 BHRDCA.render.clubs("#m");
-(function(){var d=window.BHRDCA_DATA||{};document.getElementById("clubs-note").innerHTML="Showing <strong>"+(d.clubs||[]).length+"</strong> member clubs. "+(d.clubsNote||"");})();
+(function(){
+  var d = window.BHRDCA_DATA || {};
+  document.getElementById("clubs-note").innerHTML = "Showing <strong>" + (d.clubs || []).length + "</strong> member clubs. " + (d.clubsNote || "");
+
+  var tiles = Array.prototype.slice.call(document.querySelectorAll("#m .bh-club-wrap"));
+  var counts = { all: tiles.length, M: 0, J: 0, F: 0, V: 0, AFFILIATE: 0 };
+  tiles.forEach(function (t) {
+    var grades = t.getAttribute("data-grades").split(",");
+    grades.forEach(function (g) { if (counts.hasOwnProperty(g)) counts[g]++; });
+  });
+  Object.keys(counts).forEach(function (k) {
+    var el = document.getElementById("cat-n-" + k);
+    if (el) el.textContent = counts[k];
+  });
+
+  var tabsEl = document.getElementById("club-cat-tabs");
+  var emptyEl = document.getElementById("club-cat-empty");
+  tabsEl.addEventListener("click", function (e) {
+    var btn = e.target.closest(".cc-tab");
+    if (!btn) return;
+    tabsEl.querySelectorAll(".cc-tab").forEach(function (b) { b.classList.remove("active"); });
+    btn.classList.add("active");
+    var cat = btn.getAttribute("data-cat");
+    var visible = 0;
+    tiles.forEach(function (t) {
+      var grades = t.getAttribute("data-grades").split(",");
+      var show = cat === "all" || grades.indexOf(cat) > -1;
+      t.style.display = show ? "" : "none";
+      if (show) visible++;
+    });
+    emptyEl.hidden = visible > 0;
+  });
+})();
 </script>
   <script src="https://sportsweb-one-v1.vercel.app/sitepulse-widget.js"
         data-club-id="c944eff6-3d36-4b70-8b49-23dc70673397"

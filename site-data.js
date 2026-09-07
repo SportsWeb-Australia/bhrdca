@@ -66,7 +66,7 @@ window.BHRDCA_DATA = (function () {
         { role: "Junior Rep Carnival & Girls Cricket Coordinator", name: "Ross Chambers", phone: "0432 660 951", email: "chambers.ross@optusnet.com.au" }
       ],
       resources: [
-        { label: "Junior Competition Rules", url: "https://www.bhrdca.com.au/_files/ugd/23872a_b03334bc0f454b80bd4ab3ae7bc0ca84.pdf" },
+        { label: "Junior Competition Rules", url: "/documents/bhrdca-junior-competition-rules-2025-26.pdf" },
         { label: "Coaches Code of Behaviour", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_9ced7a2e55504257a291b053bc9b183f.pdf" },
         { label: "U12 Rules Summary", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_3e47dc29944f4aaf91a5e279d98e4b12.pdf" },
         { label: "U14 Rules Summary", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_569e03d05715420b90b2d1abeb46df64.pdf" },
@@ -313,10 +313,11 @@ window.BHRDCA_DATA = (function () {
   ];
 
   var history = [
-    { label: "Heritage", desc: "The BHRDCA story since 1890/91.", icon: "ti-books", url: "https://www.bhrdca.com.au/_files/ugd/23872a_318cc73c815640ecb9bddbf90166433c.pdf" },
+    { label: "Heritage", desc: "The BHRDCA story since 1890/91.", icon: "ti-books", url: "/documents/bhrdca-heritage.pdf" },
     { label: "Office Bearers", desc: "Past presidents, secretaries and officials.", icon: "ti-users", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_61d23488e3a74922a34e415c7f9dc0ac.pdf" },
     { label: "BHRDCA Records", desc: "Statistical and historical records, 1890/91 to 1985/86.", icon: "ti-chart-bar", url: "/documents/bhrdca-records-1890-1985-86.pdf" },
     { label: "BHRDCA Statistics", desc: "Batting, bowling and premiership records, 2008/09 to 2025/26.", icon: "ti-chart-histogram", url: "/documents/bhrdca-statistics-2008-2026.pdf" },
+    { label: "Premiership Count", desc: "129 seasons of Top Grade premiership winners, since 1890/91.", icon: "ti-trophy-filled", url: "/documents/bhrdca-premiership-count.pdf" },
     { label: "Life Members", desc: "Those honoured for outstanding service.", icon: "ti-award", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_583c74764c6a49b5bf64665cf87a8178.pdf" },
     { label: "Biographies", desc: "Profiles of the people who shaped the Association.", icon: "ti-user-star", url: "/biographies.html" },
     { label: "Hall of Fame", desc: "The BHRDCA's most celebrated cricketers.", icon: "ti-trophy", url: "https://www.bhrdca.com.au/_files/ugd/23872a_a728ad62055d40ae85fb29d05e7a8794.pdf" }

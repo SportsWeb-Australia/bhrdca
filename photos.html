@@ -35,10 +35,23 @@
 </header>
 
 <div class="page-wrap wide">
+
   <div class="section-block">
+    <div class="sec-head">
+      <div><div class="eyebrow">Field of View Sports Photography</div><div class="block-hed">Season Galleries</div></div>
+    </div>
+    <div class="block-sub">Every season's full photo set and Grand Final premiership posters, hosted by our official photographer &mdash; open a season to browse or order prints.</div>
+    <div class="sg-grid" id="sg-grid"></div>
+  </div>
+
+  <div class="section-block">
+    <div class="sec-head">
+      <div><div class="eyebrow">This Season</div><div class="block-hed">Recent Match Photos</div></div>
+    </div>
     <div class="block-sub" id="gal-note"></div>
     <div class="gal-grid" id="gal-grid"></div>
   </div>
+
 </div>
 
 <!-- LIGHTBOX -->
@@ -54,9 +67,30 @@
 
 <div data-bhrdca="sponsor-carousel"></div>
 <div data-bhrdca="footer"></div>
+<script src="/season-galleries-data.js"></script>
 <script src="/gallery-data.js"></script>
 <script>
 (function () {
+  var esc = function (t) { return String(t == null ? "" : t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
+  var SG = window.BHRDCA_SEASON_GALLERIES || [];
+  var sgGrid = document.getElementById("sg-grid");
+  sgGrid.innerHTML = SG.map(function (s) {
+    var hasCover = !!s.cover;
+    var cls = "sg-card" + (hasCover ? " has-cover" : "") + (s.isPoster ? " sg-poster" : "");
+    var icon = s.isPoster ? "ti-trophy" : "ti-camera";
+    var bg = hasCover ? '<img class="sg-bg" src="' + esc(s.cover) + '" alt="" loading="lazy">' : "";
+    return '<a class="' + cls + '" href="' + esc(s.url) + '" target="_blank" rel="noopener">'
+      + bg
+      + '<div class="sg-scrim"></div>'
+      + '<div class="sg-glyph"><i class="ti ' + icon + '"></i></div>'
+      + '<div class="sg-body">'
+      + '<div class="sg-label">' + esc(s.label) + '</div>'
+      + '<div class="sg-season">' + esc(s.season) + '</div>'
+      + '<div class="sg-cta">View gallery <i class="ti ti-arrow-up-right"></i></div>'
+      + '</div>'
+      + '</a>';
+  }).join("");
+
   var G = window.BHRDCA_GALLERY || [];
   var grid = document.getElementById("gal-grid");
   document.getElementById("gal-note").innerHTML = "Showing <strong>" + G.length + "</strong> photos.";

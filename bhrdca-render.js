@@ -203,21 +203,33 @@
     sponsors: function (sel) {
       var m = $(sel); if (!m) return;
       var sp = D.sponsors || [];
-      var tiers = ["Premier", "Partner", "Community"];
+      var tiers = [
+        { key: "Premier",   label: "Premier Partners" },
+        { key: "Partner",   label: "Association Partners" },
+        { key: "Community", label: "Community & Compliance Partners" }
+      ];
       var html = "";
       tiers.forEach(function (t) {
-        var list = sp.filter(function (s) { return s.tier === t; });
+        var list = sp.filter(function (s) { return s.tier === t.key; });
         if (!list.length) return;
-        html += '<div class="block-hed" style="margin-top:26px">' + t + (t === "Community" ? " & Compliance" : "") + ' Partners</div>';
-        html += '<div class="bh-clubgrid">' + list.map(function (s) {
-          var crest = s.logo
-            ? '<div class="crest has-logo' + (s.darkLogo ? ' dark-logo' : '') + '"><img src="' + esc(s.logo) + '" alt="' + esc(s.name) + ' logo" loading="lazy" onerror="this.parentNode.classList.remove(\'has-logo\',\'dark-logo\');this.remove();this.parentNode.textContent=\'' + esc(initials(s.name)) + '\'"></div>'
-            : '<div class="crest">' + esc(initials(s.name)) + '</div>';
-          return '<a class="bh-club" href="' + esc(s.url) + '" target="_blank" rel="noopener">'
-            + crest
-            + '<div class="cn">' + esc(s.name) + '</div>'
-            + '<div class="cx"><i class="ti ti-external-link"></i> Visit</div>'
-            + '</a>';
+        html += '<div class="block-hed" style="margin-top:30px">' + t.label + '</div>';
+        html += '<div class="spon-grid">' + list.map(function (s) {
+          var ini = esc(initials(s.name));
+          var logo = s.logo
+            ? '<div class="spon-logo' + (s.darkLogo ? ' dark' : '') + '"><img src="' + esc(s.logo) + '" alt="' + esc(s.name) + ' logo" loading="lazy" onerror="this.parentNode.classList.add(\'no-img\');this.parentNode.setAttribute(\'data-ini\',\'' + ini + '\');this.remove()"></div>'
+            : '<div class="spon-logo no-img" data-ini="' + ini + '"></div>';
+          var details = "";
+          if (s.phone)   details += '<div class="spon-row"><i class="ti ti-phone"></i><a href="tel:' + tel(s.phone) + '">' + esc(s.phone) + '</a></div>';
+          if (s.email)   details += '<div class="spon-row"><i class="ti ti-mail"></i><a href="mailto:' + esc(s.email) + '">' + esc(s.email) + '</a></div>';
+          if (s.address) details += '<div class="spon-row"><i class="ti ti-map-pin"></i><span>' + esc(s.address) + '</span></div>';
+          return '<div class="spon-card">'
+            + logo
+            + '<div class="spon-body">'
+            + '<h3 class="spon-name">' + esc(s.name) + '</h3>'
+            + (details ? '<div class="spon-details">' + details + '</div>' : '')
+            + '<a class="btn btn-red spon-btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">Visit Sponsor <i class="ti ti-arrow-up-right"></i></a>'
+            + '</div>'
+            + '</div>';
         }).join("") + '</div>';
       });
       m.innerHTML = html;

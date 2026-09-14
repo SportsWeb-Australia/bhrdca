@@ -793,6 +793,24 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .bh-club .cx{font-size:11px;color:var(--gold-deep);font-weight:700;display:inline-flex;align-items:center;gap:4px}
 
 /* grade key + badges */
+/* ===== Sponsor cards (Sponsors page) ===== */
+.spon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:14px}
+.spon-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;transition:transform .15s ease,box-shadow .15s ease}
+.spon-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2)}
+.spon-logo{height:200px;display:flex;align-items:center;justify-content:center;padding:26px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.spon-logo img{max-width:84%;max-height:132px;object-fit:contain}
+.spon-logo.dark{background:var(--navy)}
+.spon-logo.no-img{font-family:'Bebas Neue',sans-serif;font-size:46px;letter-spacing:1.5px;color:var(--navy)}
+.spon-logo.no-img::before{content:attr(data-ini)}
+.spon-body{display:flex;flex-direction:column;gap:14px;padding:22px;flex:1}
+.spon-name{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:.4px;color:var(--navy);line-height:1.1}
+.spon-details{display:flex;flex-direction:column;gap:10px}
+.spon-row{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text)}
+.spon-row i{color:var(--gold-deep);width:16px;text-align:center;flex-shrink:0}
+.spon-row a{color:var(--navy3);text-decoration:none}
+.spon-row a:hover{color:var(--gold-deep)}
+.spon-btn{margin-top:auto;width:100%;justify-content:center}
+
 /* ===== Club directory folder (homepage + Clubs page) ===== */
 .cf-folder{margin-top:6px}
 .cf-tabs{display:flex;flex-wrap:wrap;gap:5px;padding-left:10px;position:relative;z-index:2}

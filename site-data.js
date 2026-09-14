@@ -42,7 +42,6 @@ window.BHRDCA_DATA = (function () {
     { role: "Media Manager", name: "Paul Hooper", phone: "0420 789 811", email: "bhrdca.media@gmail.com" },
     { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" },
     { role: "Veterans Section Manager", name: "Michael Whitehead", phone: "0419 523 183", email: "mick_019@msn.com" },
-    { role: "Competition Assistant", name: "Aryan Meghani", phone: "0416 218 669", email: "ameghani@cricketvictoria.com.au" },
     { role: "Competition Administrator", name: "Beau Nixon", phone: "61 3 9085 8846", email: "bnixon@cricketvictoria.com.au" },
     { role: "Chairman, BHRDCA Umpires Assoc.", name: "Phil Hermann", phone: "0402 384 642", email: "hermanndianne@hotmail.com" },
     { role: "Secretary, BHRDCA Umpires Assoc.", name: "Michael Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" },
@@ -93,7 +92,7 @@ window.BHRDCA_DATA = (function () {
     seniors: {
       key: "seniors", name: "Seniors", icon: "ti-trophy",
       blurb: "More than 12 Senior grades on Saturdays, plus a mid-week twilight T20 competition. For information on Senior cricket, contact the Competition Assistant or your local club.",
-      contacts: [ { role: "Senior Cricket", name: "Aryan Meghani", phone: "0416 218 669", email: "ameghani@cricketvictoria.com.au" } ],
+      contacts: [ { role: "Senior Cricket", name: "Beau Nixon", phone: "61 3 9085 8846", email: "bnixon@cricketvictoria.com.au" } ],
       resources: [
         { label: "Senior Playing Conditions", url: "/documents/bhrdca-senior-competition-playing-rules-2025-26.docx" },
         { label: "T20 Playing Conditions", url: "/documents/bhrdca-t20-rules-2025-26.pdf" },

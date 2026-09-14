@@ -752,8 +752,10 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 
 /* section split (about the section) */
 .bh-secintro{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
-.bh-secintro .ph{background:linear-gradient(160deg,var(--navy),var(--navy3));border-radius:var(--r);min-height:260px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.25);font-size:120px;overflow:hidden;position:relative}
+.bh-secintro .ph{background:linear-gradient(160deg,var(--navy),var(--navy3));border-radius:var(--r);min-height:260px;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.25);font-size:120px;overflow:hidden;position:relative;box-shadow:var(--shadow)}
 .bh-secintro .ph i{filter:drop-shadow(0 6px 20px rgba(0,0,0,.4))}
+.bh-secintro .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.bh-secintro .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,34,66,.35) 100%);pointer-events:none}
 @media(max-width:760px){.bh-secintro{grid-template-columns:1fr}}
 
 /* contact cards (committee / section) */
@@ -853,7 +855,7 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 .sb-concept-flag i{font-size:13px}
 
 .tt-wrap{background:var(--navy);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);overflow:hidden}
-.tt-track{display:flex;width:max-content;animation:tt-scroll 38s linear infinite}
+.tt-track{display:flex;width:max-content;animation:tt-scroll 68s linear infinite}
 .tt-wrap:hover .tt-track{animation-play-state:paused}
 .tti{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:9px 26px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#fff;border-right:1px solid rgba(255,255,255,.12)}
 .tti i{color:var(--gold);font-size:13px}
@@ -861,6 +863,27 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 @keyframes tt-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* Split-flap "Adelaide Oval" scoreboard — full building treatment */
+/* Subtle player montage behind the scoreboard — faint, desaturated, edge-faded */
+#scoreboard-section{position:relative;isolation:isolate}
+#scoreboard-section::before{
+  content:"";position:absolute;z-index:-1;
+  left:50%;transform:translateX(-50%);
+  top:-8px;bottom:26px;width:min(1080px,96%);
+  background:linear-gradient(180deg,rgba(10,34,66,.18),rgba(10,34,66,.30)),
+    url("/hero/bhrdca-hero.webp") center 22%/cover no-repeat;
+  filter:grayscale(.55) contrast(1.02);
+  opacity:.13;
+  border-radius:26px;
+  -webkit-mask-image:radial-gradient(130% 92% at 50% 42%,#000 48%,transparent 100%);
+          mask-image:radial-gradient(130% 92% at 50% 42%,#000 48%,transparent 100%);
+  pointer-events:none;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) #scoreboard-section::before{opacity:.20;filter:grayscale(.45)}
+}
+:root[data-theme="dark"] #scoreboard-section::before{opacity:.20;filter:grayscale(.45)}
+@media (max-width:640px){#scoreboard-section::before{opacity:.10;border-radius:18px}}
+
 .split-board-outer{position:relative;padding-top:46px;max-width:780px;margin:0 auto}
 
 .split-board-vane{position:absolute;top:0;left:50%;transform:translateX(-50%) rotate(-6deg);transform-origin:bottom center;display:flex;flex-direction:column;align-items:center;animation:vane-sway 4.5s ease-in-out infinite;z-index:4}

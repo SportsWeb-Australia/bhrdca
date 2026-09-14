@@ -45,14 +45,13 @@ window.BHRDCA_DATA = (function () {
     { role: "Competition Administrator", name: "Beau Nixon", phone: "61 3 9085 8846", email: "bnixon@cricketvictoria.com.au" },
     { role: "Chairman, BHRDCA Umpires Assoc.", name: "Phil Hermann", phone: "0402 384 642", email: "hermanndianne@hotmail.com" },
     { role: "Secretary, BHRDCA Umpires Assoc.", name: "Michael Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" },
-    { role: "Umpires Assoc. Advisor", name: "Mark Thomas", phone: "0455 207 864", email: "mark.thomas@tile.com.au" },
     { role: "Auditor", name: "David Woollard", phone: "", email: "" }
   ];
 
   var subCommittees = [
     { name: "Disciplinary Tribunal", members: ["David Cowell", "Don Edwards", "Andrew Gill", "Ross Kainey", "Michael Long", "Kevin Rose’meyer"] },
     { name: "Heritage Committee", members: ["Stephen Tully — Chairman", "Andy Lambert — Historian", "Tristan Davidson (ECA)", "Michael Dwyer", "Warren Earl", "John Toogood", "Nick Tsiotinas", "Michael Van Zuyden"] },
-    { name: "Umpire Appointments Committee", members: ["Trevor McGary — Umpires Appointments", "Mark Thomas — Umpires Advisor"] }
+    { name: "Umpire Appointments Committee", members: ["Trevor McGary — Umpires Appointments"] }
   ];
 
   // Playing sections
@@ -61,8 +60,7 @@ window.BHRDCA_DATA = (function () {
       key: "juniors", name: "Juniors", icon: "ti-friends",
       blurb: "Boys & Girls cricket across more than 20 junior grades, playing Friday nights, Saturday and Sunday mornings. New players are always welcome — contact the Junior Section Manager or your local club.",
       contacts: [
-        { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" },
-        { role: "Junior Rep Carnival & Girls Cricket Coordinator", name: "Ross Chambers", phone: "0432 660 951", email: "chambers.ross@optusnet.com.au" }
+        { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" }
       ],
       resources: [
         { label: "Junior Competition Rules", url: "/documents/bhrdca-junior-competition-rules-2025-26.pdf" },
@@ -90,7 +88,7 @@ window.BHRDCA_DATA = (function () {
       ]
     },
     seniors: {
-      key: "seniors", name: "Seniors", icon: "ti-trophy",
+      key: "seniors", name: "Seniors", icon: "ti-trophy", image: "/gallery/full/img-17-9-12-t20-a-glen-waverley-hawks-v-bhnsk18.webp",
       blurb: "More than 12 Senior grades on Saturdays, plus a mid-week twilight T20 competition. For information on Senior cricket, contact the Competition Assistant or your local club.",
       contacts: [ { role: "Senior Cricket", name: "Beau Nixon", phone: "61 3 9085 8846", email: "bnixon@cricketvictoria.com.au" } ],
       resources: [
@@ -137,7 +135,7 @@ window.BHRDCA_DATA = (function () {
       ]
     },
     veterans: {
-      key: "veterans", name: "Veterans", icon: "ti-medal",
+      key: "veterans", name: "Veterans", icon: "ti-medal", image: "/gallery/full/img-14-7-12-vets-action000000149.webp",
       blurb: "Over 40 & Over 50 Veterans cricket across 8 grades, played Sunday afternoons. A great way to keep playing the game you love.",
       contacts: [ { role: "Veterans Cricket", name: "Michael Whitehead", phone: "0419 523 183", email: "mick_019@msn.com" } ],
       resources: [
@@ -163,8 +161,7 @@ window.BHRDCA_DATA = (function () {
       contacts: [
         { role: "UA President", name: "Phil Hermann", phone: "0402 384 642", email: "hermanndianne@hotmail.com" },
         { role: "UA Secretary", name: "Mick Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" },
-        { role: "Umpires Appointments", name: "Trevor McGarry", phone: "0488 287 676", email: "trevormcgary6@gmail.com" },
-        { role: "Umpires Advisor", name: "Mark Thomas", phone: "0455 207 864", email: "mark.thomas@tile.com.au" }
+        { role: "Umpires Appointments", name: "Trevor McGarry", phone: "0488 287 676", email: "trevormcgary6@gmail.com" }
       ],
       resources: [
         { label: "Umpire Fees", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_28f8655c4480433980a6d9a94363414f.pdf" },
@@ -295,20 +292,16 @@ window.BHRDCA_DATA = (function () {
     { name: "Top Notch Trophies", url: "https://www.topnotchtrophies.com.au/", tier: "Partner", logo: "/sponsor-logos/top-notch-trophies.webp" },
     { name: "SEDA College", url: "https://seda.vic.edu.au/", tier: "Partner" },
     { name: "Box Hill Indoor Sports", url: "https://boxhillindoorsports.com.au/sports-and-activities/indoor-cricket/", tier: "Partner" },
-    { name: "Mulgrave Country Club", url: "https://mulgravecc.com.au/sports/", tier: "Partner", logo: "/sponsor-logos/mulgrave-country-club.webp", darkLogo: true },
     { name: "Geyer Accountants", url: "https://geyeraccountants.com.au/", tier: "Partner", logo: "/sponsor-logos/geyer-accountants.webp" },
     { name: "Grant Professionals", url: "https://au.linkedin.com/company/grant-professionals", tier: "Partner", logo: "/sponsor-logos/grant-professionals.webp" },
     { name: "Club Builder", url: "https://www.club-builder.com.au/", tier: "Partner", logo: "/sponsor-logos/club-builder.webp" },
-    { name: "Michael Sukkar MP", url: "https://www.michaelsukkar.com.au/", tier: "Partner", logo: "/sponsor-logos/michael-sukkar-mp.webp" },
     { name: "Club Connect", url: "https://clubconnect.net.au", tier: "Partner", logo: "/sponsor-logos/club-connect.webp" },
     { name: "Altegra", url: "https://www.altegra.com.au/", tier: "Community" },
     { name: "Good Sports", url: "https://goodsports.com.au/", tier: "Community", logo: "/sponsor-logos/good-sports.webp" },
     { name: "Child Safe", url: "https://www.childsafe.org.au/", tier: "Community", logo: "/sponsor-logos/child-safe.svg" },
-    { name: "Carina Garland MP", url: "https://www.carinagarland.com.au/", tier: "Community", logo: "/sponsor-logos/carina-garland-mp.webp" },
     { name: "Compare & Connect", url: "https://www.compareandconnect.com.au/", tier: "Partner" },
     { name: "LCF Linemarking & Logos", url: "https://grassup.com.au/services", tier: "Partner" },
     { name: "Modern Orthodontics", url: "https://www.modernorthodontics.com.au/", tier: "Partner", logo: "/sponsor-logos/modern-orthodontics.webp" },
-    { name: "Tobin Brothers Funerals", url: "https://tobinbrothers.com.au/in-partnership/", tier: "Partner", logo: "/sponsor-logos/tobin-brothers-funerals.webp" },
     { name: "3WBC Radio", url: "https://www.3wbc.org.au/shows/the-cordon/", tier: "Community", logo: "/sponsor-logos/3wbc-radio.webp" }
   ];
 

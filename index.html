@@ -148,14 +148,6 @@
       <a class="view-all" href="/clubs.html">Full directory <i class="ti ti-arrow-right"></i></a>
     </div>
     <div class="block-sub" id="clubs-note"></div>
-    <div class="grade-legend">
-      <strong>Key:</strong>
-      <span class="grade-legend-item"><span class="grade-badge gm">M</span> Men's / Seniors</span>
-      <span class="grade-legend-item"><span class="grade-badge gf">F</span> Women's / Girls</span>
-      <span class="grade-legend-item"><span class="grade-badge gj">J</span> Juniors</span>
-      <span class="grade-legend-item"><span class="grade-badge gv">V</span> Veterans</span>
-      <span class="grade-legend-note">Indicative &mdash; to be confirmed with each club. Hover a club for committee contacts.</span>
-    </div>
     <div id="clubs-mount"></div>
   </div>
 
@@ -176,7 +168,7 @@
 <script src="/bhrdca-render.js"></script>
 <script>
   BHRDCA.render.stats("#stats-mount");
-  BHRDCA.render.clubs("#clubs-mount");
+  BHRDCA.render.clubsTabbed("#clubs-mount");
   (function(){
     var d = window.BHRDCA_DATA || {};
     var n = (d.clubs||[]).length;

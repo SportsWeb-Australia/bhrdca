@@ -71,11 +71,7 @@
     return out;
   }
 
-  var render = {
-    clubs: function (sel) {
-      var m = $(sel); if (!m) return;
-      var clubs = D.clubs || [];
-      m.innerHTML = '<div class="bh-clubgrid">' + clubs.map(function (c) {
+  function clubTileHTML(c) {
         var badges = (c.grades || []).map(function (g) {
           var gm = GRADE_META[g] || { lbl: g, cls: "gx" };
           return '<span class="grade-badge ' + gm.cls + '" title="' + esc(gm.lbl) + '">' + esc(g) + '</span>';
@@ -109,7 +105,81 @@
           + '</a>'
           + hover
           + '</div>';
-      }).join("") + '</div>';
+  }
+
+  function clubGridHTML() {
+    var clubs = D.clubs || [];
+    return '<div class="bh-clubgrid">' + clubs.map(clubTileHTML).join("") + '</div>';
+  }
+
+  var CLUB_LEGEND =
+    '<div class="grade-legend">'
+    + '<strong>Key:</strong>'
+    + '<span class="grade-legend-item"><span class="grade-badge gm">M</span> Men\'s / Seniors</span>'
+    + '<span class="grade-legend-item"><span class="grade-badge gf">F</span> Women\'s / Girls</span>'
+    + '<span class="grade-legend-item"><span class="grade-badge gj">J</span> Juniors</span>'
+    + '<span class="grade-legend-item"><span class="grade-badge gv">V</span> Veterans</span>'
+    + '<span class="grade-legend-note">Indicative &mdash; to be confirmed with each club. Hover a club for committee contacts.</span>'
+    + '</div>';
+
+  var CLUB_TABS = [
+    { cat: "all", label: "All Clubs", icon: "ti-layout-grid" },
+    { cat: "M", label: "Seniors", icon: "ti-ball-cricket" },
+    { cat: "J", label: "Juniors", icon: "ti-shirt-sport" },
+    { cat: "F", label: "Women", icon: "ti-shirt-sport" },
+    { cat: "V", label: "Veterans", icon: "ti-shirt-sport" },
+    { cat: "AFFILIATE", label: "Affiliates", icon: "ti-building-bank" }
+  ];
+
+  var render = {
+    clubs: function (sel) {
+      var m = $(sel); if (!m) return;
+      m.innerHTML = clubGridHTML();
+    },
+
+    /* Folder-tab club directory: category tabs + filtered grid. Shared by the
+       homepage and the Clubs page so both stay in sync. */
+    clubsTabbed: function (sel) {
+      var m = $(sel); if (!m) return;
+      var clubs = D.clubs || [];
+      var counts = { all: clubs.length, M: 0, J: 0, F: 0, V: 0, AFFILIATE: 0 };
+      clubs.forEach(function (c) {
+        var gs = (c.grades && c.grades.length) ? c.grades : ["AFFILIATE"];
+        gs.forEach(function (g) { if (counts.hasOwnProperty(g)) counts[g]++; });
+      });
+      var tabsHTML = CLUB_TABS.map(function (t, i) {
+        if (!counts[t.cat]) return "";
+        return '<button class="cf-tab' + (i === 0 ? ' active' : '') + '" type="button" role="tab" data-cat="' + t.cat + '">'
+          + '<i class="ti ' + t.icon + '"></i><span>' + esc(t.label) + '</span>'
+          + '<span class="cf-n">' + counts[t.cat] + '</span></button>';
+      }).join("");
+      m.innerHTML =
+        '<div class="cf-folder">'
+        + '<div class="cf-tabs" role="tablist">' + tabsHTML + '</div>'
+        + '<div class="cf-body">'
+        + CLUB_LEGEND
+        + clubGridHTML()
+        + '<div class="cf-empty" hidden>No clubs in this category yet.</div>'
+        + '</div></div>';
+
+      var tabsEl = m.querySelector(".cf-tabs");
+      var emptyEl = m.querySelector(".cf-empty");
+      var tiles = Array.prototype.slice.call(m.querySelectorAll(".bh-club-wrap"));
+      tabsEl.addEventListener("click", function (e) {
+        var btn = e.target.closest(".cf-tab");
+        if (!btn) return;
+        tabsEl.querySelectorAll(".cf-tab").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        var cat = btn.getAttribute("data-cat");
+        var vis = 0;
+        tiles.forEach(function (t) {
+          var gs = t.getAttribute("data-grades").split(",");
+          var show = cat === "all" || gs.indexOf(cat) > -1;
+          t.style.display = show ? "" : "none";
+          if (show) vis++;
+        });
+        emptyEl.hidden = vis > 0;
+      });
     },
 
     clubContacts: function (sel) {
@@ -175,7 +245,7 @@
         + '<div class="block-sub" style="font-size:14px;line-height:1.7">' + esc(s.blurb) + '</div>'
         + '<div style="margin-top:16px"><a class="btn btn-red" href="' + esc(D.links.playhq) + '" target="_blank" rel="noopener"><i class="ti ti-scoreboard"></i> Fixtures, Results &amp; Ladders</a></div>'
         + '</div>'
-        + '<div class="ph"><i class="ti ' + esc(s.icon) + '"></i></div>'
+        + '<div class="ph">' + (s.image ? '<img src="' + esc(s.image) + '" alt="' + esc(s.name) + ' cricket in the BHRDCA" loading="lazy">' : '<i class="ti ' + esc(s.icon) + '"></i>') + '</div>'
         + '</div>';
       out += '<div class="block-hed" style="margin-top:34px">Who to contact</div>';
       out += '<div class="bh-cgrid">' + s.contacts.map(contactCard).join("") + '</div>';

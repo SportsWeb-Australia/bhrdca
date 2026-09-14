@@ -19,7 +19,6 @@
     out += '<div class="nm">' + esc(c.name || "TBC") + '</div>';
     if (c.phone) out += '<a href="tel:' + tel(c.phone) + '"><i class="ti ti-phone"></i> ' + esc(c.phone) + '</a>';
     if (c.email) out += '<a href="mailto:' + esc(c.email) + '"><i class="ti ti-mail"></i> ' + esc(c.email) + '</a>';
-    if (!c.phone && !c.email) out += '<div class="row"><i class="ti ti-dots"></i> Contact details to come</div>';
     out += '</div>';
     return out;
   }

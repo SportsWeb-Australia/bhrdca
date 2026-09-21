@@ -237,9 +237,11 @@
       m.innerHTML = html;
     },
 
-    committee: function (sel) {
+    committee: function (sel, opts) {
       var m = $(sel); if (!m) return;
-      m.innerHTML = '<div class="bh-cgrid">' + (D.committee || []).map(contactCard).join("") + '</div>';
+      var exclude = (opts && opts.exclude) || [];
+      var list = (D.committee || []).filter(function (c) { return exclude.indexOf(c.role) === -1; });
+      m.innerHTML = '<div class="bh-cgrid">' + list.map(contactCard).join("") + '</div>';
     },
 
     subCommittees: function (sel) {

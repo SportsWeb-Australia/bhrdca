@@ -287,7 +287,7 @@ window.BHRDCA_DATA = (function () {
   // Sponsors & partners (from the association's sponsor wall)
   var sponsors = [
     { name: "Century Cricket Centre", url: "https://www.cricketcentre.com.au/", tier: "Premier", logo: "/sponsor-logos/century-cricket-centre.webp" },
-    { name: "Kookaburra Sport", url: "https://www.kookaburrasport.com.au/cricket/", tier: "Premier", logo: "/sponsor-logos/kookaburra-sport.webp" },
+    { name: "Kookaburra Sport", url: "https://www.kookaburrasport.com.au/cricket/", tier: "Premier", logo: "/sponsor-logos/kookaburra-sport.webp" , darkLogo: true },
     { name: "Cricket Victoria", url: "https://www.cricketvictoria.com.au/", tier: "Premier", logo: "/sponsor-logos/cricket-victoria.webp" },
     { name: "Field of View Sports Photography", url: "https://www.fieldofview.com.au/", tier: "Premier", logo: "/sponsor-logos/field-of-view.webp" },
     { name: "SportsWeb Australia", url: "https://sportsweb.com.au", tier: "Premier", logo: "/sponsor-logos/sportsweb-one.webp" },
@@ -300,11 +300,11 @@ window.BHRDCA_DATA = (function () {
     { name: "Club Connect", url: "https://clubconnect.net.au", tier: "Partner", logo: "/sponsor-logos/club-connect.webp" },
     { name: "Altegra", url: "https://www.altegra.com.au/", tier: "Community" },
     { name: "Good Sports", url: "https://goodsports.com.au/", tier: "Community", logo: "/sponsor-logos/good-sports.webp" },
-    { name: "Child Safe", url: "https://www.childsafe.org.au/", tier: "Community", logo: "/sponsor-logos/child-safe.svg" },
+    { name: "Child Safe", url: "https://www.childsafe.org.au/", tier: "Community", logo: "/sponsor-logos/child-safe.svg" , darkLogo: true },
     { name: "Compare & Connect", url: "https://www.compareandconnect.com.au/", tier: "Partner", logo: "/sponsor-logos/compare-and-connect.webp" },
     { name: "LCF Linemarking & Logos", url: "https://grassup.com.au/services", tier: "Partner", logo: "/sponsor-logos/lcf-linemarking.webp" },
     { name: "Modern Orthodontics", url: "https://www.modernorthodontics.com.au/", tier: "Partner", logo: "/sponsor-logos/modern-orthodontics.webp" },
-    { name: "3WBC Radio", url: "https://www.3wbc.org.au/shows/the-cordon/", tier: "Community", logo: "/sponsor-logos/3wbc-radio.webp" }
+    { name: "3WBC Radio", url: "https://www.3wbc.org.au/shows/the-cordon/", tier: "Community", logo: "/sponsor-logos/3wbc-radio.webp" , darkLogo: true }
   ];
 
   var history = [

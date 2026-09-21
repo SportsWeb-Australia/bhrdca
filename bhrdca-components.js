@@ -14,7 +14,7 @@
   // sponsor names for the moving carousel (static chrome, matches association wall)
   var SPONSORS = [
     ["Century Cricket Centre","https://www.cricketcentre.com.au/","/sponsor-logos/century-cricket-centre.webp"],
-    ["Kookaburra Sport","https://www.kookaburrasport.com.au/cricket/","/sponsor-logos/kookaburra-sport.webp"],
+    ["Kookaburra Sport","https://www.kookaburrasport.com.au/cricket/","/sponsor-logos/kookaburra-sport.webp",1],
     ["Cricket Victoria","https://www.cricketvictoria.com.au/","/sponsor-logos/cricket-victoria.webp"],
     ["Field of View","https://www.fieldofview.com.au/","/sponsor-logos/field-of-view.webp"],
     ["SportsWeb Australia","https://sportsweb.com.au","/sponsor-logos/sportsweb-one.webp"],
@@ -27,11 +27,11 @@
     ["Club Connect","https://clubconnect.net.au","/sponsor-logos/club-connect.webp"],
     ["Altegra","https://www.altegra.com.au/"],
     ["Good Sports","https://goodsports.com.au/","/sponsor-logos/good-sports.webp"],
-    ["Child Safe","https://www.childsafe.org.au/","/sponsor-logos/child-safe.svg"],
+    ["Child Safe","https://www.childsafe.org.au/","/sponsor-logos/child-safe.svg",1],
     ["Compare & Connect","https://www.compareandconnect.com.au/","/sponsor-logos/compare-and-connect.webp"],
     ["LCF Linemarking & Logos","https://grassup.com.au/services","/sponsor-logos/lcf-linemarking.webp"],
     ["Modern Orthodontics","https://www.modernorthodontics.com.au/","/sponsor-logos/modern-orthodontics.webp"],
-    ["3WBC Radio","https://www.3wbc.org.au/shows/the-cordon/","/sponsor-logos/3wbc-radio.webp"]
+    ["3WBC Radio","https://www.3wbc.org.au/shows/the-cordon/","/sponsor-logos/3wbc-radio.webp",1]
   ];
   function scItems() {
     var set = SPONSORS.map(function (s) {

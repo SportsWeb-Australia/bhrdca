@@ -801,6 +801,7 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .spon-logo{height:190px;display:flex;align-items:center;justify-content:center;padding:22px;background:radial-gradient(125% 120% at 50% 0%,var(--navy3) 0%,var(--navy2) 45%,var(--navy) 100%);border-radius:var(--rsm);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
 .spon-logo img{max-width:100%;max-height:120px;object-fit:contain;background:#fff;padding:15px 20px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.32)}
 .spon-logo.dark{background:radial-gradient(125% 120% at 50% 0%,var(--navy3) 0%,var(--navy2) 45%,var(--navy) 100%)}
+.spon-logo.dark img{background:transparent;box-shadow:none;padding:8px;max-height:138px}
 .spon-logo.no-img{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:1.5px;color:var(--gold)}
 .spon-logo.no-img::before{content:attr(data-ini)}
 .spon-body{display:flex;flex-direction:column;gap:14px;padding:18px 8px 8px;flex:1}

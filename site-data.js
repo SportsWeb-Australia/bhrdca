@@ -192,6 +192,9 @@ window.BHRDCA_DATA = (function () {
     }
   };
 
+  // Junior Rep Cricket — duplicates the Juniors section content under its own title.
+  sections.juniorRep = Object.assign({}, sections.juniors, { key: "juniorRep", name: "Junior Rep" });
+
   // Member clubs (recognised on the association's "Our Clubs" wall) with websites.
   // NOTE: full 28-club member set + official club logos to be confirmed with BHRDCA.
   var clubs = [

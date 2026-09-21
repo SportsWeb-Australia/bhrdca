@@ -20,7 +20,6 @@
     ["SportsWeb Australia","https://sportsweb.com.au","/sponsor-logos/sportsweb-one.webp"],
     ["Topline Cricket","https://www.toplinecricket.com.au/","/sponsor-logos/topline-cricket.webp"],
     ["Top Notch Trophies","https://www.topnotchtrophies.com.au/","/sponsor-logos/top-notch-trophies.webp"],
-    ["SEDA College","https://seda.vic.edu.au/","/sponsor-logos/seda-college.webp"],
     ["Box Hill Indoor Sports","https://boxhillindoorsports.com.au/sports-and-activities/indoor-cricket/","/sponsor-logos/box-hill-indoor-sports.webp"],
     ["Geyer Accountants","https://geyeraccountants.com.au/","/sponsor-logos/geyer-accountants.webp"],
     ["Grant Professionals & Club Builder","https://www.club-builder.com.au/","/sponsor-logos/club-builder.webp"],

@@ -1,7 +1,7 @@
 /* ============================================================================
    BHRDCA — Box Hill Reporter District Cricket Association
    Content data layer. window.BHRDCA_DATA is read by bhrdca-render.js.
-   Content sourced from the live Wix site (bhrdca.com.au) — 2025/26 season.
+   Content sourced from the live Wix site (bhrdca.com.au) — 2026/27 season.
    ========================================================================== */
 window.BHRDCA_DATA = (function () {
 
@@ -17,7 +17,7 @@ window.BHRDCA_DATA = (function () {
   var assoc = {
     name: "Box Hill Reporter District Cricket Association",
     short: "BHRDCA",
-    tagline: "Melbourne's east. 137 seasons of cricket.",
+    tagline: "Melbourne's east. 139 seasons of cricket.",
     established: "1890/91",
     reg: "Registered with Consumer Affairs Victoria — BOX HILL REPORTER DISTRICT CRICKET ASSOCIATION INC. Registered 26/9/1995, Registration #A0032112P.",
     postal: "PO Box 7017, Sth Croydon VIC 3136",
@@ -33,7 +33,7 @@ window.BHRDCA_DATA = (function () {
     { n: "3,500", label: "Overall Players" }
   ];
 
-  // Association administration contacts (2025/26)
+  // Association administration contacts (2026/27)
   var committee = [
     { role: "President", name: "Peter Rosenthal", phone: "0407 844 643", email: "bhrdca.president@gmail.com" },
     { role: "Vice President", name: "Ross Kainey", phone: "0457 828 574", email: "ross.kainey@bigpond.com" },
@@ -230,7 +230,7 @@ window.BHRDCA_DATA = (function () {
     { name: "Yarraleen", url: "https://www.yarraleencc.com.au/", logo: "/club-logos/yarraleen.webp", grades: ["M", "J"] }
   ];
 
-  // Full club contact directory (all affiliated clubs — 2025/26). From live site.
+  // Full club contact directory (all affiliated clubs — 2026/27). From live site.
   var clubContacts = [
     ["Ainslie Park","Karen Ridley","0448 448 421",""],
     ["Blackburn","Amanda Crossland","0419 356 581","juniors@blackburn.org.au"],

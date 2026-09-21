@@ -76,6 +76,7 @@
 <section class="page-wrap wide" style="margin-top:28px" id="scoreboard-section">
   <div class="sb-concept-flag"><i class="ti ti-flask"></i> Concept preview &mdash; demo data, connects to a live PlayHQ feed once API access is confirmed</div>
   <div class="lb-board">
+    <div class="lb-live"><span class="dot"></span> LIVE &middot; ROUND 8</div>
     <div class="lb-head">
       <img class="lb-head-logo" src="/bhrdca-logo.svg" alt="BHRDCA">
       <div class="lb-head-txt">
@@ -100,7 +101,11 @@
       </div>
     </div>
     <div class="lb-tabs" id="lb-tabs" role="tablist"></div>
-    <div class="lb-foot">CONCEPT PREVIEW &middot; DEMO DATA &middot; LIVE PLAYHQ FEED ONCE API ACCESS IS CONFIRMED</div>
+    <div class="lb-foot">
+      <span class="lb-foot-brand"><i class="ti ti-broadcast"></i> BHRDCA LIVE SCORING</span>
+      <span class="lb-foot-mid">CONCEPT PREVIEW &middot; DEMO DATA &middot; LIVE PLAYHQ FEED ONCE API ACCESS IS CONFIRMED</span>
+      <span class="lb-foot-brand">IN PARTNERSHIP WITH CRICKET VICTORIA</span>
+    </div>
   </div>
 
   <aside class="fb-below" aria-label="BHRDCA Facebook feed">
@@ -186,6 +191,18 @@
     var SB = window.BHRDCA_SCOREBOARD;
     if (!SB) return;
     function esc(t){ return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+    // club crest lookup (uses member-club logos where available)
+    var CLUBS = (window.BHRDCA_DATA && window.BHRDCA_DATA.clubs) || [];
+    function normClub(s){ return String(s||"").toLowerCase().replace(/[^a-z0-9]/g,""); }
+    var clubLogo = {};
+    CLUBS.forEach(function(c){ if (c.logo) clubLogo[normClub(c.name)] = c.logo; });
+    function crestFor(clubField){
+      var club = String(clubField).split("·")[0].trim();
+      var ini = (club.replace(/[^A-Za-z0-9 ]/g," ").split(/\s+/).filter(Boolean).slice(0,2).map(function(w){return w[0];}).join("").toUpperCase()) || "C";
+      var logo = clubLogo[normClub(club)];
+      if (logo) return '<span class="lb-crest"><img src="' + esc(logo) + '" alt="" loading="lazy" onerror="this.parentNode.classList.add(\'ini\');this.parentNode.textContent=\'' + ini + '\'"></span>';
+      return '<span class="lb-crest ini">' + ini + '</span>';
+    }
     var batEl = document.getElementById("lb-bat");
     var bowlEl = document.getElementById("lb-bowl");
     var gradeAEl = document.getElementById("lb-grade-a");
@@ -201,8 +218,10 @@
 
     function rowsHTML(list){
       return list.map(function(r, i){
+        var medal = i < 3 ? ' m' + (i + 1) : '';
         return '<div class="lb-row' + (i === 0 ? ' lb-row-lead' : '') + ' flap-in" style="animation-delay:' + (i * 40) + 'ms">'
-          + '<span class="lb-rank">' + (i + 1) + '</span>'
+          + '<span class="lb-rank' + medal + '">' + (i + 1) + '</span>'
+          + crestFor(r[1])
           + '<span class="lb-name">' + esc(r[0]) + '</span>'
           + '<span class="lb-club">' + esc(r[1]) + '</span>'
           + '<span class="lb-val">' + esc(r[2]) + '</span></div>';

@@ -75,41 +75,61 @@
 <!-- ASSOCIATION SCOREBOARD (concept — demo data, whole-of-association) -->
 <section class="page-wrap wide" style="margin-top:28px" id="scoreboard-section">
   <div class="sb-concept-flag"><i class="ti ti-flask"></i> Concept preview &mdash; demo data, connects to a live PlayHQ feed once API access is confirmed</div>
-  <div class="lb-board">
-    <div class="lb-head">
-      <img class="lb-head-logo" src="/bhrdca-logo.svg" alt="BHRDCA">
-      <div class="lb-head-txt">
-        <div class="lb-title">Association Scoreboard</div>
-        <div class="lb-sub">ALL GRADES &middot; UPDATES AS GAMES ARE SCORED</div>
-      </div>
-      <img class="lb-head-logo lb-head-cv" src="/sponsor-logos/cricket-victoria.webp" alt="Cricket Victoria">
+  <div class="sb-layout">
+  <div class="split-board-outer">
+    <div class="split-board-vane"><span class="pole"></span><span class="bar"></span><span class="ball"></span></div>
+    <div class="split-board-roof">
+      <span class="split-board-finial fl"></span><span class="split-board-finial fr"></span>
+      <div class="split-board-roof-dome"></div>
+      <div class="split-board-clockface"><span class="hr"></span><span class="mn"></span><span class="pin"></span></div>
+      <div class="split-board-spires"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
-    <div class="lb-totals">
-      <div class="lb-total"><div class="lb-total-lbl">TOTAL RUNS</div><div class="lb-total-val" id="lb-runs">&mdash;</div></div>
-      <div class="lb-total"><div class="lb-total-lbl">TOTAL OVERS</div><div class="lb-total-val" id="lb-overs">&mdash;</div></div>
-      <div class="lb-total"><div class="lb-total-lbl">TOTAL WICKETS</div><div class="lb-total-val" id="lb-wkts">&mdash;</div></div>
+    <div class="split-board">
+    <div class="split-board-crown">
+      <div class="split-board-title">ASSOCIATION SCOREBOARD</div>
+      <div class="split-board-sub">ALL GRADES &middot; UPDATES AS GAMES ARE SCORED</div>
     </div>
-    <div class="lb-cols">
-      <div class="lb-cardx">
-        <div class="lb-cardx-hd"><span class="lb-cardx-title">Leading Run Scorers</span><span class="lb-cardx-grade" id="lb-grade-a"></span></div>
-        <div class="lb-rows" id="lb-bat"></div>
+    <div class="split-board-ribbon">B.H.R.D.C.A. &middot; EST. 1890</div>
+    <div class="split-board-face">
+      <div class="split-totals">
+        <div class="split-total-block">
+          <div class="split-total-lbl">TOTAL RUNS</div>
+          <div class="flap-row" id="flap-runs"></div>
+        </div>
+        <div class="split-total-block">
+          <div class="split-total-lbl">TOTAL OVERS</div>
+          <div class="flap-row" id="flap-overs"></div>
+        </div>
+        <div class="split-total-block">
+          <div class="split-total-lbl">TOTAL WICKETS</div>
+          <div class="flap-row" id="flap-wkts"></div>
+        </div>
       </div>
-      <div class="lb-cardx">
-        <div class="lb-cardx-hd"><span class="lb-cardx-title">Leading Wicket Takers</span><span class="lb-cardx-grade" id="lb-grade-b"></span></div>
-        <div class="lb-rows" id="lb-bowl"></div>
+      <div class="split-leaders">
+        <div class="split-leaders-tabs">
+          <button class="lb-tab active" data-lb="bat" type="button">BATSMEN</button>
+          <button class="lb-tab" data-lb="bowl" type="button">BOWLERS</button>
+        </div>
+        <div class="split-leaders-head"><span>PLAYER</span><span>CLUB / GRADE</span><span id="sb-unit-head" style="text-align:right">RUNS</span></div>
+        <div class="split-leaders-rows" id="sb-rows"></div>
       </div>
     </div>
-    <div class="lb-tabs" id="lb-tabs" role="tablist"></div>
-    <div class="lb-foot">CONCEPT PREVIEW &middot; DEMO DATA &middot; LIVE PLAYHQ FEED ONCE API ACCESS IS CONFIRMED</div>
+    <div class="split-board-foot">ROUND 8 &middot; DEMO DATA &middot; UPDATED JUST NOW</div>
+    </div>
+    <div class="split-board-arcade">
+      <div class="split-board-arches"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="split-board-arcade-base"></div>
+    </div>
+    <div class="split-board-grass"></div>
   </div>
-
-  <aside class="fb-below" aria-label="BHRDCA Facebook feed">
-    <div class="fb-below-hd"><i class="ti ti-brand-facebook"></i> BHRDCA on Facebook</div>
-    <div class="fb-below-frame">
-      <iframe title="BHRDCA on Facebook" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fbhrdca&tabs=timeline&width=520&height=560&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" width="520" height="560" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+  <aside class="sb-social" aria-label="BHRDCA Facebook feed">
+    <div class="sb-social-hd"><i class="ti ti-brand-facebook"></i> BHRDCA on Facebook</div>
+    <div class="sb-social-frame">
+      <iframe title="BHRDCA on Facebook" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fbhrdca&tabs=timeline&width=360&height=640&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" width="360" height="640" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
     </div>
-    <a class="fb-below-cta" href="https://www.facebook.com/bhrdca" target="_blank" rel="noopener"><i class="ti ti-brand-facebook"></i> Follow the BHRDCA</a>
+    <a class="sb-social-cta" href="https://www.facebook.com/bhrdca" target="_blank" rel="noopener"><i class="ti ti-brand-facebook"></i> Follow the BHRDCA</a>
   </aside>
+  </div>
 </section>
 
 <div class="page-wrap wide">
@@ -154,7 +174,6 @@
 
 <script src="/site-data.js"></script>
 <script src="/club-contacts-data.js"></script>
-<script src="/scoreboard-data.js"></script>
 <script src="/bhrdca-render.js"></script>
 <script>
   BHRDCA.render.stats("#stats-mount");
@@ -182,75 +201,115 @@
       track.innerHTML = ttItems.map(mk).join("") + ttItems.map(mk).join("");
     }
 
-    /* ---- Leaderboard board: per-grade demo data with grade tabs ---- */
-    var SB = window.BHRDCA_SCOREBOARD;
-    if (!SB) return;
-    function esc(t){ return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-    var batEl = document.getElementById("lb-bat");
-    var bowlEl = document.getElementById("lb-bowl");
-    var gradeAEl = document.getElementById("lb-grade-a");
-    var gradeBEl = document.getElementById("lb-grade-b");
-    var tabsWrap = document.getElementById("lb-tabs");
-    var current = SB.grades[0].key;
+    /* split-flap character engine — cycles random chars then lands on target,
+       staggered per tile, like an airport/train departure board */
+    var DIGITS = "0123456789";
+    var LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    function flapChar(el, target, delay, charset){
+      var steps = 7 + Math.floor(Math.random() * 6);
+      var i = 0;
+      setTimeout(function(){
+        var iv = setInterval(function(){
+          if (i < steps - 1) {
+            el.textContent = charset[Math.floor(Math.random() * charset.length)];
+          } else {
+            el.textContent = target;
+            clearInterval(iv);
+          }
+          el.classList.remove("is-flip");
+          void el.offsetWidth;
+          el.classList.add("is-flip");
+          i++;
+        }, 50);
+      }, delay);
+    }
+    function flapRowRender(containerId, text){
+      var el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = "";
+      text.split("").forEach(function(ch, idx){
+        var tile = document.createElement("div");
+        if (!/[a-zA-Z0-9]/.test(ch)) {
+          tile.className = "flap-tile is-sep";
+          tile.textContent = ch === " " ? "" : ch;
+          el.appendChild(tile);
+          return;
+        }
+        tile.className = "flap-tile";
+        tile.textContent = "0";
+        el.appendChild(tile);
+        flapChar(tile, ch, idx * 90, /[0-9]/.test(ch) ? DIGITS : LETTERS);
+      });
+    }
 
-    // build grade tabs
-    tabsWrap.innerHTML = SB.grades.map(function(g){
-      return '<button class="lb-tab" type="button" role="tab" data-grade="' + g.key + '">' + esc(g.label) + '</button>';
-    }).join("");
-    var tabBtns = tabsWrap.querySelectorAll(".lb-tab");
+    var sbFinal = { runs: "4,812", overs: "1206.3", wkts: "318" };
+    function runScoreboardFlap(){
+      flapRowRender("flap-runs", sbFinal.runs);
+      flapRowRender("flap-overs", sbFinal.overs);
+      flapRowRender("flap-wkts", sbFinal.wkts);
+    }
 
-    function rowsHTML(list){
-      return list.map(function(r, i){
-        return '<div class="lb-row' + (i === 0 ? ' lb-row-lead' : '') + ' flap-in" style="animation-delay:' + (i * 40) + 'ms">'
-          + '<span class="lb-rank">' + (i + 1) + '</span>'
-          + '<span class="lb-name">' + esc(r[0]) + '</span>'
-          + '<span class="lb-club">' + esc(r[1]) + '</span>'
-          + '<span class="lb-val">' + esc(r[2]) + '</span></div>';
+    var LB = {
+      bat: [
+        ["J WHITFIELD","Box Hill — Sen","412"],["S KAUR","Wantirna Sth — Wmn","387"],
+        ["M DELANEY","Vermont — Sen","356"],["A OSEI","Forest Hill — Jnr","341"],
+        ["R THOMPSON","Balwyn — Sen","329"],["L NGUYEN","Bayswater — Wmn","318"],
+        ["D MARSH","Croydon — Vet","304"],["T IQBAL","Blackburn — Sen","297"],
+        ["C FENWICK","Nunawading — Jnr","281"],["P COSTA","Mont Albert — Sen","266"]
+      ],
+      bowl: [
+        ["K PAPADOPOULOS","Ringwood — Sen","24"],["H BELL","Reporter — Sen","22"],
+        ["Z AHMED","Box Hill — Jnr","21"],["E SHARMA","Wantirna Sth — Wmn","20"],
+        ["G MOLLOY","Vermont — Vet","19"],["N WHITWORTH","Forest Hill — Sen","18"],
+        ["B CARRUCAN","Balwyn — Sen","17"],["F OKAFOR","Bayswater — Wmn","16"],
+        ["W SUTTON","Croydon — Jnr","15"],["O BAXTER","Blackburn — Sen","14"]
+      ]
+    };
+    var rowsEl = document.getElementById("sb-rows");
+    var unitHead = document.getElementById("sb-unit-head");
+    function renderLB(key){
+      if (!rowsEl) return;
+      unitHead.textContent = key === "bat" ? "RUNS" : "WKTS";
+      rowsEl.innerHTML = LB[key].map(function(row, i){
+        return '<div class="split-row flap-in" style="animation-delay:' + (i * 45) + 'ms">'
+          + '<div class="split-row-name"><span class="split-row-rank">' + (i + 1) + '</span>' + row[0] + '</div>'
+          + '<div class="split-row-club">' + row[1] + '</div>'
+          + '<div class="split-row-val">' + row[2] + '</div></div>';
       }).join("");
     }
-
-    // count-up animation for a total value (handles commas + one decimal)
-    function countUp(el, targetStr){
-      var dec = /\./.test(targetStr);
-      var target = parseFloat(String(targetStr).replace(/,/g, "")) || 0;
-      var start = null, dur = 850;
-      function fmt(v){
-        if (dec) return v.toFixed(1);
-        return Math.round(v).toLocaleString("en-US");
-      }
-      function step(ts){
-        if (!start) start = ts;
-        var p = Math.min((ts - start) / dur, 1);
-        var eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = fmt(target * eased);
-        if (p < 1) requestAnimationFrame(step); else el.textContent = targetStr;
-      }
-      requestAnimationFrame(step);
-    }
-
-    function renderGrade(key){
-      var d = SB.data[key]; if (!d) return;
+    var tabs = document.querySelectorAll(".lb-tab");
+    var current = "bat";
+    function setTab(key){
       current = key;
-      tabBtns.forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-grade") === key); });
-      gradeAEl.textContent = d.label;
-      gradeBEl.textContent = d.label;
-      batEl.innerHTML = rowsHTML(d.bat);
-      bowlEl.innerHTML = rowsHTML(d.bowl);
-      countUp(document.getElementById("lb-runs"), d.totals.runs);
-      countUp(document.getElementById("lb-overs"), d.totals.overs);
-      countUp(document.getElementById("lb-wkts"), d.totals.wkts);
+      tabs.forEach(function(t){ t.classList.toggle("active", t.getAttribute("data-lb") === key); });
+      renderLB(key);
     }
-    tabBtns.forEach(function(b){ b.addEventListener("click", function(){ renderGrade(b.getAttribute("data-grade")); }); });
+    tabs.forEach(function(t){ t.addEventListener("click", function(){ setTab(t.getAttribute("data-lb")); }); });
 
-    // reveal + re-animate whenever the board scrolls into view
+    /* animate the whole board (totals + leaderboard) whenever it scrolls into view,
+       not just once on page load — replays the flap-in each time it re-enters */
     var sbSection = document.getElementById("scoreboard-section");
+    var sbLoopsStarted = false;
+    function startScoreboardLoops(){
+      if (sbLoopsStarted) return;
+      sbLoopsStarted = true;
+      setInterval(runScoreboardFlap, 25000);
+      setInterval(function(){ setTab(current === "bat" ? "bowl" : "bat"); }, 11000);
+    }
+    function revealScoreboard(){
+      runScoreboardFlap();
+      setTab(current);
+      startScoreboardLoops();
+    }
     if (sbSection && "IntersectionObserver" in window) {
       var sbObserver = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){ if (entry.isIntersecting) renderGrade(current); });
-      }, { threshold: 0.3 });
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) revealScoreboard();
+        });
+      }, { threshold: 0.35 });
       sbObserver.observe(sbSection);
     } else {
-      renderGrade(current);
+      revealScoreboard();
     }
   })();
 </script>

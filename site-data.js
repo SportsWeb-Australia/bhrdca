@@ -20,7 +20,7 @@ window.BHRDCA_DATA = (function () {
     tagline: "Melbourne's east. 137 seasons of cricket.",
     established: "1890/91",
     reg: "Registered with Consumer Affairs Victoria — BOX HILL REPORTER DISTRICT CRICKET ASSOCIATION INC. Registered 26/9/1995, Registration #A0032112P.",
-    postal: "92 King Arthur Drive, Glen Waverley VIC 3150",
+    postal: "PO Box 7017, Sth Croydon VIC 3136",
     blurb: "The BHRDCA is an amateur ‘hard wicket’ cricket association centred around Melbourne’s eastern suburbs, first established in 1890/91. It can lay claim to being the longest-running cricket association in Victoria, supporting Junior Boys & Girls, Senior, Women’s and Veterans (Over 40 & Over 50) competitions — more than 3,500 cricketers of all ages and abilities playing every week."
   };
 

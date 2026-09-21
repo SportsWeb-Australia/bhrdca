@@ -935,6 +935,17 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 :root[data-theme="dark"] #scoreboard-section::before{opacity:.20;filter:grayscale(.45)}
 @media (max-width:640px){#scoreboard-section::before{opacity:.10;border-radius:18px}}
 
+.sb-layout{display:flex;gap:30px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+.sb-layout .split-board-outer{margin:0}
+.sb-social{flex:0 0 360px;max-width:360px;width:100%;margin-top:46px;display:flex;flex-direction:column;gap:14px}
+.sb-social-hd{display:flex;align-items:center;gap:9px;font-family:"Bebas Neue",sans-serif;letter-spacing:.06em;font-size:22px;color:var(--ink-gold);line-height:1}
+.sb-social-hd i{color:#1877f2;font-size:22px}
+.sb-social-frame{background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow2);overflow:hidden;min-height:640px}
+.sb-social-frame iframe{display:block;width:100%}
+.sb-social-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#1877f2;color:#fff;font-weight:700;font-size:14px;padding:12px 16px;border-radius:var(--rsm);text-decoration:none;transition:filter .15s ease}
+.sb-social-cta:hover{filter:brightness(1.08)}
+@media (max-width:1080px){.sb-social{flex-basis:100%;max-width:520px;margin-top:8px}}
+
 .split-board-outer{position:relative;padding-top:46px;max-width:780px;margin:0 auto}
 
 .split-board-vane{position:absolute;top:0;left:50%;transform:translateX(-50%) rotate(-6deg);transform-origin:bottom center;display:flex;flex-direction:column;align-items:center;animation:vane-sway 4.5s ease-in-out infinite;z-index:4}

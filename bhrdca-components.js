@@ -15,7 +15,7 @@
   var SPONSORS = [
     ["Century Cricket Centre","https://www.cricketcentre.com.au/","/sponsor-logos/century-cricket-centre.webp"],
     ["Kookaburra Sport","https://www.kookaburrasport.com.au/cricket/","/sponsor-logos/kookaburra-sport.webp"],
-    ["Cricket Victoria","https://www.cricketvictoria.com.au/"],
+    ["Cricket Victoria","https://www.cricketvictoria.com.au/","/sponsor-logos/cricket-victoria.webp"],
     ["Field of View","https://www.fieldofview.com.au/","/sponsor-logos/field-of-view.webp"],
     ["SportsWeb Australia","https://sportsweb.com.au","/sponsor-logos/sportsweb-australia.webp"],
     ["Topline Cricket","https://www.toplinecricket.com.au/","/sponsor-logos/topline-cricket.webp"],

@@ -288,7 +288,7 @@ window.BHRDCA_DATA = (function () {
   var sponsors = [
     { name: "Century Cricket Centre", url: "https://www.cricketcentre.com.au/", tier: "Premier", logo: "/sponsor-logos/century-cricket-centre.webp" },
     { name: "Kookaburra Sport", url: "https://www.kookaburrasport.com.au/cricket/", tier: "Premier", logo: "/sponsor-logos/kookaburra-sport.webp" },
-    { name: "Cricket Victoria", url: "https://www.cricketvictoria.com.au/", tier: "Premier" },
+    { name: "Cricket Victoria", url: "https://www.cricketvictoria.com.au/", tier: "Premier", logo: "/sponsor-logos/cricket-victoria.webp" },
     { name: "Field of View Sports Photography", url: "https://www.fieldofview.com.au/", tier: "Premier", logo: "/sponsor-logos/field-of-view.webp" },
     { name: "SportsWeb Australia", url: "https://sportsweb.com.au", tier: "Premier", logo: "/sponsor-logos/sportsweb-australia.webp" },
     { name: "Topline Cricket", url: "https://www.toplinecricket.com.au/", tier: "Partner", logo: "/sponsor-logos/topline-cricket.webp" },

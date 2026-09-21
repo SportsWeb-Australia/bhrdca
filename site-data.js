@@ -208,7 +208,6 @@ window.BHRDCA_DATA = (function () {
     { name: "Forest Hill", url: "http://www.foresthillcc.com.au/", grades: ["M", "F", "J"] },
     { name: "Glen Waverley", url: "https://www.glenwaverleycc.com", logo: "/club-logos/glen-waverley.jpg", grades: ["M", "F", "J"] },
     { name: "Glen Waverley Cougars", url: "https://cougars.net.au/?page_id=298", logo: "/club-logos/glen-waverley-cougars.jpeg", grades: ["M", "F", "J"] },
-    { name: "Heatherdale", url: "https://www.heatherdalecricketclub.com.au/", logo: "/club-logos/heatherdale.png", grades: ["F", "J"] },
     { name: "Kerrimuir United", url: "http://kerrimuircc.com.au/", grades: ["M", "F", "J"] },
     { name: "Koonung Heights", url: "http://www.koonungheightscc.com/", logo: "/club-logos/koonung-heights.png", grades: ["M", "F", "J"] },
     { name: "Laburnum", url: "http://laburnumcc.vic.cricket.com.au/", logo: "/club-logos/laburnum.png", grades: ["M", "F", "J"] },

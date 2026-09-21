@@ -223,7 +223,14 @@ window.BHRDCA_DATA = (function () {
     { name: "St David's", url: "https://www.stdavidscc.com/", logo: "/club-logos/st-davids.png", grades: ["M", "F", "J"] },
     { name: "Templestowe", url: "https://www.templestowecc.com/", logo: "/club-logos/templestowe.png", grades: ["M", "F", "J"] },
     { name: "Templeton", url: "https://www.templetoncc.com.au/", logo: "/club-logos/templeton.jpeg", grades: ["F", "J"] },
-    { name: "Vermont", url: "https://www.vermontcricket.com.au/", logo: "/club-logos/vermont.png", grades: ["M", "F", "J"] }
+    { name: "Vermont", url: "https://www.vermontcricket.com.au/", grades: ["M", "F"] },
+    { name: "Eley Park", url: "https://www.epcc.com.au/", logo: "/club-logos/eley-park.webp", grades: ["M"] },
+    { name: "Glen Waverley Hawks", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/f8c1124c", grades: ["M", "F", "J"] },
+    { name: "Monash Morrow", url: "https://monashmorrowcc.org/", grades: ["M", "F", "J"] },
+    { name: "Mulgrave Wheelers Hill", url: "https://www.mwhcc.com.au/", grades: ["M", "F", "J"] },
+    { name: "Vermont South", url: "https://www.vscc.com.au/", logo: "/club-logos/vermont.png", grades: ["M", "F", "J"] },
+    { name: "Wyclif", url: "https://www.wyclif.com.au/", grades: ["M", "F", "J"] },
+    { name: "Yarraleen", url: "https://www.yarraleencc.com.au/", logo: "/club-logos/yarraleen.webp", grades: ["M", "J"] }
   ];
 
   // Full club contact directory (all affiliated clubs — 2025/26). From live site.

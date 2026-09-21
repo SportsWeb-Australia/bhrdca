@@ -821,8 +821,8 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .cf-tab.active{background:var(--card);color:var(--navy);top:0;padding-bottom:18px;box-shadow:0 -4px 14px rgba(10,34,66,.07)}
 .cf-tab.active i{color:var(--gold-deep);opacity:1}
 .cf-tab.active .cf-n{background:rgba(10,34,66,.1);color:var(--navy)}
-.cf-body{position:relative;z-index:1;background:var(--card);border:1px solid var(--border);border-radius:0 var(--r) var(--r) var(--r);box-shadow:var(--shadow2);padding:22px;margin-top:-1px;overflow:hidden}
-.cf-body::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--navy),var(--gold))}
+.cf-body{position:relative;background:var(--card);border:1px solid var(--border);border-radius:0 var(--r) var(--r) var(--r);box-shadow:var(--shadow2);padding:22px;margin-top:-1px}
+.cf-body::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;border-radius:0 var(--r) 0 0;background:linear-gradient(90deg,var(--navy),var(--gold))}
 .cf-empty{grid-column:1/-1;text-align:center;padding:26px;color:var(--muted);font-size:13px}
 @media (max-width:640px){
   .cf-tabs{padding-left:4px;gap:3px}

@@ -213,7 +213,6 @@ window.BHRDCA_DATA = (function () {
     { name: "Kerrimuir United", url: "http://kerrimuircc.com.au/", grades: ["M", "F", "J"] },
     { name: "Koonung Heights", url: "http://www.koonungheightscc.com/", logo: "/club-logos/koonung-heights.png", grades: ["M", "F", "J"] },
     { name: "Laburnum", url: "http://laburnumcc.vic.cricket.com.au/", logo: "/club-logos/laburnum.png", grades: ["M", "F", "J"] },
-    { name: "Manningham", url: "https://mycricket.cricket.com.au/home.aspx?entityid=27035&save=0" },
     { name: "Mitcham", url: "https://www.mitcham.cc/", logo: "/club-logos/mitcham.webp", grades: ["M", "F", "J"] },
     { name: "Mulgrave", url: "https://www.mulgravecricketclub.com.au/", logo: "/club-logos/mulgrave.png", grades: ["M", "J"] },
     { name: "Notting Hill / Brandon Park", url: "http://nhbpcc.vic.cricket.com.au/", grades: ["M", "F", "J"] },

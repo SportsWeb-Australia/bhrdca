@@ -107,7 +107,9 @@
   }
 
   function clubGridHTML() {
-    var clubs = D.clubs || [];
+    var clubs = (D.clubs || []).slice().sort(function (a, b) {
+      return a.name.localeCompare(b.name, "en", { sensitivity: "base" });
+    });
     return '<div class="bh-clubgrid">' + clubs.map(clubTileHTML).join("") + '</div>';
   }
 

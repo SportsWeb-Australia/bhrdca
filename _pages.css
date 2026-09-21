@@ -825,6 +825,11 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .cf-body{position:relative;background:var(--card);border:1px solid var(--border);border-radius:0 var(--r) var(--r) var(--r);box-shadow:var(--shadow2);padding:22px;margin-top:-1px}
 .cf-body::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;border-radius:0 var(--r) 0 0;background:linear-gradient(90deg,var(--navy),var(--gold))}
 .cf-empty{grid-column:1/-1;text-align:center;padding:26px;color:var(--muted);font-size:13px}
+.cf-search{position:relative;display:flex;align-items:center;margin-bottom:16px}
+.cf-search i{position:absolute;left:15px;color:var(--gold-deep);font-size:18px;pointer-events:none}
+.cf-search input{width:100%;padding:13px 16px 13px 44px;font:inherit;font-size:14px;color:var(--text);background:var(--bg2);border:1px solid var(--border);border-radius:var(--rsm);transition:border-color .15s,box-shadow .15s}
+.cf-search input::placeholder{color:var(--muted)}
+.cf-search input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.15)}
 @media (max-width:640px){
   .cf-tabs{padding-left:4px;gap:3px}
   .cf-tab{padding:9px 11px 13px;font-size:11.5px}

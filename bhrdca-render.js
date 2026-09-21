@@ -95,7 +95,7 @@
           ? '<div class="crest has-logo"><img src="' + esc(c.logo) + '" alt="' + esc(c.name) + ' crest" loading="lazy" onerror="this.parentNode.classList.remove(\'has-logo\');this.remove();this.parentNode.textContent=\'' + esc(initials(c.name)) + '\'"></div>'
           : '<div class="crest">' + esc(initials(c.name)) + '</div>';
         var gradeKey = (c.grades && c.grades.length) ? c.grades.join(",") : "AFFILIATE";
-        return '<div class="bh-club-wrap" tabindex="0" data-grades="' + esc(gradeKey) + '">'
+        return '<div class="bh-club-wrap" tabindex="0" data-grades="' + esc(gradeKey) + '" data-name="' + esc(String(c.name).toLowerCase()) + '">'
           + '<a class="bh-club" href="' + esc(c.url) + '" target="_blank" rel="noopener">'
           + crest
           + '<div class="cn">' + esc(c.name) + '</div>'
@@ -158,29 +158,61 @@
         '<div class="cf-folder">'
         + '<div class="cf-tabs" role="tablist">' + tabsHTML + '</div>'
         + '<div class="cf-body">'
+        + '<div class="cf-search"><i class="ti ti-search"></i>'
+        + '<input type="search" id="cf-search-input" placeholder="Search clubs or a category — e.g. &ldquo;female juniors&rdquo;, &ldquo;veterans&rdquo;, &ldquo;Blackburn&rdquo;" aria-label="Search clubs by name or category">'
+        + '</div>'
         + CLUB_LEGEND
         + clubGridHTML()
-        + '<div class="cf-empty" hidden>No clubs in this category yet.</div>'
+        + '<div class="cf-empty" hidden>No clubs match your search.</div>'
         + '</div></div>';
 
       var tabsEl = m.querySelector(".cf-tabs");
       var emptyEl = m.querySelector(".cf-empty");
+      var input = m.querySelector("#cf-search-input");
       var tiles = Array.prototype.slice.call(m.querySelectorAll(".bh-club-wrap"));
+      var activeCat = "all";
+
+      // map search words to grade categories so "female juniors" filters F + J
+      var CAT_WORDS = {
+        senior: "M", seniors: "M", men: "M", "men's": "M", mens: "M", male: "M",
+        junior: "J", juniors: "J", boys: "J", boy: "J",
+        women: "F", "women's": "F", womens: "F", woman: "F", female: "F", females: "F", girl: "F", girls: "F", ladies: "F",
+        veteran: "V", veterans: "V", vet: "V", vets: "V", masters: "V", over40s: "V", over50s: "V",
+        affiliate: "AFFILIATE", affiliates: "AFFILIATE"
+      };
+
+      function applyFilter() {
+        var q = (input.value || "").toLowerCase().trim();
+        var words = q ? q.split(/\s+/) : [];
+        var needGrades = {}, nameTerms = [];
+        words.forEach(function (w) {
+          if (CAT_WORDS[w]) needGrades[CAT_WORDS[w]] = true;
+          else nameTerms.push(w);
+        });
+        var needGradeList = Object.keys(needGrades);
+        var vis = 0;
+        tiles.forEach(function (t) {
+          var gs = t.getAttribute("data-grades").split(",");
+          var name = t.getAttribute("data-name") || "";
+          var okTab = activeCat === "all" || gs.indexOf(activeCat) > -1;
+          var okGrades = needGradeList.every(function (g) { return gs.indexOf(g) > -1; });
+          var okName = nameTerms.every(function (w) { return name.indexOf(w) > -1; });
+          var show = okTab && okGrades && okName;
+          t.style.display = show ? "" : "none";
+          if (show) vis++;
+        });
+        emptyEl.hidden = vis > 0;
+      }
+
       tabsEl.addEventListener("click", function (e) {
         var btn = e.target.closest(".cf-tab");
         if (!btn) return;
         tabsEl.querySelectorAll(".cf-tab").forEach(function (b) { b.classList.remove("active"); });
         btn.classList.add("active");
-        var cat = btn.getAttribute("data-cat");
-        var vis = 0;
-        tiles.forEach(function (t) {
-          var gs = t.getAttribute("data-grades").split(",");
-          var show = cat === "all" || gs.indexOf(cat) > -1;
-          t.style.display = show ? "" : "none";
-          if (show) vis++;
-        });
-        emptyEl.hidden = vis > 0;
+        activeCat = btn.getAttribute("data-cat");
+        applyFilter();
       });
+      if (input) input.addEventListener("input", applyFilter);
     },
 
     clubContacts: function (sel) {

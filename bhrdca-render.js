@@ -218,7 +218,7 @@
         html += '<div class="spon-grid">' + list.map(function (s) {
           var ini = esc(initials(s.name));
           var logo = s.logo
-            ? '<div class="spon-logo' + (s.darkLogo ? ' dark' : '') + '"><img src="' + esc(s.logo) + '" alt="' + esc(s.name) + ' logo" loading="lazy" onerror="this.parentNode.classList.add(\'no-img\');this.parentNode.setAttribute(\'data-ini\',\'' + ini + '\');this.remove()"></div>'
+            ? '<div class="spon-logo' + (s.plate ? ' plate' : '') + '"><img src="' + esc(s.logo) + '" alt="' + esc(s.name) + ' logo" loading="lazy" onerror="this.parentNode.classList.add(\'no-img\');this.parentNode.setAttribute(\'data-ini\',\'' + ini + '\');this.remove()"></div>'
             : '<div class="spon-logo no-img" data-ini="' + ini + '"></div>';
           var details = "";
           if (s.phone)   details += '<div class="spon-row"><i class="ti ti-phone"></i><a href="tel:' + tel(s.phone) + '">' + esc(s.phone) + '</a></div>';

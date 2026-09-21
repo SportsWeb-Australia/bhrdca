@@ -286,25 +286,25 @@ window.BHRDCA_DATA = (function () {
 
   // Sponsors & partners (from the association's sponsor wall)
   var sponsors = [
-    { name: "Century Cricket Centre", url: "https://www.cricketcentre.com.au/", tier: "Premier", logo: "/sponsor-logos/century-cricket-centre.webp" },
-    { name: "Kookaburra Sport", url: "https://www.kookaburrasport.com.au/cricket/", tier: "Premier", logo: "/sponsor-logos/kookaburra-sport.webp" , darkLogo: true },
-    { name: "Cricket Victoria", url: "https://www.cricketvictoria.com.au/", tier: "Premier", logo: "/sponsor-logos/cricket-victoria.webp" },
+    { name: "Century Cricket Centre", url: "https://www.cricketcentre.com.au/", tier: "Premier", logo: "/sponsor-logos/century-cricket-centre.webp", plate: true },
+    { name: "Kookaburra Sport", url: "https://www.kookaburrasport.com.au/cricket/", tier: "Premier", logo: "/sponsor-logos/kookaburra-sport.webp" },
+    { name: "Cricket Victoria", url: "https://www.cricketvictoria.com.au/", tier: "Premier", logo: "/sponsor-logos/cricket-victoria.webp", plate: true },
     { name: "Field of View Sports Photography", url: "https://www.fieldofview.com.au/", tier: "Premier", logo: "/sponsor-logos/field-of-view.webp" },
     { name: "SportsWeb Australia", url: "https://sportsweb.com.au", tier: "Premier", logo: "/sponsor-logos/sportsweb-one.webp" },
-    { name: "Topline Cricket", url: "https://www.toplinecricket.com.au/", tier: "Partner", logo: "/sponsor-logos/topline-cricket.webp" },
-    { name: "Top Notch Trophies", url: "https://www.topnotchtrophies.com.au/", tier: "Partner", logo: "/sponsor-logos/top-notch-trophies.webp" },
-    { name: "SEDA College", url: "https://seda.vic.edu.au/", tier: "Partner", logo: "/sponsor-logos/seda-college.webp" },
+    { name: "Topline Cricket", url: "https://www.toplinecricket.com.au/", tier: "Partner", logo: "/sponsor-logos/topline-cricket.webp", plate: true },
+    { name: "Top Notch Trophies", url: "https://www.topnotchtrophies.com.au/", tier: "Partner", logo: "/sponsor-logos/top-notch-trophies.webp", plate: true },
+    { name: "SEDA College", url: "https://seda.vic.edu.au/", tier: "Partner", logo: "/sponsor-logos/seda-college.webp", plate: true },
     { name: "Box Hill Indoor Sports", url: "https://boxhillindoorsports.com.au/sports-and-activities/indoor-cricket/", tier: "Partner", logo: "/sponsor-logos/box-hill-indoor-sports.webp" },
     { name: "Geyer Accountants", url: "https://geyeraccountants.com.au/", tier: "Partner", logo: "/sponsor-logos/geyer-accountants.webp" },
-    { name: "Grant Professionals & Club Builder", url: "https://www.club-builder.com.au/", tier: "Partner", logo: "/sponsor-logos/club-builder.webp" },
+    { name: "Grant Professionals & Club Builder", url: "https://www.club-builder.com.au/", tier: "Partner", logo: "/sponsor-logos/club-builder.webp", plate: true },
     { name: "Club Connect", url: "https://clubconnect.net.au", tier: "Partner", logo: "/sponsor-logos/club-connect.webp" },
-    { name: "Altegra", url: "https://www.altegra.com.au/", tier: "Community" },
+    { name: "Altegra", url: "https://www.altegra.com.au/", tier: "Community", logo: "/sponsor-logos/altegra.webp", plate: true },
     { name: "Good Sports", url: "https://goodsports.com.au/", tier: "Community", logo: "/sponsor-logos/good-sports.webp" },
-    { name: "Child Safe", url: "https://www.childsafe.org.au/", tier: "Community", logo: "/sponsor-logos/child-safe.svg" , darkLogo: true },
-    { name: "Compare & Connect", url: "https://www.compareandconnect.com.au/", tier: "Partner", logo: "/sponsor-logos/compare-and-connect.webp" },
-    { name: "LCF Linemarking & Logos", url: "https://grassup.com.au/services", tier: "Partner", logo: "/sponsor-logos/lcf-linemarking.webp" },
+    { name: "Child Safe", url: "https://www.childsafe.org.au/", tier: "Community", logo: "/sponsor-logos/child-safe.svg" },
+    { name: "Compare & Connect", url: "https://www.compareandconnect.com.au/", tier: "Premier", logo: "/sponsor-logos/compare-and-connect.webp" },
+    { name: "LCF Linemarking & Logos", url: "https://grassup.com.au/services", tier: "Partner", logo: "/sponsor-logos/lcf-linemarking.webp", plate: true },
     { name: "Modern Orthodontics", url: "https://www.modernorthodontics.com.au/", tier: "Partner", logo: "/sponsor-logos/modern-orthodontics.webp" },
-    { name: "3WBC Radio", url: "https://www.3wbc.org.au/shows/the-cordon/", tier: "Community", logo: "/sponsor-logos/3wbc-radio.webp" , darkLogo: true }
+    { name: "3WBC Radio", url: "https://www.3wbc.org.au/shows/the-cordon/", tier: "Community", logo: "/sponsor-logos/3wbc-radio.webp" }
   ];
 
   var history = [

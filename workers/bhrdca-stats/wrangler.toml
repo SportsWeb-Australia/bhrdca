@@ -8,6 +8,16 @@ PHQ_HOST = "https://api.playhq.com"
 PHQ_TENANT = "ca"
 ORG_ID = "f8c1124c-c0cd-4b6f-b513-0e2c1340978b"
 
+# --- SportsWeb One push (additive; the leaderboard does not depend on it) ---
+# Off unless this says exactly "true". With it off the Worker behaves as it did
+# before this was added. TRAINING endpoint only for now.
+SW1_PUSH_ENABLED = "true"
+SW1_INGEST_URL   = "https://jgziqwowavhuqpbmzxhs.supabase.co/functions/v1/playhq-ingest"
+SW1_PUSH_GRADE_LIMIT = "2"
+# Secret, set with `npx wrangler secret put PLAYHQ_INGEST_SECRET`:
+#   PLAYHQ_INGEST_SECRET  the signing secret SW1 shares. NOT a Supabase key --
+#   this Worker holds no database credential of any kind.
+
 # KV for the computed board + per-game cache.
 # Create with:  npx wrangler kv namespace create STATS
 # then paste the returned id below.

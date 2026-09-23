@@ -293,6 +293,8 @@ async function aggregate(env) {
   return board;
 }
 
+import { pushToSw1 } from "./sw1-push.js";
+
 /* ------------------------------ handlers ------------------------------- */
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, OPTIONS", "Cache-Control": "public, max-age=120" };
 
@@ -300,7 +302,30 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS });
-    if (url.pathname === "/health") return json({ ok: true }, env);
+    if (url.pathname === "/health") {
+      // The push is additive and can fail on its own; say so here rather than
+      // letting a stuck queue be invisible.
+      const [pending, stuck] = await Promise.all([
+        env.STATS.get("sw1push:pending", "json"),
+        env.STATS.get("sw1push:stuck", "json"),
+      ]);
+      return json({
+        ok: true,
+        sw1Push: {
+          enabled: env.SW1_PUSH_ENABLED === "true",
+          pendingRetry: pending ? { attempts: pending.attempts, lastError: pending.last_error } : null,
+          gaveUp: stuck || null,
+        },
+      }, env);
+    }
+
+    // Manual, bounded push. Runs the same code the cron runs, so what is tested
+    // by hand is what runs unattended.
+    if (url.pathname === "/sw1-push") {
+      const budget = { left: SUBREQUEST_BUDGET_PER_RUN };
+      const out = await pushToSw1(env, makeClient(env, budget), budget).catch((e) => ({ error: String(e.message) }));
+      return json(out, env);
+    }
 
     if (url.pathname === "/scoreboard") {
       // ?refresh=1 runs a bounded rebuild inline (backfills a batch of new games,
@@ -312,11 +337,25 @@ export default {
       const cached = await env.STATS.get("board:current", "json");
       return json(cached || { grades: [], data: {}, meta: { empty: true } }, env);
     }
-    return json({ error: "not_found", routes: ["/scoreboard", "/scoreboard?refresh=1", "/health"] }, env, 404);
+    return json({ error: "not_found", routes: ["/scoreboard", "/scoreboard?refresh=1", "/health", "/sw1-push"] }, env, 404);
   },
 
   async scheduled(_event, env, ctx) {
-    ctx.waitUntil(aggregate(env));
+    ctx.waitUntil((async () => {
+      // The board first, and on its own. Whatever happens after this point,
+      // the leaderboard has already been built and saved exactly as before.
+      await aggregate(env);
+
+      // Then, and only then, the SportsWeb push -- with the budget that is
+      // left, inside its own catch. It cannot delay, starve or break the board.
+      try {
+        const budget = { left: Math.max(0, Math.floor(SUBREQUEST_BUDGET_PER_RUN / 3)) };
+        const out = await pushToSw1(env, makeClient(env, budget), budget);
+        if (out && !out.skipped) console.log("sw1 push", JSON.stringify(out));
+      } catch (err) {
+        console.error("sw1 push threw", err && err.message);
+      }
+    })());
   },
 };
 

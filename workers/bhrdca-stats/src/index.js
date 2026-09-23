@@ -116,39 +116,67 @@ function extractGame(summary) {
   return { bat: Object.values(bat), bowl: Object.values(bowl), totals: { runs: totalRuns, balls: totalBalls, wkts: totalWkts } };
 }
 
+// listing rarely changes; cache it so each run isn't dominated by slow PlayHQ
+// list calls. Completed seasons are static; live-season lag ≤ TTL (acceptable).
+const LIST_TTL = 3600; // seconds
+
 /* ------------- resolve the active season per competition --------------- */
 // newest season with >=1 FINAL game, else newest COMPLETED (last-season-first).
-async function resolveSeason(phq, seasons, tab) {
+async function resolveSeason(phq, env, seasons, tab) {
+  const ck = `season:${tab.key}`;
+  const cached = await env.STATS.get(ck, "json");
+  if (cached) return cached;
   const mine = seasons
     .filter((s) => tab.match(s.competition ? s.competition.name : ""))
     .sort((a, b) => String(b.name).localeCompare(String(a.name))); // "Summer 2026/27" > "2025/26"
+  let chosen = null;
   for (const s of mine) {
-    if (s.status === "COMPLETED") return s;                 // completed always has finals
-    // UPCOMING/ACTIVE: only use it once round 1 is FINAL
+    if (s.status === "COMPLETED") { chosen = s; break; }     // completed always has finals
     const grades = await phq.getAll(`/v1/seasons/${s.id}/grades`, (j) => j.data);
+    let hasFinal = false;
     for (const g of grades.slice(0, 3)) {
       const fx = await phq.get(`/v2/grades/${g.id}/games`).catch(() => null);
-      const hasFinal = fx && (fx.rounds || []).some((r) => (r.games || []).some((gm) => gm.status === "FINAL"));
-      if (hasFinal) return s;
+      if (fx && (fx.rounds || []).some((r) => (r.games || []).some((gm) => gm.status === "FINAL"))) { hasFinal = true; break; }
     }
+    if (hasFinal) { chosen = s; break; }
   }
-  return mine[0] || null;
+  chosen = chosen || mine[0] || null;
+  if (chosen) await env.STATS.put(ck, JSON.stringify({ id: chosen.id, name: chosen.name, status: chosen.status }), { expirationTtl: LIST_TTL });
+  return chosen;
+}
+
+async function gradesForSeason(phq, env, seasonId) {
+  const ck = `grades:${seasonId}`;
+  const hit = await env.STATS.get(ck, "json");
+  if (hit) return hit;
+  const g = await phq.getAll(`/v1/seasons/${seasonId}/grades`, (j) => j.data);
+  await env.STATS.put(ck, JSON.stringify(g), { expirationTtl: LIST_TTL });
+  return g;
+}
+
+async function finalGameIds(phq, env, gradeId) {
+  const ck = `gids:${gradeId}`;
+  const hit = await env.STATS.get(ck, "json");
+  if (hit) return hit;
+  const ids = [];
+  try {
+    const fx = await phq.get(`/v2/grades/${gradeId}/games`);
+    for (const r of fx.rounds || []) for (const gm of r.games || []) if (gm.status === "FINAL") ids.push(gm.id);
+  } catch { /* skip */ }
+  await env.STATS.put(ck, JSON.stringify(ids), { expirationTtl: LIST_TTL });
+  return ids;
 }
 
 /* ------------------------- build one grade group ----------------------- */
 async function buildTab(phq, env, tab, seasons, budget) {
-  const season = await resolveSeason(phq, seasons, tab);
+  const season = await resolveSeason(phq, env, seasons, tab);
   if (!season) return null;
 
-  const grades = await phq.getAll(`/v1/seasons/${season.id}/grades`, (j) => j.data);
+  const grades = await gradesForSeason(phq, env, season.id);
 
-  // collect all FINAL game ids across the season's grades
+  // collect all FINAL game ids across the season's grades (cached)
   const gameIds = [];
-  for (const g of grades) {
-    let fx;
-    try { fx = await phq.get(`/v2/grades/${g.id}/games`); } catch { continue; }
-    for (const r of fx.rounds || []) for (const gm of r.games || []) if (gm.status === "FINAL") gameIds.push(gm.id);
-  }
+  for (const g of grades) gameIds.push(...(await finalGameIds(phq, env, g.id)));
 
   // fetch summaries not yet cached, in parallel, bounded by the per-run budget
   const uncached = [];
@@ -188,7 +216,11 @@ async function buildTab(phq, env, tab, seasons, budget) {
 /* ----------------------------- aggregate ------------------------------- */
 async function aggregate(env) {
   const phq = makeClient(env);
-  const seasons = await phq.getAll(`/v1/organisations/${env.ORG_ID}/seasons`, (j) => j.data);
+  let seasons = await env.STATS.get("seasons:all", "json");
+  if (!seasons) {
+    seasons = await phq.getAll(`/v1/organisations/${env.ORG_ID}/seasons`, (j) => j.data);
+    await env.STATS.put("seasons:all", JSON.stringify(seasons), { expirationTtl: LIST_TTL });
+  }
   const budget = { left: MAX_GAME_FETCHES_PER_RUN };
 
   // seed from the previous board so a partial run never wipes finished tabs

@@ -98,6 +98,17 @@ Evidence says **true in‑play live scores are the partner/webhook tier, not the
 
 ---
 
+## Deployment status (live)
+
+- Deployed to Cloudflare account `carson@clicksportsmedia.com`:
+  **`https://bhrdca-stats.carson-cfd.workers.dev/scoreboard`** (cron `*/15 * * * *`).
+- KV namespace `STATS` = `3a2d2122647244928dbb3ea812bb6678`. Secret `PLAYHQ_API_KEY` set via wrangler.
+- Homepage `index.html` sets `window.BHRDCA_STATS_API` to that URL (demo fallback if unreachable).
+- Listing (seasons/grades/fixture game-ids) is cached in KV (`LIST_TTL` 1h) so runs are cheap;
+  FINAL game summaries cached forever (`game:{id}`). First warm-up run is slow; steady-state tiny.
+- **When the site moves Vercel → Cloudflare:** fold this Worker into the site as a same-origin route
+  (e.g. `/api/scoreboard`) instead of the `workers.dev` URL, and update `BHRDCA_STATS_API`. Same code.
+
 ## 6. Where the code lives
 
 - `workers/bhrdca-stats/` — the Cloudflare Worker (scheduled aggregation + JSON API). See its

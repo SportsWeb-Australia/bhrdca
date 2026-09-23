@@ -79,7 +79,7 @@
     <div class="lb-head">
       <img class="lb-head-logo" src="/bhrdca-logo.svg" alt="BHRDCA">
       <div class="lb-head-txt">
-        <div class="lb-title">Association Scoreboard</div>
+        <div class="lb-title"><span id="lb-title-season">Season 2025/26</span> Association Scoreboard</div>
         <div class="lb-sub" id="lb-subhead">ALL GRADES &middot; UPDATES AS GAMES ARE SCORED</div>
       </div>
       <img class="lb-head-logo lb-head-cv" src="/sponsor-logos/cricket-victoria.webp" alt="Cricket Victoria">
@@ -253,9 +253,14 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
       tabBtns.forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-grade") === key); });
       gradeAEl.textContent = d.label;
       gradeBEl.textContent = d.label;
-      // season goes in the header subtitle
+      // season goes in the header title: "Season 2025/26 Association Scoreboard"
+      var seasonTitleEl = document.getElementById("lb-title-season");
+      if (seasonTitleEl && d.seasonName) {
+        var yr = (d.seasonName.match(/\d{4}\/\d{2,4}/) || [])[0];
+        seasonTitleEl.textContent = "Season " + (yr || d.seasonName);
+      }
       var subEl = document.getElementById("lb-subhead");
-      if (subEl) subEl.textContent = (d.seasonName ? d.seasonName + " · " : "") + "All Grades · Updates as games are scored";
+      if (subEl) subEl.textContent = "All Grades · Updates as games are scored";
       // corner pill is a live-round chip: only shown while a round is in play
       var pill = document.querySelector("#scoreboard-section .lb-live");
       var seasonEl = document.getElementById("lb-season");

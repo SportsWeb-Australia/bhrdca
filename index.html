@@ -216,15 +216,28 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
     var SB = window.BHRDCA_SCOREBOARD;
     if (!SB) return;
     function esc(t){ return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-    // club crest lookup (uses member-club logos where available)
+    // club crest lookup (uses member-club logos where available).
+    // PlayHQ bakes the format/age into team names (e.g. "Wyclif T20 1st XI",
+    // "Kerrimuir United Over 40 Men", "Blackburn North CC"), so an exact match
+    // misses. Instead match the longest known club that PREFIXES the team name
+    // (longest-first avoids "Blackburn North" losing to "Blackburn"; prefix — not
+    // substring — keeps a distinct club like "East Doncaster" off "Doncaster").
     var CLUBS = (window.BHRDCA_DATA && window.BHRDCA_DATA.clubs) || [];
     function normClub(s){ return String(s||"").toLowerCase().replace(/[^a-z0-9]/g,""); }
-    var clubLogo = {};
-    CLUBS.forEach(function(c){ if (c.logo) clubLogo[normClub(c.name)] = c.logo; });
+    var clubList = [];
+    CLUBS.forEach(function(c){ if (c.logo) clubList.push({ n: normClub(c.name), logo: c.logo }); });
+    clubList.sort(function(a,b){ return b.n.length - a.n.length; });
+    function logoForClub(clubField){
+      var raw = String(clubField).split("·")[0].trim().replace(/^(?:men|women)\s+/i, "");
+      var bn = normClub(raw);
+      if (!bn) return null;
+      for (var i = 0; i < clubList.length; i++){ if (bn.indexOf(clubList[i].n) === 0) return clubList[i].logo; }
+      return null;
+    }
     function crestFor(clubField){
       var club = String(clubField).split("·")[0].trim();
       var ini = (club.replace(/[^A-Za-z0-9 ]/g," ").split(/\s+/).filter(Boolean).slice(0,2).map(function(w){return w[0];}).join("").toUpperCase()) || "C";
-      var logo = clubLogo[normClub(club)];
+      var logo = logoForClub(clubField);
       if (logo) return '<span class="lb-crest"><img src="' + esc(logo) + '" alt="" loading="lazy" onerror="this.parentNode.classList.add(\'ini\');this.parentNode.textContent=\'' + ini + '\'"></span>';
       return '<span class="lb-crest ini">' + ini + '</span>';
     }

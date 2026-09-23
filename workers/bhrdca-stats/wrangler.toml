@@ -1,0 +1,21 @@
+name = "bhrdca-stats"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# BHRDCA public data (safe to commit — the API KEY is a secret, set separately)
+[vars]
+PHQ_HOST = "https://api.playhq.com"
+PHQ_TENANT = "ca"
+ORG_ID = "f8c1124c-c0cd-4b6f-b513-0e2c1340978b"
+
+# KV for the computed board + per-game cache.
+# Create with:  npx wrangler kv namespace create STATS
+# then paste the returned id below.
+[[kv_namespaces]]
+binding = "STATS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+# Scheduled aggregation. Tune cadence to PlayHQ's rate limits once confirmed.
+# Every 15 min is a sensible default during the season.
+[triggers]
+crons = ["*/15 * * * *"]

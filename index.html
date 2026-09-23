@@ -209,12 +209,16 @@
     var gradeBEl = document.getElementById("lb-grade-b");
     var tabsWrap = document.getElementById("lb-tabs");
     var current = SB.grades[0].key;
+    var tabBtns;
 
-    // build grade tabs
-    tabsWrap.innerHTML = SB.grades.map(function(g){
-      return '<button class="lb-tab" type="button" role="tab" data-grade="' + g.key + '">' + esc(g.label) + '</button>';
-    }).join("");
-    var tabBtns = tabsWrap.querySelectorAll(".lb-tab");
+    // build grade tabs (re-runnable so live data can rebuild them)
+    function buildTabs(){
+      tabsWrap.innerHTML = SB.grades.map(function(g){
+        return '<button class="lb-tab" type="button" role="tab" data-grade="' + g.key + '">' + esc(g.label) + '</button>';
+      }).join("");
+      tabBtns = tabsWrap.querySelectorAll(".lb-tab");
+      tabBtns.forEach(function(b){ b.addEventListener("click", function(){ renderGrade(b.getAttribute("data-grade")); }); });
+    }
 
     function rowsHTML(list){
       return list.map(function(r, i){
@@ -259,7 +263,7 @@
       countUp(document.getElementById("lb-overs"), d.totals.overs);
       countUp(document.getElementById("lb-wkts"), d.totals.wkts);
     }
-    tabBtns.forEach(function(b){ b.addEventListener("click", function(){ renderGrade(b.getAttribute("data-grade")); }); });
+    buildTabs();
 
     // reveal + re-animate whenever the board scrolls into view
     var sbSection = document.getElementById("scoreboard-section");
@@ -270,6 +274,27 @@
       sbObserver.observe(sbSection);
     } else {
       renderGrade(current);
+    }
+
+    /* Live data: if a PlayHQ stats Worker URL is configured, fetch the real
+       leaderboards and swap them in. Falls back silently to the demo data
+       above if unset or unreachable, so the board never breaks. */
+    if (window.BHRDCA_STATS_API) {
+      fetch(window.BHRDCA_STATS_API, { mode: "cors" })
+        .then(function(r){ return r.ok ? r.json() : null; })
+        .then(function(live){
+          if (!live || !live.grades || !live.grades.length || !live.data) return;
+          SB = live;
+          if (SB.grades.map(function(g){ return g.key; }).indexOf(current) === -1) current = SB.grades[0].key;
+          buildTabs();
+          renderGrade(current);
+          var flag = document.querySelector("#scoreboard-section .sb-concept-flag");
+          var d0 = SB.data[current];
+          if (flag && d0 && d0.seasonName) {
+            flag.innerHTML = '<i class="ti ti-database"></i> Live from PlayHQ &mdash; ' + esc(d0.seasonName) + ' season';
+          }
+        })
+        .catch(function(){ /* keep demo data */ });
     }
   })();
 </script>

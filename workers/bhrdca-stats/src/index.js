@@ -154,18 +154,25 @@ async function gradesForSeason(phq, env, seasonId) {
   return g;
 }
 
-async function finalGameIds(phq, env, gradeId) {
-  const ck = `gids:${gradeId}`;
+// returns { ids:[FINAL game ids], lastRound:"Round N" } for a grade (cached)
+async function finalGames(phq, env, gradeId) {
+  const ck = `gids2:${gradeId}`;
   const hit = await env.STATS.get(ck, "json");
   if (hit) return hit;
-  const ids = [];
+  const ids = []; let lastRound = null;
   try {
     const fx = await phq.get(`/v2/grades/${gradeId}/games`);
-    for (const r of fx.rounds || []) for (const gm of r.games || []) if (gm.status === "FINAL") ids.push(gm.id);
+    for (const r of fx.rounds || []) {            // rounds are in order
+      let any = false;
+      for (const gm of r.games || []) if (gm.status === "FINAL") { ids.push(gm.id); any = true; }
+      if (any) lastRound = r.name || lastRound;    // keep the latest round with a FINAL game
+    }
   } catch { /* skip */ }
-  await env.STATS.put(ck, JSON.stringify(ids), { expirationTtl: LIST_TTL });
-  return ids;
+  const val = { ids, lastRound };
+  await env.STATS.put(ck, JSON.stringify(val), { expirationTtl: LIST_TTL });
+  return val;
 }
+const roundNum = (n) => { const m = String(n || "").match(/(\d+)/); return m ? +m[1] : 0; };
 
 /* ------------------------- build one grade group ----------------------- */
 async function buildTab(phq, env, tab, seasons, budget) {
@@ -174,25 +181,35 @@ async function buildTab(phq, env, tab, seasons, budget) {
 
   const grades = await gradesForSeason(phq, env, season.id);
 
-  // collect all FINAL game ids across the season's grades (cached)
+  // FINAL game ids + latest round per grade (cached) — listing fetched in parallel
+  const fgs = new Array(grades.length);
+  await pMapLimit(grades.map((g, i) => ({ g, i })), FETCH_CONCURRENCY, async ({ g, i }) => { fgs[i] = await finalGames(phq, env, g.id); });
   const gameIds = [];
-  for (const g of grades) gameIds.push(...(await finalGameIds(phq, env, g.id)));
+  let latestRound = null;
+  for (const fg of fgs) {
+    if (!fg) continue;
+    gameIds.push(...fg.ids);
+    if (fg.lastRound && roundNum(fg.lastRound) > roundNum(latestRound)) latestRound = fg.lastRound;
+  }
+  // only surface a round for a live/upcoming season, not a finished one
+  const roundName = /completed/i.test(season.status || "") ? null : latestRound;
 
+  // read existing game caches in parallel (KV reads are not subrequests)
+  const cache = {};
+  await pMapLimit(gameIds, 16, async (id) => { cache[id] = await env.STATS.get(`game:${id}`, "json"); });
   // fetch summaries not yet cached, in parallel, bounded by the per-run budget
-  const uncached = [];
-  for (const id of gameIds) { if (!(await env.STATS.get(`game:${id}`))) uncached.push(id); }
-  const toFetch = uncached.slice(0, Math.max(0, budget.left));
+  const toFetch = gameIds.filter((id) => !cache[id]).slice(0, Math.max(0, budget.left));
   budget.left -= toFetch.length;
   await pMapLimit(toFetch, FETCH_CONCURRENCY, async (id) => {
     const sum = await phq.get(`/v2/games/${id}/summary`).catch(() => null);
-    if (sum) await env.STATS.put(`game:${id}`, JSON.stringify(extractGame(sum))); // FINAL games are immutable
+    if (sum) { const ex = extractGame(sum); cache[id] = ex; await env.STATS.put(`game:${id}`, JSON.stringify(ex)); } // FINAL games are immutable
   });
 
-  // aggregate from cache (KV reads are not subrequests)
+  // aggregate from the in-memory cache map
   const batAgg = {}, bowlAgg = {};
   let runs = 0, balls = 0, wkts = 0;
   for (const gid of gameIds) {
-    const ex = await env.STATS.get(`game:${gid}`, "json");
+    const ex = cache[gid];
     if (!ex) continue;
     runs += ex.totals.runs; balls += ex.totals.balls; wkts += ex.totals.wkts;
     for (const b of ex.bat)  { const k = b.name + "|" + b.club; (batAgg[k]  ||= { ...b, runs: 0 }).runs += b.runs; }
@@ -205,8 +222,9 @@ async function buildTab(phq, env, tab, seasons, budget) {
     .map((p) => [p.name, p.div ? `${p.club} · ${p.div}` : p.club, String(p.wkts)]);
 
   return {
-    label: `${tab.label}${/completed/i.test(season.status) ? "" : ""}`,
+    label: tab.label,
     seasonName: season.name,
+    roundName: roundName,
     totals: { runs: runs.toLocaleString("en-US"), overs: ballsToOvers(balls), wkts: String(wkts) },
     bat: topBat,
     bowl: topBowl,
@@ -231,7 +249,7 @@ async function aggregate(env) {
     const built = await buildTab(phq, env, tab, seasons, budget).catch(() => null);
     if (!built || (!built.bat.length && !built.bowl.length)) continue;
     seen[tab.key] = true;
-    data[tab.key] = { label: tab.label, seasonName: built.seasonName, totals: built.totals, bat: built.bat, bowl: built.bowl };
+    data[tab.key] = { label: tab.label, seasonName: built.seasonName, roundName: built.roundName, totals: built.totals, bat: built.bat, bowl: built.bowl };
     // write progressively so /scoreboard fills in tab-by-tab
     const grades = TABS.filter((t) => data[t.key]).map((t) => ({ key: t.key, label: t.label }));
     await env.STATS.put("board:current", JSON.stringify({ grades, data, meta: { updatedAt: new Date().toISOString(), source: "playhq", live: false } }));

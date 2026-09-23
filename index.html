@@ -74,9 +74,8 @@
 
 <!-- ASSOCIATION SCOREBOARD (concept — demo data, whole-of-association) -->
 <section class="page-wrap wide" style="margin-top:28px" id="scoreboard-section">
-  <div class="sb-concept-flag"><i class="ti ti-flask"></i> Concept preview &mdash; demo data, connects to a live PlayHQ feed once API access is confirmed</div>
   <div class="lb-board">
-    <div class="lb-live"><span class="dot"></span> LIVE &middot; ROUND 8</div>
+    <div class="lb-live"><span class="dot"></span> <span id="lb-season">Season</span></div>
     <div class="lb-head">
       <img class="lb-head-logo" src="/bhrdca-logo.svg" alt="BHRDCA">
       <div class="lb-head-txt">
@@ -101,11 +100,6 @@
       </div>
     </div>
     <div class="lb-tabs" id="lb-tabs" role="tablist"></div>
-    <div class="lb-foot">
-      <span class="lb-foot-brand"><i class="ti ti-broadcast"></i> BHRDCA LIVE SCORING</span>
-      <span class="lb-foot-mid">CONCEPT PREVIEW &middot; DEMO DATA &middot; LIVE PLAYHQ FEED ONCE API ACCESS IS CONFIRMED</span>
-      <span class="lb-foot-brand">IN PARTNERSHIP WITH CRICKET VICTORIA</span>
-    </div>
   </div>
 
   <aside class="fb-below" aria-label="BHRDCA Facebook feed">
@@ -259,6 +253,11 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
       tabBtns.forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-grade") === key); });
       gradeAEl.textContent = d.label;
       gradeBEl.textContent = d.label;
+      var seasonEl = document.getElementById("lb-season");
+      if (seasonEl) {
+        var sn = String(d.seasonName || "").replace(/^summer\s*/i, "").trim();
+        seasonEl.textContent = (sn ? sn + " Season" : "Season") + (d.roundName ? " · " + d.roundName : "");
+      }
       batEl.innerHTML = rowsHTML(d.bat);
       bowlEl.innerHTML = rowsHTML(d.bowl);
       countUp(document.getElementById("lb-runs"), d.totals.runs);
@@ -290,11 +289,6 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
           if (SB.grades.map(function(g){ return g.key; }).indexOf(current) === -1) current = SB.grades[0].key;
           buildTabs();
           renderGrade(current);
-          var flag = document.querySelector("#scoreboard-section .sb-concept-flag");
-          var d0 = SB.data[current];
-          if (flag && d0 && d0.seasonName) {
-            flag.innerHTML = '<i class="ti ti-database"></i> Live from PlayHQ &mdash; ' + esc(d0.seasonName) + ' season';
-          }
         })
         .catch(function(){ /* keep demo data */ });
     }

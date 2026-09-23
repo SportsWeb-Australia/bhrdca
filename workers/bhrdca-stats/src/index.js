@@ -27,9 +27,15 @@ const TABS = [
 ];
 
 // FINAL games are cached forever (KV reads don't count as subrequests — only
-// PlayHQ fetches do), so steady-state is tiny. Budget bounds new game fetches
-// per run; PlayHQ summaries are fetched in parallel batches for speed.
-const MAX_GAME_FETCHES_PER_RUN = 120;
+// PlayHQ fetches do), so steady-state is tiny. ONE shared budget bounds EVERY
+// PlayHQ call per run (season/grade/fixture listings + game summaries) so a cold
+// run never exceeds Cloudflare's per-invocation subrequest cap — 50 on the Free
+// plan. When the budget is spent the run stops cleanly and the next cron/refresh
+// resumes from KV, so a whole season backfills over several runs without erroring.
+// Bump this well up (e.g. 900) if the Worker moves to the Paid plan (1000 cap).
+const SUBREQUEST_BUDGET_PER_RUN = 45;
+// how many tabs to actively backfill per run; the rest still serve from cache.
+// Rotating the start point each run means every tab gets a turn at the budget.
 const FETCH_CONCURRENCY = 6;
 const LEADER_LIMIT = 10;
 
@@ -43,14 +49,23 @@ async function pMapLimit(items, limit, fn) {
 }
 
 /* ---------------------------- PlayHQ client ---------------------------- */
-function makeClient(env) {
+function makeClient(env, budget) {
   const host = env.PHQ_HOST || DEFAULT_HOST;
   const headers = { "x-api-key": env.PLAYHQ_API_KEY, "x-phq-tenant": env.PHQ_TENANT || "ca" };
   async function get(path) {
+    // Every network call draws from a single shared subrequest budget so a cold
+    // run never exceeds Cloudflare's per-invocation cap. When exhausted we throw a
+    // BUDGET sentinel; callers stop cleanly WITHOUT caching partial data, and the
+    // next cron/refresh run resumes from where this one left off.
+    if (budget) {
+      if (budget.left <= 0) { const e = new Error("BUDGET"); e.budget = true; throw e; }
+      budget.left--;
+    }
     const res = await fetch(host + path, { headers });
     if (!res.ok) throw new Error(`PlayHQ ${res.status} ${path}`);
     return res.json();
   }
+  get.isBudgetError = (e) => !!(e && e.budget);
   // follow cursor pagination, collecting `pick(json)` arrays
   async function getAll(path, pick) {
     let out = [], cursor = null, guard = 0;
@@ -118,7 +133,10 @@ function extractGame(summary) {
 
 // listing rarely changes; cache it so each run isn't dominated by slow PlayHQ
 // list calls. Completed seasons are static; live-season lag ≤ TTL (acceptable).
-const LIST_TTL = 3600; // seconds
+// Listings (seasons, grades, fixture lists, resolved season) are cached this long
+// so warm runs spend their whole subrequest budget on game summaries, not re-listing.
+// Long is safe for completed seasons; shorten when a LIVE season needs fresh results.
+const LIST_TTL = 21600; // 6 hours
 
 /* ------------- resolve the active season per competition --------------- */
 // newest season with >=1 FINAL game, else newest COMPLETED (last-season-first).
@@ -135,7 +153,9 @@ async function resolveSeason(phq, env, seasons, tab) {
     const grades = await phq.getAll(`/v1/seasons/${s.id}/grades`, (j) => j.data);
     let hasFinal = false;
     for (const g of grades.slice(0, 3)) {
-      const fx = await phq.get(`/v2/grades/${g.id}/games`).catch(() => null);
+      let fx = null;
+      try { fx = await phq.get(`/v2/grades/${g.id}/games`); }
+      catch (e) { if (phq.get.isBudgetError(e)) throw e; }  // budget: abort tab, resume next run
       if (fx && (fx.rounds || []).some((r) => (r.games || []).some((gm) => gm.status === "FINAL"))) { hasFinal = true; break; }
     }
     if (hasFinal) { chosen = s; break; }
@@ -160,14 +180,13 @@ async function finalGames(phq, env, gradeId) {
   const hit = await env.STATS.get(ck, "json");
   if (hit) return hit;
   const ids = []; let lastRound = null;
-  try {
-    const fx = await phq.get(`/v2/grades/${gradeId}/games`);
-    for (const r of fx.rounds || []) {            // rounds are in order
-      let any = false;
-      for (const gm of r.games || []) if (gm.status === "FINAL") { ids.push(gm.id); any = true; }
-      if (any) lastRound = r.name || lastRound;    // keep the latest round with a FINAL game
-    }
-  } catch { /* skip */ }
+  // let a BUDGET error propagate so we never cache a partial fixture list
+  const fx = await phq.get(`/v2/grades/${gradeId}/games`);
+  for (const r of fx.rounds || []) {            // rounds are in order
+    let any = false;
+    for (const gm of r.games || []) if (gm.status === "FINAL") { ids.push(gm.id); any = true; }
+    if (any) lastRound = r.name || lastRound;    // keep the latest round with a FINAL game
+  }
   const val = { ids, lastRound };
   await env.STATS.put(ck, JSON.stringify(val), { expirationTtl: LIST_TTL });
   return val;
@@ -181,9 +200,15 @@ async function buildTab(phq, env, tab, seasons, budget) {
 
   const grades = await gradesForSeason(phq, env, season.id);
 
-  // FINAL game ids + latest round per grade (cached) — listing fetched in parallel
+  // FINAL game ids + latest round per grade (cached) — listing fetched in parallel.
+  // If the shared budget runs out mid-listing, that grade is simply skipped this
+  // run (its fixtures list is cached once fetched); the tab still surfaces with the
+  // grades we DID list, and the rest fill in on the next cron/refresh run.
   const fgs = new Array(grades.length);
-  await pMapLimit(grades.map((g, i) => ({ g, i })), FETCH_CONCURRENCY, async ({ g, i }) => { fgs[i] = await finalGames(phq, env, g.id); });
+  await pMapLimit(grades.map((g, i) => ({ g, i })), FETCH_CONCURRENCY, async ({ g, i }) => {
+    try { fgs[i] = await finalGames(phq, env, g.id); }
+    catch { fgs[i] = null; }
+  });
   const gameIds = [];
   let latestRound = null;
   for (const fg of fgs) {
@@ -197,11 +222,13 @@ async function buildTab(phq, env, tab, seasons, budget) {
   // read existing game caches in parallel (KV reads are not subrequests)
   const cache = {};
   await pMapLimit(gameIds, 16, async (id) => { cache[id] = await env.STATS.get(`game:${id}`, "json"); });
-  // fetch summaries not yet cached, in parallel, bounded by the per-run budget
+  // fetch summaries not yet cached, in parallel, bounded by the shared budget
+  // (the client decrements it per call, so slice to what's left as an upper bound)
   const toFetch = gameIds.filter((id) => !cache[id]).slice(0, Math.max(0, budget.left));
-  budget.left -= toFetch.length;
   await pMapLimit(toFetch, FETCH_CONCURRENCY, async (id) => {
-    const sum = await phq.get(`/v2/games/${id}/summary`).catch(() => null);
+    let sum = null;
+    try { sum = await phq.get(`/v2/games/${id}/summary`); }
+    catch (e) { if (phq.get.isBudgetError(e)) return; /* out of budget: resume next run */ }
     if (sum) { const ex = extractGame(sum); cache[id] = ex; await env.STATS.put(`game:${id}`, JSON.stringify(ex)); } // FINAL games are immutable
   });
 
@@ -233,20 +260,26 @@ async function buildTab(phq, env, tab, seasons, budget) {
 
 /* ----------------------------- aggregate ------------------------------- */
 async function aggregate(env) {
-  const phq = makeClient(env);
+  // ONE shared subrequest budget for the whole run (see SUBREQUEST_BUDGET_PER_RUN)
+  const budget = { left: SUBREQUEST_BUDGET_PER_RUN };
+  const phq = makeClient(env, budget);
   let seasons = await env.STATS.get("seasons:all", "json");
   if (!seasons) {
     seasons = await phq.getAll(`/v1/organisations/${env.ORG_ID}/seasons`, (j) => j.data);
     await env.STATS.put("seasons:all", JSON.stringify(seasons), { expirationTtl: LIST_TTL });
   }
-  const budget = { left: MAX_GAME_FETCHES_PER_RUN };
-
   // seed from the previous board so a partial run never wipes finished tabs
   const prev = (await env.STATS.get("board:current", "json")) || { grades: [], data: {} };
   const data = { ...(prev.data || {}) };
   const seen = {};
-  for (const tab of TABS) {
-    const built = await buildTab(phq, env, tab, seasons, budget).catch(() => null);
+  // rotate which tab is processed first each run, so the shared budget doesn't
+  // always get spent on the same early tabs — every tab gets its turn to backfill.
+  const rot = ((await env.STATS.get("rot", "text")) | 0) % TABS.length;
+  await env.STATS.put("rot", String((rot + 1) % TABS.length));
+  const order = TABS.slice(rot).concat(TABS.slice(0, rot));
+  for (const tab of order) {
+    const built = await buildTab(phq, env, tab, seasons, budget).catch((e) => (phq.get.isBudgetError(e) ? "BUDGET" : null));
+    if (built === "BUDGET") continue;   // out of budget: this tab resumes next run
     if (!built || (!built.bat.length && !built.bowl.length)) continue;
     seen[tab.key] = true;
     data[tab.key] = { label: tab.label, seasonName: built.seasonName, roundName: built.roundName, totals: built.totals, bat: built.bat, bowl: built.bowl };

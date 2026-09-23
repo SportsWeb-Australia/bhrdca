@@ -15,7 +15,9 @@ ORG_ID = "f8c1124c-c0cd-4b6f-b513-0e2c1340978b"
 binding = "STATS"
 id = "3a2d2122647244928dbb3ea812bb6678"
 
-# Scheduled aggregation. Tune cadence to PlayHQ's rate limits once confirmed.
-# Every 15 min is a sensible default during the season.
+# Scheduled aggregation. Off-season / completed-season data is static, so hourly
+# keeps KV reads well inside the free tier (re-aggregating reads every cached game).
+# Drop back to "*/15 * * * *" (or tighter) once a LIVE season needs frequent updates
+# — ideally alongside the Workers Paid plan, which lifts both the subrequest and KV caps.
 [triggers]
-crons = ["*/15 * * * *"]
+crons = ["0 * * * *"]

@@ -26,10 +26,21 @@ const TABS = [
   { key: "t20",         label: "T20",            match: (n) => /t20/i.test(n) },
 ];
 
-// Keep each scheduled run inside Worker subrequest/CPU limits. FINAL games are
-// cached forever, so the first few runs backfill and steady-state is small.
-const MAX_GAME_FETCHES_PER_RUN = 40;
+// FINAL games are cached forever (KV reads don't count as subrequests — only
+// PlayHQ fetches do), so steady-state is tiny. Budget bounds new game fetches
+// per run; PlayHQ summaries are fetched in parallel batches for speed.
+const MAX_GAME_FETCHES_PER_RUN = 120;
+const FETCH_CONCURRENCY = 6;
 const LEADER_LIMIT = 10;
+
+// run up to `limit` async fns at once
+async function pMapLimit(items, limit, fn) {
+  let i = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (i < items.length) { const idx = i++; await fn(items[idx]); }
+  });
+  await Promise.all(workers);
+}
 
 /* ---------------------------- PlayHQ client ---------------------------- */
 function makeClient(env) {
@@ -130,30 +141,34 @@ async function buildTab(phq, env, tab, seasons, budget) {
   if (!season) return null;
 
   const grades = await phq.getAll(`/v1/seasons/${season.id}/grades`, (j) => j.data);
-  const batAgg = {}, bowlAgg = {};
-  let runs = 0, balls = 0, wkts = 0;
 
+  // collect all FINAL game ids across the season's grades
+  const gameIds = [];
   for (const g of grades) {
     let fx;
     try { fx = await phq.get(`/v2/grades/${g.id}/games`); } catch { continue; }
-    const finals = [];
-    for (const r of fx.rounds || []) for (const gm of r.games || []) if (gm.status === "FINAL") finals.push(gm.id);
+    for (const r of fx.rounds || []) for (const gm of r.games || []) if (gm.status === "FINAL") gameIds.push(gm.id);
+  }
 
-    for (const gid of finals) {
-      const cacheKey = `game:${gid}`;
-      let ex = await env.STATS.get(cacheKey, "json");
-      if (!ex) {
-        if (budget.left <= 0) continue;                     // stay within per-run budget; backfill next run
-        budget.left--;
-        const sum = await phq.get(`/v2/games/${gid}/summary`).catch(() => null);
-        if (!sum) continue;
-        ex = extractGame(sum);
-        await env.STATS.put(cacheKey, JSON.stringify(ex));  // FINAL games are immutable
-      }
-      runs += ex.totals.runs; balls += ex.totals.balls; wkts += ex.totals.wkts;
-      for (const b of ex.bat)  { const k = b.name + "|" + b.club; (batAgg[k]  ||= { ...b, runs: 0 }).runs += b.runs; }
-      for (const b of ex.bowl) { const k = b.name + "|" + b.club; (bowlAgg[k] ||= { ...b, wkts: 0 }).wkts += b.wkts; }
-    }
+  // fetch summaries not yet cached, in parallel, bounded by the per-run budget
+  const uncached = [];
+  for (const id of gameIds) { if (!(await env.STATS.get(`game:${id}`))) uncached.push(id); }
+  const toFetch = uncached.slice(0, Math.max(0, budget.left));
+  budget.left -= toFetch.length;
+  await pMapLimit(toFetch, FETCH_CONCURRENCY, async (id) => {
+    const sum = await phq.get(`/v2/games/${id}/summary`).catch(() => null);
+    if (sum) await env.STATS.put(`game:${id}`, JSON.stringify(extractGame(sum))); // FINAL games are immutable
+  });
+
+  // aggregate from cache (KV reads are not subrequests)
+  const batAgg = {}, bowlAgg = {};
+  let runs = 0, balls = 0, wkts = 0;
+  for (const gid of gameIds) {
+    const ex = await env.STATS.get(`game:${gid}`, "json");
+    if (!ex) continue;
+    runs += ex.totals.runs; balls += ex.totals.balls; wkts += ex.totals.wkts;
+    for (const b of ex.bat)  { const k = b.name + "|" + b.club; (batAgg[k]  ||= { ...b, runs: 0 }).runs += b.runs; }
+    for (const b of ex.bowl) { const k = b.name + "|" + b.club; (bowlAgg[k] ||= { ...b, wkts: 0 }).wkts += b.wkts; }
   }
 
   const topBat = Object.values(batAgg).sort((a, b) => b.runs - a.runs).slice(0, LEADER_LIMIT)
@@ -176,13 +191,20 @@ async function aggregate(env) {
   const seasons = await phq.getAll(`/v1/organisations/${env.ORG_ID}/seasons`, (j) => j.data);
   const budget = { left: MAX_GAME_FETCHES_PER_RUN };
 
-  const data = {}, grades = [];
+  // seed from the previous board so a partial run never wipes finished tabs
+  const prev = (await env.STATS.get("board:current", "json")) || { grades: [], data: {} };
+  const data = { ...(prev.data || {}) };
+  const seen = {};
   for (const tab of TABS) {
     const built = await buildTab(phq, env, tab, seasons, budget).catch(() => null);
     if (!built || (!built.bat.length && !built.bowl.length)) continue;
-    grades.push({ key: tab.key, label: tab.label });
+    seen[tab.key] = true;
     data[tab.key] = { label: tab.label, seasonName: built.seasonName, totals: built.totals, bat: built.bat, bowl: built.bowl };
+    // write progressively so /scoreboard fills in tab-by-tab
+    const grades = TABS.filter((t) => data[t.key]).map((t) => ({ key: t.key, label: t.label }));
+    await env.STATS.put("board:current", JSON.stringify({ grades, data, meta: { updatedAt: new Date().toISOString(), source: "playhq", live: false } }));
   }
+  const grades = TABS.filter((t) => data[t.key]).map((t) => ({ key: t.key, label: t.label }));
   const board = { grades, data, meta: { updatedAt: new Date().toISOString(), source: "playhq", live: false } };
   await env.STATS.put("board:current", JSON.stringify(board));
   return board;
@@ -192,13 +214,14 @@ async function aggregate(env) {
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, OPTIONS", "Cache-Control": "public, max-age=120" };
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS });
     if (url.pathname === "/health") return json({ ok: true }, env);
 
     if (url.pathname === "/scoreboard") {
-      // ?refresh=1 forces a rebuild (guard with a token in prod if you like)
+      // ?refresh=1 runs a bounded rebuild inline (backfills a batch of new games,
+      // writing tabs progressively). Call repeatedly to backfill fully.
       if (url.searchParams.get("refresh") === "1") {
         const board = await aggregate(env).catch((e) => ({ error: String(e) }));
         return json(board, env);

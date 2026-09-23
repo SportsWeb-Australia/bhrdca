@@ -29,11 +29,11 @@ const TABS = [
 // FINAL games are cached forever (KV reads don't count as subrequests — only
 // PlayHQ fetches do), so steady-state is tiny. ONE shared budget bounds EVERY
 // PlayHQ call per run (season/grade/fixture listings + game summaries) so a cold
-// run never exceeds Cloudflare's per-invocation subrequest cap — 50 on the Free
-// plan. When the budget is spent the run stops cleanly and the next cron/refresh
-// resumes from KV, so a whole season backfills over several runs without erroring.
-// Bump this well up (e.g. 900) if the Worker moves to the Paid plan (1000 cap).
-const SUBREQUEST_BUDGET_PER_RUN = 45;
+// run never exceeds Cloudflare's per-invocation subrequest cap (1000 on Paid).
+// When the budget is spent the run stops cleanly and resumes from KV next run.
+// Workers PAID plan: 900 lets a whole cold season rebuild in a single pass.
+// (On the Free plan this MUST be <= ~45 — the per-invocation cap there is 50.)
+const SUBREQUEST_BUDGET_PER_RUN = 900;
 // how many tabs to actively backfill per run; the rest still serve from cache.
 // Rotating the start point each run means every tab gets a turn at the budget.
 const FETCH_CONCURRENCY = 6;
@@ -283,10 +283,9 @@ async function aggregate(env) {
     if (!built || (!built.bat.length && !built.bowl.length)) continue;
     seen[tab.key] = true;
     data[tab.key] = { label: tab.label, seasonName: built.seasonName, roundName: built.roundName, totals: built.totals, bat: built.bat, bowl: built.bowl };
-    // write progressively so /scoreboard fills in tab-by-tab
-    const grades = TABS.filter((t) => data[t.key]).map((t) => ({ key: t.key, label: t.label }));
-    await env.STATS.put("board:current", JSON.stringify({ grades, data, meta: { updatedAt: new Date().toISOString(), source: "playhq", live: false } }));
   }
+  // one write per run (Paid budget rebuilds every tab in a single pass, so the
+  // tab-by-tab progressive writes are no longer needed — keeps KV writes minimal)
   const grades = TABS.filter((t) => data[t.key]).map((t) => ({ key: t.key, label: t.label }));
   const board = { grades, data, meta: { updatedAt: new Date().toISOString(), source: "playhq", live: false } };
   await env.STATS.put("board:current", JSON.stringify(board));

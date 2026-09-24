@@ -226,6 +226,15 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
     function normClub(s){ return String(s||"").toLowerCase().replace(/[^a-z0-9]/g,""); }
     var clubList = [];
     CLUBS.forEach(function(c){ if (c.logo) clubList.push({ n: normClub(c.name), logo: c.logo }); });
+    // scoreboard-only crests for non-member (RDCA) clubs that appear in the shared
+    // Veterans/T20 comps — kept out of the member-club directory on purpose.
+    [
+      ["croydon ranges",   "/club-logos/croydon-ranges.webp"],
+      ["east doncaster",   "/club-logos/east-doncaster.webp"],
+      ["heatherdale",      "/club-logos/heatherdale.webp"],
+      ["knox boronia",     "/club-logos/knox-boronia.webp"],
+      ["warranwood",       "/club-logos/warranwood.webp"]
+    ].forEach(function(x){ clubList.push({ n: normClub(x[0]), logo: x[1] }); });
     clubList.sort(function(a,b){ return b.n.length - a.n.length; });
     function logoForClub(clubField){
       var raw = String(clubField).split("·")[0].trim().replace(/^(?:men|women)\s+/i, "");
@@ -302,7 +311,9 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
         seasonTitleEl.textContent = "Season " + (yr || d.seasonName);
       }
       var subEl = document.getElementById("lb-subhead");
-      if (subEl) subEl.textContent = "All Grades · Updates as games are scored";
+      if (subEl) subEl.textContent = (key === "all")
+        ? "Every BHRDCA competition · combined season totals"
+        : d.label + " · leaders this season";
       // corner pill is a live-round chip: only shown while a round is in play
       var pill = document.querySelector("#scoreboard-section .lb-live");
       var seasonEl = document.getElementById("lb-season");
@@ -338,7 +349,8 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
         .then(function(live){
           if (!live || !live.grades || !live.grades.length || !live.data) return;
           SB = live;
-          if (SB.grades.map(function(g){ return g.key; }).indexOf(current) === -1) current = SB.grades[0].key;
+          // land on the first tab of the live board (the combined "All Grades")
+          current = SB.grades[0].key;
           buildTabs();
           renderGrade(current);
         })

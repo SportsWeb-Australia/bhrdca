@@ -253,8 +253,33 @@ async function buildTab(phq, env, tab, seasons, budget) {
     seasonName: season.name,
     roundName: roundName,
     totals: { runs: runs.toLocaleString("en-US"), overs: ballsToOvers(balls), wkts: String(wkts) },
+    totalsRaw: { runs, balls, wkts },                  // for the combined "All Grades" tab
     bat: topBat,
     bowl: topBowl,
+    batAgg: Object.values(batAgg),                     // full per-player aggregates
+    bowlAgg: Object.values(bowlAgg),                   // (merged across comps for "All")
+  };
+}
+
+// build the association-wide "All Grades" tab by merging every competition's full
+// per-player aggregates (a player who bats in Seniors + T20 has their runs summed)
+function buildAllTab(built) {
+  const allBat = {}, allBowl = {};
+  let runs = 0, balls = 0, wkts = 0, seasonName = null;
+  for (const b of built) {
+    seasonName = seasonName || b.seasonName;
+    runs += b.totalsRaw.runs; balls += b.totalsRaw.balls; wkts += b.totalsRaw.wkts;
+    for (const p of b.batAgg)  { const k = p.name + "|" + p.club; (allBat[k]  ||= { name: p.name, club: p.club, runs: 0 }).runs += p.runs; }
+    for (const p of b.bowlAgg) { const k = p.name + "|" + p.club; (allBowl[k] ||= { name: p.name, club: p.club, wkts: 0 }).wkts += p.wkts; }
+  }
+  const topBat = Object.values(allBat).sort((a, b) => b.runs - a.runs).slice(0, LEADER_LIMIT)
+    .map((p) => [p.name, p.club, String(p.runs)]);   // club only (spans formats — no single division)
+  const topBowl = Object.values(allBowl).sort((a, b) => b.wkts - a.wkts).slice(0, LEADER_LIMIT)
+    .map((p) => [p.name, p.club, String(p.wkts)]);
+  return {
+    label: "All Grades", seasonName, roundName: null,
+    totals: { runs: runs.toLocaleString("en-US"), overs: ballsToOvers(balls), wkts: String(wkts) },
+    bat: topBat, bowl: topBowl,
   };
 }
 
@@ -277,16 +302,25 @@ async function aggregate(env) {
   const rot = ((await env.STATS.get("rot", "text")) | 0) % TABS.length;
   await env.STATS.put("rot", String((rot + 1) % TABS.length));
   const order = TABS.slice(rot).concat(TABS.slice(0, rot));
+  const builtFull = [];
   for (const tab of order) {
     const built = await buildTab(phq, env, tab, seasons, budget).catch((e) => (phq.get.isBudgetError(e) ? "BUDGET" : null));
     if (built === "BUDGET") continue;   // out of budget: this tab resumes next run
     if (!built || (!built.bat.length && !built.bowl.length)) continue;
     seen[tab.key] = true;
     data[tab.key] = { label: tab.label, seasonName: built.seasonName, roundName: built.roundName, totals: built.totals, bat: built.bat, bowl: built.bowl };
+    builtFull.push(built);
   }
+  // Combined "All Grades" tab — merges every competition's full aggregates. Only
+  // (re)build it when every competition present on the board was rebuilt this run,
+  // so a partial (budget-limited) run never overwrites it with undercounted totals.
+  const rebuiltEvery = TABS.filter((t) => data[t.key]).every((t) => seen[t.key]);
+  if (builtFull.length && rebuiltEvery) data.all = buildAllTab(builtFull);
   // one write per run (Paid budget rebuilds every tab in a single pass, so the
   // tab-by-tab progressive writes are no longer needed — keeps KV writes minimal)
-  const grades = TABS.filter((t) => data[t.key]).map((t) => ({ key: t.key, label: t.label }));
+  const grades = [];
+  if (data.all) grades.push({ key: "all", label: "All Grades" });   // association-wide, shown first
+  TABS.forEach((t) => { if (data[t.key]) grades.push({ key: t.key, label: t.label }); });
   const board = { grades, data, meta: { updatedAt: new Date().toISOString(), source: "playhq", live: false } };
   await env.STATS.put("board:current", JSON.stringify(board));
   return board;

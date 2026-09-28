@@ -110,10 +110,9 @@
       + '<i class="ti ' + t.icon + '"></i><span>' + esc(t.label) + '</span><span class="cc-tab-n">' + t.n + '</span></button>';
   }).join("");
 
+  var CX = window.BHRDCA_CX || { cx: function(){ return ""; } };
   function contactRow(p) {
-    var email = p.email ? '<a href="mailto:' + esc(p.email) + '" title="' + esc(p.email) + '"><i class="ti ti-mail"></i></a>' : "";
-    var phone = p.phone ? '<a href="tel:' + tel(p.phone) + '" title="' + esc(p.phone) + '"><i class="ti ti-phone"></i></a>' : "";
-    return { email: email, phone: phone };
+    return { email: p.email ? CX.cx("mail", p.email, "") : "", phone: p.phone ? CX.cx("tel", p.phone, "") : "" };
   }
 
   function renderCommittee(list) {
@@ -121,8 +120,8 @@
       return '<div class="cc-card" data-hay="' + esc((c.name + " " + c.role).toLowerCase()) + '">'
         + '<div class="cc-card-nm">' + esc(c.name) + '</div>'
         + '<div class="cc-card-role">' + esc(c.role) + '</div>'
-        + (c.phone ? '<a href="tel:' + tel(c.phone) + '"><i class="ti ti-phone"></i>' + esc(c.phone) + '</a>' : '')
-        + (c.email ? '<a href="mailto:' + esc(c.email) + '"><i class="ti ti-mail"></i>' + esc(c.email) + '</a>' : '')
+        + (c.phone ? CX.cx("tel", c.phone) : '')
+        + (c.email ? CX.cx("mail", c.email) : '')
         + '</div>';
     }).join("") + '</div>';
   }

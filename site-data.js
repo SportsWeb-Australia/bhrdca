@@ -295,6 +295,7 @@ window.BHRDCA_DATA = (function () {
     { name: "Top Notch Trophies", url: "https://www.topnotchtrophies.com.au/", tier: "Partner", logo: "/sponsor-logos/top-notch-trophies.webp", plate: true },
     { name: "Box Hill Indoor Sports", url: "https://boxhillindoorsports.com.au/sports-and-activities/indoor-cricket/", tier: "Partner", logo: "/sponsor-logos/box-hill-indoor-sports.webp" },
     { name: "Geyer Accountants", url: "https://geyeraccountants.com.au/", tier: "Partner", logo: "/sponsor-logos/geyer-accountants.webp" },
+    { name: "Community Bank Inner East · Bendigo Bank", url: "https://www.bendigobank.com.au/", tier: "Partner", logo: "/sponsor-logos/bendigo-bank.webp" },
     { name: "Grant Professionals & Club Builder", url: "https://www.club-builder.com.au/", tier: "Partner", logo: "/sponsor-logos/club-builder.webp", plate: true },
     { name: "Club Connect", url: "https://clubconnect.net.au", tier: "Partner", logo: "/sponsor-logos/club-connect.webp" },
     { name: "Altegra", url: "https://www.altegra.com.au/", tier: "Community", logo: "/sponsor-logos/altegra.webp", plate: true },

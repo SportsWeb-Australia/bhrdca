@@ -22,6 +22,7 @@
     ["Top Notch Trophies","https://www.topnotchtrophies.com.au/","/sponsor-logos/top-notch-trophies.webp"],
     ["Box Hill Indoor Sports","https://boxhillindoorsports.com.au/sports-and-activities/indoor-cricket/","/sponsor-logos/box-hill-indoor-sports.webp"],
     ["Geyer Accountants","https://geyeraccountants.com.au/","/sponsor-logos/geyer-accountants.webp"],
+    ["Community Bank Inner East · Bendigo Bank","https://www.bendigobank.com.au/","/sponsor-logos/bendigo-bank.webp"],
     ["Grant Professionals & Club Builder","https://www.club-builder.com.au/","/sponsor-logos/club-builder.webp"],
     ["Club Connect","https://clubconnect.net.au","/sponsor-logos/club-connect.webp"],
     ["Altegra","https://www.altegra.com.au/","/sponsor-logos/altegra.webp"],

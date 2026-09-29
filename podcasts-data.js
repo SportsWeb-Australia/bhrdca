@@ -16,7 +16,7 @@
    ========================================================================== */
 window.BHRDCA_PODCASTS = {
   currentSeason: "2026/27",
-  spotifyShow: "https://tinyurl.com/yw39ksoy",
+  spotifyShow: "https://creators.spotify.com/pod/profile/paul-hooper2",
   host: "Hosted by Paul Hooper, live on 3WBC 94.1FM.",
 
   episodes: [

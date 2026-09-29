@@ -63,31 +63,45 @@
 <div data-bhrdca="sponsor-carousel"></div>
 <div data-bhrdca="footer"></div>
 <script src="/podcasts-data.js"></script>
+<script src="/sw1.js"></script>
 <script>
 (function () {
-  var P = window.BHRDCA_PODCASTS || {};
-  document.getElementById("pod-sub").textContent = "The BHRDCA podcast — stories from around the grades. " + (P.currentSeason ? P.currentSeason + " season." : "");
-  document.getElementById("pod-season-hed").textContent = (P.currentSeason || "") + " Episodes";
-  if (P.host) document.getElementById("pod-host-line").textContent = P.host;
-  if (P.spotifyShow) document.getElementById("pod-listen-btn").href = P.spotifyShow;
+  // Text from the data is always escaped, and a link is used only if it is a
+  // secure web address - episodes can come from SportsWeb One as well as the
+  // file above.
+  var esc = function (t) { return String(t == null ? "" : t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); };
+  var safeUrl = function (u) { return typeof u === "string" && /^https:\/\/[^\s"'<>]+$/.test(u) ? u : "#"; };
 
-  var list = document.getElementById("pod-list");
-  var eps = P.episodes || [];
-  if (!eps.length) {
-    list.innerHTML = '<div class="pod-empty">'
-      + '<i class="ti ti-microphone-2"></i>'
-      + '<h3>New season, first episode coming soon</h3>'
-      + '<p>The ' + (P.currentSeason || "") + ' season is just getting underway &mdash; check back here or follow our socials, and the first episode will land right here.</p>'
-      + '</div>';
-    return;
+  function render(P) {
+    P = P || {};
+    document.getElementById("pod-sub").textContent = "The BHRDCA podcast — stories from around the grades. " + (P.currentSeason ? P.currentSeason + " season." : "");
+    document.getElementById("pod-season-hed").textContent = (P.currentSeason || "") + " Episodes";
+    if (P.host) document.getElementById("pod-host-line").textContent = P.host;
+    if (P.spotifyShow && safeUrl(P.spotifyShow) !== "#") document.getElementById("pod-listen-btn").href = P.spotifyShow;
+
+    var list = document.getElementById("pod-list");
+    var eps = P.episodes || [];
+    if (!eps.length) {
+      list.innerHTML = '<div class="pod-empty">'
+        + '<i class="ti ti-microphone-2"></i>'
+        + '<h3>New season, first episode coming soon</h3>'
+        + '<p>The ' + esc(P.currentSeason || "") + ' season is just getting underway &mdash; check back here or follow our socials, and the first episode will land right here.</p>'
+        + '</div>';
+      return;
+    }
+    list.innerHTML = eps.map(function (e) {
+      var sub = [e.date, e.blurb].filter(Boolean).map(esc).join(" — ");
+      return '<a class="tile" href="' + esc(safeUrl(e.url)) + '" target="_blank" rel="noopener">'
+        + '<div class="tile-ic"><i class="ti ti-microphone-2"></i></div>'
+        + '<div><div class="tile-tt">' + esc(e.title) + '</div>' + (sub ? '<div class="tile-tx">' + sub + '</div>' : '') + '</div>'
+        + '<i class="ti ti-chevron-right"></i>'
+        + '</a>';
+    }).join("");
   }
-  list.innerHTML = eps.map(function (e) {
-    return '<a class="tile" href="' + e.url + '" target="_blank" rel="noopener">'
-      + '<div class="tile-ic"><i class="ti ti-microphone-2"></i></div>'
-      + '<div><div class="tile-tt">' + e.title + '</div><div class="tile-tx">' + (e.date ? e.date + ' — ' : '') + (e.blurb || '') + '</div></div>'
-      + '<i class="ti ti-chevron-right"></i>'
-      + '</a>';
-  }).join("");
+
+  render(window.BHRDCA_PODCASTS);
+  // SportsWeb One is the source once it answers; if it doesn't, the page stays as drawn above.
+  if (window.bhrdcaSW1) window.bhrdcaSW1.podcast().then(function (P) { if (P) render(P); });
 })();
 </script>
   <script src="https://sportsweb-one-v1.vercel.app/sitepulse-widget.js"

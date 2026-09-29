@@ -41,28 +41,40 @@
 <div data-bhrdca="sponsor-carousel"></div>
 <div data-bhrdca="footer"></div>
 <script src="/podcasts-data.js"></script>
+<script src="/sw1.js"></script>
 <script>
 (function () {
-  var archive = (window.BHRDCA_PODCASTS || {}).archive || [];
+  // Text is always escaped and only secure links are used - past seasons can
+  // come from SportsWeb One as well as the file above.
+  var esc = function (t) { return String(t == null ? "" : t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); };
+  var safeUrl = function (u) { return typeof u === "string" && /^https:\/\/[^\s"'<>]+$/.test(u) ? u : "#"; };
   var mount = document.getElementById("pod-archive-mount");
-  if (!archive.length) {
-    mount.innerHTML = '<div class="pod-empty"><i class="ti ti-archive"></i><h3>No past seasons yet</h3><p>Once the current season wraps, its episodes will be archived here.</p></div>';
-    return;
-  }
-  mount.innerHTML = archive.map(function (season) {
-    var eps = (season.episodes || []).map(function (e) {
-      return '<a class="tile" href="' + e.url + '" target="_blank" rel="noopener">'
-        + '<div class="tile-ic"><i class="ti ti-microphone-2"></i></div>'
-        + '<div><div class="tile-tt">' + e.title + '</div>' + (e.date ? '<div class="tile-tx">' + e.date + '</div>' : '') + '</div>'
-        + '<i class="ti ti-chevron-right"></i>'
-        + '</a>';
+
+  function render(archive) {
+    archive = archive || [];
+    if (!archive.length) {
+      mount.innerHTML = '<div class="pod-empty"><i class="ti ti-archive"></i><h3>No past seasons yet</h3><p>Once the current season wraps, its episodes will be archived here.</p></div>';
+      return;
+    }
+    mount.innerHTML = archive.map(function (season) {
+      var eps = (season.episodes || []).map(function (e) {
+        return '<a class="tile" href="' + esc(safeUrl(e.url)) + '" target="_blank" rel="noopener">'
+          + '<div class="tile-ic"><i class="ti ti-microphone-2"></i></div>'
+          + '<div><div class="tile-tt">' + esc(e.title) + '</div>' + (e.date ? '<div class="tile-tx">' + esc(e.date) + '</div>' : '') + '</div>'
+          + '<i class="ti ti-chevron-right"></i>'
+          + '</a>';
+      }).join("");
+      return '<div class="pod-season-block">'
+        + '<div class="block-hed">' + esc(season.season) + ' Season</div>'
+        + (season.note ? '<div class="block-sub">' + esc(season.note) + '</div>' : '')
+        + '<div class="tile-grid" style="margin-top:14px">' + eps + '</div>'
+        + '</div>';
     }).join("");
-    return '<div class="pod-season-block">'
-      + '<div class="block-hed">' + season.season + ' Season</div>'
-      + (season.note ? '<div class="block-sub">' + season.note + '</div>' : '')
-      + '<div class="tile-grid" style="margin-top:14px">' + eps + '</div>'
-      + '</div>';
-  }).join("");
+  }
+
+  render((window.BHRDCA_PODCASTS || {}).archive);
+  // SportsWeb One is the source once it answers; if it doesn't, the page stays as drawn above.
+  if (window.bhrdcaSW1) window.bhrdcaSW1.podcast().then(function (P) { if (P) render(P.archive); });
 })();
 </script>
   <script src="https://sportsweb-one-v1.vercel.app/sitepulse-widget.js"

@@ -69,6 +69,7 @@
 <div data-bhrdca="footer"></div>
 <script src="/season-galleries-data.js"></script>
 <script src="/gallery-data.js"></script>
+<script src="/sw1.js"></script>
 <script>
 (function () {
   var esc = function (t) { return String(t == null ? "" : t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
@@ -91,15 +92,41 @@
       + '</a>';
   }).join("");
 
+  // Recent match photos: this site's own set, then - once SportsWeb One
+  // answers - the club's albums from SW1, each under its own heading. Text is
+  // escaped and only secure (or this site's own) picture addresses are used.
+  var q = function (t) { return esc(t).replace(/"/g, "&quot;"); };
+  var picUrl = function (u) { return typeof u === "string" && /^(https:\/\/[^\s"'<>]+|\/gallery\/[A-Za-z0-9._\/-]+)$/.test(u) ? u : ""; };
   var G = window.BHRDCA_GALLERY || [];
   var grid = document.getElementById("gal-grid");
-  document.getElementById("gal-note").innerHTML = "Showing <strong>" + G.length + "</strong> photos.";
-  grid.innerHTML = G.map(function (g, i) {
-    return '<a class="gal-item" href="' + g.full + '" data-i="' + i + '">'
-      + '<img src="' + g.thumb + '" alt="' + g.caption.replace(/"/g, "&quot;") + '" loading="lazy">'
-      + '<span class="gal-cap">' + g.caption + '</span>'
+  function tile(g, i) {
+    return '<a class="gal-item" href="' + q(picUrl(g.full)) + '" data-i="' + i + '">'
+      + '<img src="' + q(picUrl(g.thumb) || picUrl(g.full)) + '" alt="' + q(g.caption) + '" loading="lazy">'
+      + '<span class="gal-cap">' + esc(g.caption) + '</span>'
       + '</a>';
-  }).join("");
+  }
+  function renderFlat(list) {
+    G = list;
+    document.getElementById("gal-note").innerHTML = "Showing <strong>" + G.length + "</strong> photos.";
+    grid.innerHTML = G.map(tile).join("");
+  }
+  function renderAlbums(albums) {
+    G = [];
+    var html = albums.map(function (a) {
+      var start = G.length;
+      G = G.concat(a.photos);
+      // The photo grid is laid out in columns (masonry), so a heading spans them all.
+      return '<div class="gal-album-hed" style="column-span:all;-webkit-column-span:all;break-inside:avoid;margin:' + (start ? "22px" : "0") + ' 0 12px">'
+        + '<div class="block-hed" style="font-size:1.15rem">' + esc(a.title) + '</div>'
+        + (a.text ? '<div class="block-sub">' + esc(a.text) + '</div>' : '')
+        + '</div>'
+        + a.photos.map(function (g, j) { return tile(g, start + j); }).join("");
+    }).join("");
+    document.getElementById("gal-note").innerHTML = "Showing <strong>" + G.length + "</strong> photos in <strong>" + albums.length + "</strong> album" + (albums.length === 1 ? "" : "s") + ".";
+    grid.innerHTML = html;
+  }
+  renderFlat(G);
+  if (window.bhrdcaSW1) window.bhrdcaSW1.albums().then(function (albums) { if (albums && albums.length) renderAlbums(albums); });
 
   var lb = document.getElementById("gal-lb");
   var lbImg = document.getElementById("gal-lb-img");

@@ -57,7 +57,7 @@ window.BHRDCA_DATA = (function () {
   // Playing sections
   var sections = {
     juniors: {
-      key: "juniors", name: "Juniors", icon: "ti-friends",
+      key: "juniors", name: "Juniors", icon: "ti-friends", image: "/sections/juniors-helmet.webp",
       blurb: "Boys & Girls cricket across more than 20 junior grades, playing Friday nights, Saturday and Sunday mornings. New players are always welcome — contact the Junior Section Manager or your local club.",
       contacts: [
         { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" }

@@ -148,7 +148,7 @@ window.BHRDCA_DATA = (function () {
       ]
     },
     umpires: {
-      key: "umpires", name: "Umpires", icon: "ti-gavel",
+      key: "umpires", name: "Umpires", icon: "ti-gavel", image: "/sections/umpires.webp", imagePos: "center 40%",
       blurb: "The BHRDCA Umpires Association (BHRDCA UA) supports and appoints umpires across the competition. New umpires and officials are always welcome.",
       contacts: [
         { role: "UA President", name: "Phil Hermann", phone: "0402 384 642", email: "hermanndianne@hotmail.com" },

@@ -1306,6 +1306,9 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .pod-hero-kicker{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
 .pod-hero-copy h2{font-family:'Bebas Neue',sans-serif;color:#fff;font-size:26px;letter-spacing:.4px;margin-bottom:4px}
 .pod-hero-copy p{color:rgba(255,255,255,.75);font-size:13px}
+.pod-3wbc{flex:0 0 auto;display:inline-flex;align-items:center;opacity:.92;transition:opacity .15s ease}
+.pod-3wbc:hover{opacity:1}
+.pod-3wbc img{height:42px;width:auto;display:block}
 .pod-empty{grid-column:1/-1;text-align:center;padding:40px 20px;background:var(--card);border:1px dashed var(--border);border-radius:var(--r)}
 .pod-empty i{font-size:34px;color:var(--gold-deep);display:block;margin-bottom:10px}
 .pod-empty h3{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--navy);margin-bottom:6px}

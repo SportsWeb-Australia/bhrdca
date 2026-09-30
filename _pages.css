@@ -689,7 +689,8 @@ body[data-page="womens"] .section-block{margin-bottom:46px}
 /* slim season strip (replaces live-score ticker) */
 .bh-strip{background:linear-gradient(90deg,var(--navy),var(--navy2));border-top:1px solid rgba(255,255,255,.06);border-bottom:3px solid var(--gold)}
 .bh-strip-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:9px 20px;flex-wrap:wrap}
-.bh-strip-pill{background:var(--gold);color:var(--ink-gold);font-weight:800;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.bh-strip-pill{background:var(--gold);color:var(--ink-gold);font-weight:800;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;text-decoration:none;transition:filter .15s ease}
+a.bh-strip-pill:hover{filter:brightness(1.06)}
 .bh-strip-tx{color:rgba(255,255,255,.9);font-size:12.5px;flex:1;min-width:180px}
 .bh-strip-cta{color:var(--gold);font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .bh-strip-cta:hover{text-decoration:underline}

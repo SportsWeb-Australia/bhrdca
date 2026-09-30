@@ -136,7 +136,7 @@
 
     "ticker": '<div class="bh-strip">'
       + '<div class="bh-strip-inner">'
-      + '<span class="bh-strip-pill"><i class="ti ti-scoreboard"></i> This Season</span>'
+      + '<a class="bh-strip-pill" href="' + PLAYHQ + '" target="_blank" rel="noopener"><i class="ti ti-scoreboard"></i> This Season</a>'
       + '<span class="bh-strip-tx">Fixtures, results &amp; ladders are live on PlayHQ &mdash; Juniors, Seniors, Women\'s &amp; Veterans.</span>'
       + '<a class="bh-strip-cta" href="' + PLAYHQ + '" target="_blank" rel="noopener">Open PlayHQ <i class="ti ti-external-link"></i></a>'
       + '</div>'

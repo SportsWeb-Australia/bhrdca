@@ -791,7 +791,7 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .bh-club .crest{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 50% 35%,var(--navy3),var(--navy));border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:.5px;overflow:hidden}
 .bh-club .crest.has-logo{background:#fff}
 .bh-club .crest.has-logo.dark-logo{background:var(--navy)}
-.bh-club .crest.has-logo img{width:100%;height:100%;object-fit:contain;padding:6px}
+.bh-club .crest.has-logo img{width:100%;height:100%;object-fit:cover;display:block}
 .bh-club .cn{font-size:13px;font-weight:600;color:var(--navy);line-height:1.25}
 .bh-club .cx{font-size:11px;color:var(--gold-deep);font-weight:700;display:inline-flex;align-items:center;gap:4px}
 
@@ -1025,9 +1025,9 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
    live Facebook page plugin + follow rail) */
 .social{max-width:1060px;margin:40px auto 0}
 .social-hd{text-align:center;margin-bottom:20px}
-.social-eyebrow{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-.social-title{font-family:"Bebas Neue",sans-serif;letter-spacing:.03em;font-size:34px;line-height:1;color:#fff;margin-top:6px}
-.social-sub{color:rgba(255,255,255,.68);font-size:13.5px;line-height:1.55;margin:8px auto 0;max-width:520px}
+.social-eyebrow{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
+.social-title{font-family:"Bebas Neue",sans-serif;letter-spacing:.03em;font-size:34px;line-height:1;color:var(--navy);margin-top:6px}
+.social-sub{color:var(--muted);font-size:13.5px;line-height:1.55;margin:8px auto 0;max-width:520px}
 .social-grid{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start}
 .social-rail{display:flex;flex-direction:column;gap:14px}
 .social-card{background:linear-gradient(160deg,var(--navy2),var(--navy));border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:18px;box-shadow:var(--shadow2)}

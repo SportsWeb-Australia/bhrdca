@@ -223,6 +223,7 @@ window.BHRDCA_DATA = (function () {
     { name: "Eley Park", url: "https://www.epcc.com.au/", logo: "/club-logos/eley-park.webp", grades: ["M"] },
     { name: "Glen Waverley Hawks", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/f8c1124c", logo: "/club-logos/glen-waverley-hawks.webp", grades: ["M", "F", "J"] },
     { name: "Monash Morrow", url: "https://monashmorrowcc.org/", logo: "/club-logos/monash-morrow.webp", grades: ["M", "F", "J"] },
+    { name: "Mulgrave Wheelers Hill", url: "https://www.mwhcc.com.au/", logo: "/club-logos/mulgrave-wheelers-hill.webp", grades: ["M", "F", "J"] },
     { name: "Vermont South", url: "https://www.vscc.com.au/", logo: "/club-logos/vermont-south.webp", grades: ["M", "F", "J"] },
     { name: "Wyclif", url: "https://www.wyclif.com.au/", logo: "/club-logos/wyclif.webp", grades: ["M", "F", "J"] },
     { name: "Yarraleen", url: "https://www.yarraleencc.com.au/", logo: "/club-logos/yarraleen.webp", grades: ["M", "J"] }
@@ -261,6 +262,7 @@ window.BHRDCA_DATA = (function () {
     ["Mitcham","Steve Tully","0430 292 267","juniors@mitcham.cc"],
     ["Monash Cricket Club","David James","0419 395 183","david_ski_copper@hotmail.com"],
     ["Monash Glen Waverley Junior Cricketers","","","gwjcricket@gmail.com"],
+    ["Mulgrave - Wheelers Hill","Dilan Liyanage","0432 586 311","mwhccjunior@gmail.com"],
     ["Mountain Gate Cricket Club","Nathan Giulieri","0406 949 232","templton31@hotmail.com"],
     ["North Ringwood","Mark Wilkie","0438 563 017","mark@melbtest.com.au"],
     ["Notting Hill / Brandon Park","Chris Hipwell","0499 923 309","chris.hipwell@hotmail.com"],

@@ -855,8 +855,13 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .bh-club-wrap{position:relative}
 .bh-club-wrap .bh-club{height:100%}
 .club-hover{position:absolute;left:50%;bottom:calc(100% + 10px);width:260px;background:var(--navy);color:#fff;border-radius:10px;padding:12px 14px;box-shadow:0 14px 32px rgba(0,0,0,.32);opacity:0;visibility:hidden;transform:translate(-50%,6px);transition:opacity .15s ease,transform .15s ease;z-index:30;text-align:left;pointer-events:none}
+/* transparent bridge fills the 10px gap so moving the cursor onto the card
+   keeps it open (and the popover itself is now interactive) */
+.club-hover::before{content:"";position:absolute;left:0;right:0;top:100%;height:14px}
 .club-hover::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:7px solid transparent;border-top-color:var(--navy)}
-.bh-club-wrap:hover .club-hover,.bh-club-wrap:focus-within .club-hover{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.bh-club-wrap:hover .club-hover,.bh-club-wrap:focus-within .club-hover{opacity:1;visibility:visible;transform:translate(-50%,0);pointer-events:auto}
+.club-hover .ch-contact a{color:var(--gold);text-decoration:none;overflow-wrap:break-word}
+.club-hover .ch-contact a:hover{text-decoration:underline}
 .ch-row{display:flex;justify-content:space-between;gap:8px;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .ch-row:last-of-type{border-bottom:none}
 .ch-role{color:rgba(255,255,255,.6)}
@@ -978,6 +983,28 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .lb-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(22px,2.6vw,31px);letter-spacing:.06em;line-height:1;color:#fff;background:linear-gradient(100deg,#ffffff 38%,#fff2c4 50%,#ffffff 62%);background-size:230% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:lb-sheen 7s linear infinite}
 @keyframes lb-sheen{0%{background-position:130% 0}100%{background-position:-130% 0}}
 .lb-sub{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-top:5px}
+/* Rotating scoreboard banners (above the totals) */
+.lb-banner{margin:14px 0 2px}
+.lb-banner[hidden]{display:none}
+.lbb-track{position:relative;height:92px;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.lbb-slide{position:absolute;inset:0;opacity:0;transition:opacity .55s ease;text-decoration:none;display:block}
+.lbb-slide.on{opacity:1}
+.lbb-img{width:100%;height:100%;object-fit:cover;display:block}
+.lbb-ph{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 22px;background:linear-gradient(100deg,var(--navy2) 0%,var(--navy3) 100%);box-shadow:inset 0 0 0 1px rgba(212,175,55,.28)}
+.lbb-ph-title{font-family:"Bebas Neue",sans-serif;font-size:23px;line-height:1;letter-spacing:.03em;color:#fff}
+.lbb-ph-sub{color:rgba(255,255,255,.72);font-size:12.5px;margin-top:3px}
+.lbb-ph-cta{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:var(--ink-gold);font-weight:700;font-size:12.5px;padding:8px 14px;border-radius:20px;white-space:nowrap}
+.lbb-slide:hover .lbb-ph-cta{filter:brightness(1.06)}
+.lbb-dots{position:absolute;bottom:7px;right:12px;display:flex;gap:5px;z-index:2}
+.lbb-dot{width:7px;height:7px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .2s}
+.lbb-dot.on{background:var(--gold);width:16px;border-radius:4px}
+@media (max-width:560px){
+  .lbb-track{height:74px}
+  .lbb-ph{padding:0 14px}
+  .lbb-ph-title{font-size:19px}
+  .lbb-ph-sub{font-size:11px}
+  .lbb-ph-cta{padding:6px 11px;font-size:11.5px}
+}
 .lb-totals{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 4px}
 .lb-total{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:11px 10px 13px;text-align:center;overflow:hidden}
 .lb-total::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:38px;height:3px;border-radius:3px;background:var(--gold);box-shadow:0 0 14px rgba(246,194,28,.6)}
@@ -1023,12 +1050,12 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 }
 /* Homepage social "Newsroom" block below the board (branded frame around the
    live Facebook page plugin + follow rail) */
-.social{max-width:1060px;margin:40px auto 0}
+.social{max-width:1000px;margin:40px auto 0}
 .social-hd{text-align:center;margin-bottom:20px}
 .social-eyebrow{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
 .social-title{font-family:"Bebas Neue",sans-serif;letter-spacing:.03em;font-size:34px;line-height:1;color:var(--navy);margin-top:6px}
 .social-sub{color:var(--muted);font-size:13.5px;line-height:1.55;margin:8px auto 0;max-width:520px}
-.social-grid{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start}
+.social-grid{display:block}
 .social-rail{display:flex;flex-direction:column;gap:14px}
 .social-card{background:linear-gradient(160deg,var(--navy2),var(--navy));border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:18px;box-shadow:var(--shadow2)}
 .social-card-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}

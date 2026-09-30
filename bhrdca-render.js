@@ -87,8 +87,8 @@
           + '<div class="ch-row"><span class="ch-role">Secretary</span><span class="ch-val">' + (sec ? esc(sec.name) : "TBC") + '</span></div>'
           + '<div class="ch-row"><span class="ch-role">Treasurer</span><span class="ch-val">' + (treas ? esc(treas.name) : "TBC") + '</span></div>'
           + '<div class="ch-row"><span class="ch-role">Junior Coordinator</span><span class="ch-val">' + (jun ? esc(jun.name) : (jc ? esc(jc.contact) : "TBC")) + '</span></div>'
-          + (jun && jun.email ? '<div class="ch-contact"><i class="ti ti-mail"></i><span>' + esc(jun.email).replace(/([@.])/g, '$1<wbr>') + '</span></div>' : (jc && jc.email ? '<div class="ch-contact"><i class="ti ti-mail"></i><span>' + esc(jc.email).replace(/([@.])/g, '$1<wbr>') + '</span></div>' : ''))
-          + (jun && jun.phone ? '<div class="ch-contact"><i class="ti ti-phone"></i><span>' + esc(jun.phone) + '</span></div>' : (jc && jc.number ? '<div class="ch-contact"><i class="ti ti-phone"></i><span>' + esc(jc.number) + '</span></div>' : ''))
+          + (function(){ var em = (jun && jun.email) || (jc && jc.email) || ""; return em ? '<div class="ch-contact"><i class="ti ti-mail"></i><a href="mailto:' + esc(em) + '">' + esc(em).replace(/([@.])/g, '$1<wbr>') + '</a></div>' : ''; })()
+          + (function(){ var ph = (jun && jun.phone) || (jc && jc.number) || ""; return ph ? '<div class="ch-contact"><i class="ti ti-phone"></i><a href="tel:' + tel(ph) + '">' + esc(ph) + '</a></div>' : ''; })()
           + (anyReal ? '' : '<div class="ch-flag">Committee details to be confirmed with the club</div>')
           + '</div>';
         var crest = c.logo

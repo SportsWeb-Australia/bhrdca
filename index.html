@@ -86,6 +86,7 @@
       </div>
       <img class="lb-head-logo lb-head-cv" src="/sponsor-logos/cricket-victoria.webp" alt="Cricket Victoria">
     </div>
+    <div class="lb-banner" id="lb-banner" aria-label="Association partners" hidden></div>
     <div class="lb-totals">
       <div class="lb-total"><div class="lb-total-lbl">TOTAL RUNS</div><div class="lb-total-val" id="lb-runs">&mdash;</div></div>
       <div class="lb-total"><div class="lb-total-lbl">TOTAL OVERS</div><div class="lb-total-val" id="lb-overs">&mdash;</div></div>
@@ -111,18 +112,6 @@
       <p class="social-sub">Match-day updates, results, photos &amp; club news — straight from our channels.</p>
     </div>
     <div class="social-grid">
-      <div class="social-rail">
-        <div class="social-card">
-          <div class="social-card-top">
-            <img src="/bhrdca-logo.svg" alt="BHRDCA crest" class="social-avatar" width="52" height="52">
-            <div class="social-card-id">
-              <div class="social-name">Box Hill Reporter DCA</div>
-              <div class="social-meta">4,600+ followers &middot; since 1890</div>
-            </div>
-          </div>
-          <a class="social-btn fb" href="https://www.facebook.com/bhrdca" target="_blank" rel="noopener"><i class="ti ti-brand-facebook"></i> Follow on Facebook</a>
-        </div>
-      </div>
       <div class="social-feed">
         <div class="social-feed-bar">
           <span class="social-live"><span class="dot"></span> Live feed</span>
@@ -184,6 +173,7 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
 <script src="/site-data.js"></script>
 <script src="/club-contacts-data.js"></script>
 <script src="/scoreboard-data.js"></script>
+<script src="/scoreboard-banners.js"></script>
 <script src="/bhrdca-render.js"></script>
 <script>
   BHRDCA.render.stats("#stats-mount");
@@ -352,9 +342,48 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
           current = SB.grades[0].key;
           buildTabs();
           renderGrade(current);
+          // SW1-managed banners override the local defaults when the board provides them
+          if (live.banners && window.__bhrdcaSetBanners) window.__bhrdcaSetBanners(live.banners);
         })
         .catch(function(){ /* keep demo data */ });
     }
+  })();
+
+  /* Scoreboard rotating banners — up to 3, above the totals; mirrors the team
+     line-up banner rotator. Source: SW1/Worker board.banners if present, else
+     the local scoreboard-banners.js defaults. */
+  (function(){
+    var el = document.getElementById("lb-banner");
+    if (!el) return;
+    function esc(t){ return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+    var timer = null;
+    function slideHTML(b){
+      var inner = b.img
+        ? '<img class="lbb-img" src="' + esc(b.img) + '" alt="' + esc(b.alt || "") + '" loading="lazy">'
+        : '<div class="lbb-ph"><div class="lbb-ph-txt"><div class="lbb-ph-title">' + esc(b.title || "") + '</div>'
+            + (b.sub ? '<div class="lbb-ph-sub">' + esc(b.sub) + '</div>' : '') + '</div>'
+            + (b.cta ? '<span class="lbb-ph-cta">' + esc(b.cta) + ' <i class="ti ti-arrow-up-right"></i></span>' : '') + '</div>';
+      if (b.url) return '<a class="lbb-slide" href="' + esc(b.url) + '"' + (/^https?:/.test(b.url) ? ' target="_blank" rel="noopener"' : '') + '>' + inner + '</a>';
+      return '<div class="lbb-slide">' + inner + '</div>';
+    }
+    function render(list){
+      list = (list || []).filter(Boolean).slice(0, 3);
+      if (timer) { clearInterval(timer); timer = null; }
+      if (!list.length){ el.hidden = true; el.innerHTML = ""; return; }
+      el.hidden = false;
+      el.innerHTML = '<div class="lbb-track">' + list.map(slideHTML).join("") + '</div>'
+        + (list.length > 1 ? '<div class="lbb-dots">' + list.map(function(_, i){ return '<button class="lbb-dot" type="button" data-i="' + i + '" aria-label="Show banner ' + (i + 1) + '"></button>'; }).join("") + '</div>' : '');
+      var slides = [].slice.call(el.querySelectorAll(".lbb-slide"));
+      var dots = [].slice.call(el.querySelectorAll(".lbb-dot"));
+      var idx = 0;
+      function show(i){ idx = (i + slides.length) % slides.length; slides.forEach(function(s, j){ s.classList.toggle("on", j === idx); }); dots.forEach(function(d, j){ d.classList.toggle("on", j === idx); }); }
+      function start(){ if (timer) clearInterval(timer); if (slides.length > 1) timer = setInterval(function(){ show(idx + 1); }, 6000); }
+      show(0); start();
+      dots.forEach(function(d){ d.addEventListener("click", function(e){ e.preventDefault(); show(+d.getAttribute("data-i")); start(); }); });
+      if (slides.length > 1){ el.onmouseenter = function(){ if (timer) clearInterval(timer); }; el.onmouseleave = start; }
+    }
+    render(window.BHRDCA_SCOREBOARD_BANNERS || []);
+    window.__bhrdcaSetBanners = function(list){ render(list); };
   })();
 </script>
   <script src="https://sportsweb-one-v1.vercel.app/sitepulse-widget.js"

@@ -181,7 +181,7 @@
       + '<div style="border-top:1px solid rgba(255,255,255,.06);padding:14px 20px">'
       + '<div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">'
       + '<div style="font-size:11px;color:rgba(255,255,255,.62)">&copy; ' + (new Date().getFullYear()) + ' Box Hill Reporter District Cricket Association Inc. Reg. #A0032112P. All rights reserved.</div>'
-      + '<div style="font-size:11px;color:rgba(255,255,255,.62)">Powered by <a href="https://sportsweb.com.au" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">SportsWeb One</a></div>'
+      + '<div style="font-size:11px;color:rgba(255,255,255,.62)">Website and Club Operating System powered by <a href="https://sportsweb.com.au" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">SportsWeb Australia</a></div>'
       + '</div>'
       + '</div>'
       + '</footer>'

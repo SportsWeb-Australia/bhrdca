@@ -294,7 +294,7 @@
         + '<div class="block-hed" style="margin-top:26px">Who to contact</div>'
         + '<div class="bh-cgrid">' + s.contacts.map(contactCard).join("") + '</div>'
         + '</div>'
-        + '<div class="ph">' + (s.image ? '<img src="' + esc(s.image) + '" alt="' + esc(s.name) + ' cricket in the BHRDCA" loading="lazy">' : '<i class="ti ' + esc(s.icon) + '"></i>') + '</div>'
+        + '<div class="ph">' + (s.image ? '<img src="' + esc(s.image) + '" alt="' + esc(s.name) + ' cricket in the BHRDCA" loading="lazy"' + (s.imagePos ? ' style="object-position:' + esc(s.imagePos) + '"' : '') + '>' : '<i class="ti ' + esc(s.icon) + '"></i>') + '</div>'
         + '</div>';
       if (s.resources && s.resources.length) {
         out += '<div class="block-hed" style="margin-top:34px">Resources &amp; Rules</div>';

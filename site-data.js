@@ -57,7 +57,7 @@ window.BHRDCA_DATA = (function () {
   // Playing sections
   var sections = {
     juniors: {
-      key: "juniors", name: "Juniors", icon: "ti-friends", image: "/sections/juniors-field.webp",
+      key: "juniors", name: "Juniors", icon: "ti-friends", image: "/sections/juniors-field.webp", imagePos: "center 50%",
       blurb: "Boys & Girls cricket across more than 20 junior grades, playing Friday nights, Saturday and Sunday mornings. New players are always welcome — contact the Junior Section Manager or your local club.",
       contacts: [
         { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" }
@@ -176,7 +176,7 @@ window.BHRDCA_DATA = (function () {
   };
 
   // Junior Rep Cricket — duplicates the Juniors section content under its own title.
-  sections.juniorRep = Object.assign({}, sections.juniors, { key: "juniorRep", name: "Junior Rep", image: "/sections/juniors-rep.webp" });
+  sections.juniorRep = Object.assign({}, sections.juniors, { key: "juniorRep", name: "Junior Rep", image: "/sections/juniors-rep.webp", imagePos: "center top" });
 
   // Member clubs (recognised on the association's "Our Clubs" wall) with websites.
   // NOTE: full 28-club member set + official club logos to be confirmed with BHRDCA.

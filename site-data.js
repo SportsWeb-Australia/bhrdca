@@ -44,8 +44,7 @@ window.BHRDCA_DATA = (function () {
     { role: "Veterans Section Manager", name: "Michael Whitehead", phone: "0419 523 183", email: "mick_019@msn.com" },
     { role: "Competition Administrator", name: "Beau Nixon", phone: "61 3 9085 8846", email: "bnixon@cricketvictoria.com.au" },
     { role: "Chairman, BHRDCA Umpires Assoc.", name: "Phil Hermann", phone: "0402 384 642", email: "hermanndianne@hotmail.com" },
-    { role: "Secretary, BHRDCA Umpires Assoc.", name: "Michael Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" },
-    { role: "Auditor", name: "David Woollard", phone: "", email: "" }
+    { role: "Secretary, BHRDCA Umpires Assoc.", name: "Michael Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" }
   ];
 
   var subCommittees = [

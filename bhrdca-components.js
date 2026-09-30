@@ -11,6 +11,20 @@
   var IG = "https://www.instagram.com/bhrdca1/";
   var PLAYHQ = "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/f8c1124c";
 
+  /* --- Cloudflare Web Analytics (privacy-friendly, cookieless) ---------------
+     GO-LIVE: paste the token from Cloudflare dashboard > Web Analytics > (site) >
+     "JS snippet" between the quotes below. Empty = off.
+     NOTE: if you instead enable Web Analytics with one click in the Cloudflare
+     PAGES project, leave this empty — otherwise the page is counted twice. */
+  var CF_ANALYTICS_TOKEN = "";
+  if (CF_ANALYTICS_TOKEN && document.head) {
+    var cfb = document.createElement("script");
+    cfb.defer = true;
+    cfb.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    cfb.setAttribute("data-cf-beacon", '{"token":"' + CF_ANALYTICS_TOKEN + '"}');
+    document.head.appendChild(cfb);
+  }
+
   // sponsor names for the moving carousel (static chrome, matches association wall)
   var SPONSORS = [
     ["Century Cricket Centre","https://www.cricketcentre.com.au/","/sponsor-logos/century-cricket-centre.webp"],

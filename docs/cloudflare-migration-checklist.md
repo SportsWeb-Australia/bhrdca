@@ -20,7 +20,10 @@ Target: move the static site from Vercel staging to **Cloudflare Pages**, live o
 7. **Post-cutover checks:** spot-check 5–6 legacy Wix URLs 301 correctly; confirm no page still references `vercel.app` except the SitePulse widget; run a mobile pass.
 
 ## Still to decide / do (flagged separately)
-- **Analytics** — not yet installed. Add Cloudflare Web Analytics (or GA4 + Search Console) **before** go-live so traffic is captured from cutover. *(task chip created.)*
+- **Analytics** — Cloudflare Web Analytics beacon is wired into `bhrdca-components.js` (const `CF_ANALYTICS_TOKEN`, off until set). At go-live pick ONE of:
+  (a) **One-click** in the Pages project → Analytics → enable Web Analytics (no code, no token) — recommended; leave `CF_ANALYTICS_TOKEN` empty; or
+  (b) paste the token from Cloudflare dashboard → Web Analytics → JS snippet into `CF_ANALYTICS_TOKEN`.
+  Do NOT do both (double-counts). *(task chip created.)*
 - **SitePulse widget** — every page loads `sportsweb-one-v1.vercel.app/sitepulse-widget.js` with `data-website-status="draft"`. Decide whether to keep it live and flip to "published", or remove for launch.
 - **Internal links use `/foo.html`** — Cloudflare Pages 301s these to `/foo`, so they work with one extra hop. Optional polish: rewrite internal links to clean URLs.
 - **Old Wix URLs not in the sitemap** (e.g. individual blog posts / dynamic items) — if any had traffic, add extra 301s to `_redirects`.

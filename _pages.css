@@ -1374,3 +1374,15 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .cc-empty-hit{grid-column:1/-1;text-align:center;padding:26px;color:var(--muted);font-size:13px}
 @media (max-width:640px){.cc-tabbar{flex-direction:column;align-items:stretch}.cc-tabs{padding:3px}.cc-tab{padding:8px 11px;font-size:11.5px}.cc-tab span:not(.cc-tab-n){display:none}.cc-body{padding:18px 14px}.cc-grid{grid-template-columns:1fr 1fr;gap:8px}.cc-tag{justify-content:center}}
 @media (max-width:420px){.cc-grid{grid-template-columns:1fr}}
+
+/* --- Mobile launch polish: >=~40px tap targets + tighter totals on small phones --- */
+@media (max-width:640px){
+  .cc-tab{padding:12px 14px;font-size:12px}
+  .cc-card a{padding:8px 0}
+  .cc-person-c a{min-width:40px;min-height:40px;justify-content:center}
+  .cc-map-btn{min-height:38px}
+  .lb-tab{padding:10px 15px}
+  .split-leaders-tabs .lb-tab{padding:12px 10px}
+  a.bh-strip-pill{padding:8px 14px}
+}
+@media (max-width:400px){ .lb-totals{grid-template-columns:repeat(2,1fr)} }

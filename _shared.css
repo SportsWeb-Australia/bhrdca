@@ -5,9 +5,9 @@
    Linked by index.html and every future RDCA page. */
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:hidden;max-width:100%}
+html{overflow-x:clip;max-width:100%}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:#f0f2f5;color:#0d1923;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100vw}
+body{font-family:'DM Sans',sans-serif;background:#f0f2f5;color:#0d1923;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip;max-width:100vw}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 :root{--navy:#0a2242;--navy2:#123059;--navy3:#1c4a86;--red:#f2b90c;--red2:#ffcb2e;--gold:#f6c21c;--gold-deep:#a9770a;--ink-gold:#0a2242;--bg:#f0f2f5;--bg2:#e4e7ec;--card:#fff;--border:rgba(0,0,0,.08);--muted:#5a6880;--r:14px;--rsm:8px;--shadow:0 1px 4px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.05);--shadow2:0 8px 32px rgba(0,0,0,.14);--text:#0d1923}

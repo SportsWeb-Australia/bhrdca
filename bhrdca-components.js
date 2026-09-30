@@ -11,51 +11,6 @@
   var IG = "https://www.instagram.com/bhrdca1/";
   var PLAYHQ = "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/f8c1124c";
 
-  /* ---- contact obfuscation (anti-scraping), shared by every page ----------
-     Emails/phones live obfuscated in the data ("enc:<base64 of the reversed
-     string>") so no address/number appears in any served .js/.html file.
-     cx() renders a "Show email/phone" control that only becomes a real
-     mailto:/tel: link once a human clicks it. Exposed as window.BHRDCA_CX so
-     bhrdca-render.js and page inline scripts share one implementation. */
-  function cxEsc(t){ return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
-  function cxTel(p){ return p ? p.replace(/[^0-9+]/g,"") : ""; }
-  function cxDec(v){
-    if (typeof v !== "string" || v.slice(0,4) !== "enc:") return v || "";
-    try { return atob(v.slice(4)).split("").reverse().join(""); } catch(e){ return ""; }
-  }
-  // label === "" renders an icon-only control (for tight rows); otherwise
-  // "Show email/phone" text that becomes the address/number on click.
-  function cxMake(type, enc, label){
-    if (!enc) return "";
-    var icon = type === "tel" ? "ti-phone" : "ti-mail";
-    var aria = (type === "tel" ? "Show phone number" : "Show email address");
-    if (label === "") {
-      return '<a class="cx cx-icon" role="button" tabindex="0" aria-label="' + aria + '" title="' + aria + '" data-cxt="' + type + '" data-cx="' + cxEsc(enc) + '"><i class="ti ' + icon + '"></i></a>';
-    }
-    label = label || (type === "tel" ? "Show phone" : "Show email");
-    return '<a class="cx" role="button" tabindex="0" data-cxt="' + type + '" data-cx="' + cxEsc(enc) + '">'
-      + '<i class="ti ' + icon + '"></i> <span>' + cxEsc(label) + '</span></a>';
-  }
-  function cxReveal(e){
-    var a = e.target && e.target.closest ? e.target.closest("a.cx") : null;
-    if (!a || a.classList.contains("cx-on")) return;   // already revealed: let the link work
-    e.preventDefault();
-    var val = cxDec(a.getAttribute("data-cx"));
-    if (!val) return;
-    a.href = (a.getAttribute("data-cxt") === "tel" ? "tel:" + cxTel(val) : "mailto:" + val);
-    var span = a.querySelector("span"); if (span) span.textContent = val;
-    if (a.getAttribute("title")) a.setAttribute("title", val);
-    a.classList.add("cx-on");
-    a.removeAttribute("role"); a.removeAttribute("tabindex");
-  }
-  document.addEventListener("click", cxReveal);
-  document.addEventListener("keydown", function(e){
-    if ((e.key === "Enter" || e.key === " ") && e.target && e.target.closest && e.target.closest("a.cx:not(.cx-on)")) cxReveal(e);
-  });
-  window.BHRDCA_CX = { dec: cxDec, cx: cxMake };
-  // obfuscated association media contact for the top bar (decodes at click)
-  var MEDIA_EMAIL_ENC = "enc:bW9jLmxpYW1nQGFpZGVtLmFjZHJoYg==";
-
   // sponsor names for the moving carousel (static chrome, matches association wall)
   var SPONSORS = [
     ["Century Cricket Centre","https://www.cricketcentre.com.au/","/sponsor-logos/century-cricket-centre.webp"],
@@ -92,7 +47,7 @@
     "topbar": '<div class="topbar">'
       + '<div style="display:flex;align-items:center;gap:18px">'
       + '<div class="tb-item"><i class="ti ti-map-pin"></i> Melbourne\'s Eastern Suburbs</div>'
-      + '<div class="tb-item">' + cxMake("mail", MEDIA_EMAIL_ENC, "bhrdca.media@…") + '</div>'
+      + '<div class="tb-item"><i class="ti ti-mail"></i> bhrdca.media@gmail.com</div>'
       + '<div class="tb-item"><i class="ti ti-ball-baseball"></i> Est. 1890 &middot; 139th Season</div>'
       + '</div>'
       + '<div style="display:flex;align-items:center;gap:12px">'

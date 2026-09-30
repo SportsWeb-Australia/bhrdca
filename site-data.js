@@ -35,16 +35,16 @@ window.BHRDCA_DATA = (function () {
 
   // Association administration contacts (2026/27)
   var committee = [
-    { role: "President", name: "Peter Rosenthal", phone: "enc:MzQ2IDQ0OCA3MDQw", email: "enc:bW9jLmxpYW1nQHRuZWRpc2VycC5hY2RyaGI=" },
-    { role: "Vice President", name: "Ross Kainey", phone: "enc:NDc1IDgyOCA3NTQw", email: "enc:bW9jLmRub3BnaWJAeWVuaWFrLnNzb3I=" },
-    { role: "Treasurer", name: "Lynda Richardson", phone: "enc:ODg4IDQ4NyA5OTQw", email: "enc:bW9jLmxpYW1nQHJlcnVzYWVydC5hY2RyaGI=" },
-    { role: "Marketing & Sponsorship Manager", name: "Jo Fairy", phone: "enc:NDMzIDMxMyAxMTQw", email: "enc:dWEubW9jLndlaXZmb2RsZWlmQG9q" },
-    { role: "Media Manager", name: "Paul Hooper", phone: "enc:MTE4IDk4NyAwMjQw", email: "enc:bW9jLmxpYW1nQGFpZGVtLmFjZHJoYg==" },
-    { role: "Junior Section Manager", name: "Michael Crooks", phone: "enc:NzE3IDMwNiA0MTQw", email: "enc:bW9jLmxpYW1nQHJlZ2FuYW1yb2ludWouYWNkcmhi" },
-    { role: "Veterans Section Manager", name: "Michael Whitehead", phone: "enc:MzgxIDMyNSA5MTQw", email: "enc:bW9jLm5zbUA5MTBfa2NpbQ==" },
-    { role: "Competition Administrator", name: "Beau Nixon", phone: "enc:NjQ4OCA1ODA5IDMgMTY=", email: "enc:dWEubW9jLmFpcm90Y2l2dGVrY2lyY0Bub3hpbmI=" },
-    { role: "Chairman, BHRDCA Umpires Assoc.", name: "Phil Hermann", phone: "enc:MjQ2IDQ4MyAyMDQw", email: "enc:bW9jLmxpYW10b2hAZW5uYWlkbm5hbXJlaA==" },
-    { role: "Secretary, BHRDCA Umpires Assoc.", name: "Michael Moon", phone: "enc:MzgwIDk5MSAxODQw", email: "enc:bW9jLmxpYW1nQDUyMDJhdWNkcmhieXJhdGVyY2Vz" },
+    { role: "President", name: "Peter Rosenthal", phone: "0407 844 643", email: "bhrdca.president@gmail.com" },
+    { role: "Vice President", name: "Ross Kainey", phone: "0457 828 574", email: "ross.kainey@bigpond.com" },
+    { role: "Treasurer", name: "Lynda Richardson", phone: "0499 784 888", email: "bhrdca.treasurer@gmail.com" },
+    { role: "Marketing & Sponsorship Manager", name: "Jo Fairy", phone: "0411 313 334", email: "jo@fieldofview.com.au" },
+    { role: "Media Manager", name: "Paul Hooper", phone: "0420 789 811", email: "bhrdca.media@gmail.com" },
+    { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" },
+    { role: "Veterans Section Manager", name: "Michael Whitehead", phone: "0419 523 183", email: "mick_019@msn.com" },
+    { role: "Competition Administrator", name: "Beau Nixon", phone: "61 3 9085 8846", email: "bnixon@cricketvictoria.com.au" },
+    { role: "Chairman, BHRDCA Umpires Assoc.", name: "Phil Hermann", phone: "0402 384 642", email: "hermanndianne@hotmail.com" },
+    { role: "Secretary, BHRDCA Umpires Assoc.", name: "Michael Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" },
     { role: "Auditor", name: "David Woollard", phone: "", email: "" }
   ];
 
@@ -60,7 +60,7 @@ window.BHRDCA_DATA = (function () {
       key: "juniors", name: "Juniors", icon: "ti-friends",
       blurb: "Boys & Girls cricket across more than 20 junior grades, playing Friday nights, Saturday and Sunday mornings. New players are always welcome — contact the Junior Section Manager or your local club.",
       contacts: [
-        { role: "Junior Section Manager", name: "Michael Crooks", phone: "enc:NzE3IDMwNiA0MTQw", email: "enc:bW9jLmxpYW1nQHJlZ2FuYW1yb2ludWouYWNkcmhi" }
+        { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" }
       ],
       resources: [
         { label: "Junior Competition Rules", url: "/documents/bhrdca-junior-competition-rules-2025-26.pdf" },
@@ -90,7 +90,7 @@ window.BHRDCA_DATA = (function () {
     seniors: {
       key: "seniors", name: "Seniors", icon: "ti-trophy", image: "/gallery/full/img-17-9-12-t20-a-glen-waverley-hawks-v-bhnsk18.webp",
       blurb: "More than 12 Senior grades on Saturdays, plus a mid-week twilight T20 competition. For information on Senior cricket, contact the Competition Assistant or your local club.",
-      contacts: [ { role: "Senior Cricket", name: "Beau Nixon", phone: "enc:NjQ4OCA1ODA5IDMgMTY=", email: "enc:dWEubW9jLmFpcm90Y2l2dGVrY2lyY0Bub3hpbmI=" } ],
+      contacts: [ { role: "Senior Cricket", name: "Beau Nixon", phone: "61 3 9085 8846", email: "bnixon@cricketvictoria.com.au" } ],
       resources: [
         { label: "Senior Playing Conditions", url: "/documents/bhrdca-senior-competition-playing-rules-2025-26.docx" },
         { label: "T20 Playing Conditions", url: "/documents/bhrdca-t20-rules-2025-26.pdf" },
@@ -126,7 +126,7 @@ window.BHRDCA_DATA = (function () {
     womens: {
       key: "womens", name: "Women's", icon: "ti-cricket",
       blurb: "Women’s and girls’ cricket is a growing part of the BHRDCA. For information on Women’s cricket, get in touch with our Women’s Cricket contact.",
-      contacts: [ { role: "Women's Cricket", name: "Lynda Richardson", phone: "enc:ODg4IDQ4NyA5OTQw", email: "enc:bW9jLmxpYW1nQHRla2NpcmNlbGFtZWYuYWNkcmhi" } ],
+      contacts: [ { role: "Women's Cricket", name: "Lynda Richardson", phone: "0499 784 888", email: "bhrdca.femalecricket@gmail.com" } ],
       resources: [
         { label: "Senior Women's Rules (EGWC)", url: "https://egwc.au/images/documents/EGWC-S-2025_26-Senior-Womens-Rules.pdf" },
         { label: "Social Media Policy", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_0168cb7a77b84842a3da5136626c8378.pdf" },
@@ -137,7 +137,7 @@ window.BHRDCA_DATA = (function () {
     veterans: {
       key: "veterans", name: "Veterans", icon: "ti-medal", image: "/gallery/full/img-14-7-12-vets-action000000149.webp",
       blurb: "Over 40 & Over 50 Veterans cricket across 8 grades, played Sunday afternoons. A great way to keep playing the game you love.",
-      contacts: [ { role: "Veterans Cricket", name: "Michael Whitehead", phone: "enc:MzgxIDMyNSA5MTQw", email: "enc:bW9jLm5zbUA5MTBfa2NpbQ==" } ],
+      contacts: [ { role: "Veterans Cricket", name: "Michael Whitehead", phone: "0419 523 183", email: "mick_019@msn.com" } ],
       resources: [
         { label: "Veteran Playing Conditions", url: "https://www.bhrdca.com.au/_files/ugd/c846e3_42cd9ab70d2d44f19f7218b26080d128.pdf" },
         { label: "Cricket Balls Policy", url: "https://www.bhrdca.com.au/_files/ugd/df7f61_11456fc48f1143edbf258809b8f16018.pdf" },
@@ -159,9 +159,9 @@ window.BHRDCA_DATA = (function () {
       key: "umpires", name: "Umpires", icon: "ti-gavel",
       blurb: "The BHRDCA Umpires Association (BHRDCA UA) supports and appoints umpires across the competition. New umpires and officials are always welcome.",
       contacts: [
-        { role: "UA President", name: "Phil Hermann", phone: "enc:MjQ2IDQ4MyAyMDQw", email: "enc:bW9jLmxpYW10b2hAZW5uYWlkbm5hbXJlaA==" },
-        { role: "UA Secretary", name: "Mick Moon", phone: "enc:MzgwIDk5MSAxODQw", email: "enc:bW9jLmxpYW1nQDUyMDJhdWNkcmhieXJhdGVyY2Vz" },
-        { role: "Umpires Appointments", name: "Trevor McGarry", phone: "enc:Njc2IDc4MiA4ODQw", email: "enc:bW9jLmxpYW1nQDZ5cmFnY21yb3ZlcnQ=" }
+        { role: "UA President", name: "Phil Hermann", phone: "0402 384 642", email: "hermanndianne@hotmail.com" },
+        { role: "UA Secretary", name: "Mick Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" },
+        { role: "Umpires Appointments", name: "Trevor McGarry", phone: "0488 287 676", email: "trevormcgary6@gmail.com" }
       ],
       resources: [
         { label: "Umpire Fees", url: "https://www.bhrdca.com.au/_files/ugd/bad3dd_28f8655c4480433980a6d9a94363414f.pdf" },
@@ -232,56 +232,56 @@ window.BHRDCA_DATA = (function () {
 
   // Full club contact directory (all affiliated clubs — 2026/27). From live site.
   var clubContacts = [
-    ["Ainslie Park","Karen Ridley","enc:MTI0IDg0NCA4NDQw",""],
-    ["Blackburn","Amanda Crossland","enc:MTg1IDY1MyA5MTQw","enc:dWEuZ3JvLm5ydWJrY2FsYkBzcm9pbnVq"],
-    ["Blackburn South","Sonya O'Farrell","enc:Njc0IDYyMSA2MTQw","enc:bW9jLmxpYW1nQGxsZXJyYWZvYXlub3M="],
-    ["Box Hill North Super Kings","Jessie Fernando","enc:OTQxIDA4MyA5MTQw","enc:dWEubW9jLnltZWRhY2F0ZWtjaXJjc2duaWtyZXB1c0Byb3Rhbmlkcm9vY3JvaW51ag=="],
-    ["Bulleen-Templestowe","Tim Moran","enc:OTM1IDIwNSA4MzQw","enc:bW9jLmxpYW1nQG5hcm9tLnMubWl0"],
-    ["Burwood Districts","Abishek Pratap","enc:MjE2IDc1OSAyMDQw","enc:bW9jLmxpYW1nQDVoZ25pcy5wLmtlaHNpYmE="],
-    ["Chirnside Park","David Hughes","enc:ODQ5IDEwNSA4MTQw","enc:bW9jLm1lZmZlQHNlaGd1aC5iLmRpdmFk"],
-    ["Doncaster","Stephen Mears","enc:NjY0IDg3NyA4MzQw","enc:bW9jLmRub3BnaWJAc3JhZW10cw=="],
-    ["Donvale","Steve Darmody","","enc:bW9jLmxpYW1nQHlyYXRlcmNlc2VsYXZub2Q="],
-    ["East Box Hill","Paul Byrne","enc:NDk2IDc2NCA0MTQw","enc:bW9jLmNjaGJlQHNyb2ludWo="],
-    ["East Burwood","Rob Robinson","enc:ODE1IDM3NyAzMzQw","enc:dWEubW9jLm9vaGF5QGxhY3Nhcm9zbmlib3Jmcg=="],
-    ["East Ringwood","Ben Taylor","enc:ODE4IDQ0MyA3MDQw","enc:bW9jLmxpYW1nQGNjamRvb3dnbmlydHNhZQ=="],
-    ["Eildon Park","Brad Wilkins","enc:NzA2IDM0MiAwOTQw","enc:bW9jLmxpYW1nQHNyb2ludWpjY3Bl"],
-    ["Ferntree Gully Cricket Club","David Anstey","enc:MTAzIDI1MSA5MzQw","enc:dWEubW9jLnNtZXRzeXNhbW9AeWV0c25hLmRpdmFk"],
-    ["Ferntree Gully Footballers Cricket Club","Thomas Searle","","enc:bW9jLmxpYW1nQGNjc3JlbGxhYnRvb2Z5cmF0ZXJjZXM="],
-    ["Forest Hill","Marcus Ward","enc:NzAxIDIwOCAyMTQw","enc:dWEubW9jLmNjbGxpaHRzZXJvZkBzcm9pbnVq"],
-    ["Glen Waverley","Paul Connaughton","enc:OTY5IDYzOSA4MDQw","enc:bW9jLmxpYW1nQGNjd2cuc3JvaW51ag=="],
-    ["Glen Waverley Cougars","Graham Oppy","","enc:dWRlLmhzYW5vbUB5cHBvLm1haGFyZw=="],
-    ["Glen Waverley Hawks","Cameron Hocart","enc:MjM4IDMzMSA5MTQw","enc:bW9jLmxpYW10b2hAdHJhY29obWFj"],
-    ["Heatherdale","Justin Box","enc:NTE5IDIwNSA4MzQw","enc:dWEubW9jLmJ1bGN0ZWtjaXJjZWxhZHJlaHRhZWhAc3JvaW51ag=="],
-    ["Heathmont","Trent Carr","enc:MDg0IDY5MiA0MTQw","enc:dWEuZ3JvLmNjdG5vbWh0YWVoQHNyb2ludWo="],
-    ["Kerrimuir United","Michael Walsh","enc:MDc1IDU0NSA3NTQw","enc:bW9jLmxpYW1nQHNyb2ludWpjY3Vr"],
-    ["Knox City","Naish Gadani","enc:Njk1IDY0MyAzMjQw","enc:bW9jLmxpYW1nQGluYWRhZy5oZGFoc2lhbg=="],
-    ["Koonung Heights","Matthew Christensen","enc:OTAyIDIyMiAxMDQw","enc:bW9jLnRuZW10aXVyY2VyZXN1ZkBuZXNuZXRzaXJoY20="],
-    ["Laburnum","Michaela Thompson","enc:MDE0IDAwNCA5MzQw","enc:bW9jLmxpYW1nQGJ1bGN0ZWtjaXJjbXVucnViYWwuc3JvaW51ag=="],
-    ["Lysterfield","Michelle Doherty","","enc:bW9jLmxpYW1nQGJ1bGN0ZWtjaXJjbXVucnViYWwuc3JvaW51ag=="],
-    ["Manningham","Liam O'Brien","enc:OTg2IDI5OSA5MzQw","enc:bW9jLmxpYW1nQG5laXJiby5yLm1haWw="],
-    ["Mazenod","Simon Dresser","enc:MTQzIDczOCA0MjQw","enc:bW9jLmxpYW1nQHNyb2ludWpjY2NvbQ=="],
-    ["Mitcham","Steve Tully","enc:NzYyIDI5MiAwMzQw","enc:Y2MubWFoY3RpbUBzcm9pbnVq"],
-    ["Monash Cricket Club","David James","enc:MzgxIDU5MyA5MTQw","enc:bW9jLmxpYW10b2hAcmVwcG9jX2lrc19kaXZhZA=="],
-    ["Monash Glen Waverley Junior Cricketers","","","enc:bW9jLmxpYW1nQHRla2NpcmNqd2c="],
-    ["Mountain Gate Cricket Club","Nathan Giulieri","enc:MjMyIDk0OSA2MDQw","enc:bW9jLmxpYW10b2hAMTNub3RscG1ldA=="],
-    ["Mulgrave - Wheelers Hill","Dilan Liyanage","enc:MTEzIDY4NSAyMzQw","enc:bW9jLmxpYW1nQHJvaW51amNjaHdt"],
-    ["Mulgrave Cricket Club","Samuel Rupasinghe","","enc:dWEubW9jLmJ1bGN0ZWtjaXJjZXZhcmdsdW1AeXJhdGVyY2Vz"],
-    ["North Ringwood","Mark Wilkie","enc:NzEwIDM2NSA4MzQw","enc:dWEubW9jLnRzZXRibGVtQGtyYW0="],
-    ["Notting Hill / Brandon Park","Chris Hipwell","enc:OTAzIDMyOSA5OTQw","enc:bW9jLmxpYW10b2hAbGxld3BpaC5zaXJoYw=="],
-    ["Nunawading","Rob Nurse","enc:MTY3IDM0MSAxNTQw","enc:bW9jLmNjZ25pZGF3YW51bkBzcm9pbnVq"],
-    ["Park Orchards","Dean Kruger","enc:ODUyIDAxMSA3MTQw","enc:dWEubW9jLnByb2NyZWd1cmtAbmFlZA=="],
-    ["South Warrandyte Hawks","Josh Exley","enc:Mzk0IDY2MCA2MDQw","enc:bW9jLmxpYW10b2hAeWVseGUuaHNvag=="],
-    ["St Andrew's","Shane Mayoh","enc:MDI3IDY5MiA2MTQw","enc:bW9jLmxpYW1nQHJuai5jY3N3ZXJkbmF0cw=="],
-    ["St David's","Paul Newman","enc:MTE3IDExNSA5MTQw","enc:dWEudGVuLmRub3BnaWJAMzN5bW1hcw=="],
-    ["Surrey Hills","Barry Cull","","enc:bW9jLmxpYW1nQGxsdWNhenphYg=="],
-    ["Templestowe","Gavin Dimitri","enc:MDgzIDgwMyAxNTQw","enc:bW9jLmtvb2x0dW9AaXJ0aW1pZC5uaXZhZw=="],
-    ["Templeton","Steve Tasevski","enc:MTg4IDYxNSAwMTQw","enc:dWEubW9jLmNjbm90ZWxwbWV0QHNyb2ludWo="],
-    ["Upway-Tecoma","Rebecca Jewell","enc:MTk4IDAyMSAyMDQw","enc:bW9jLmtvb2x0dW9AMTBsbGV3ZWphY2NlYmVy"],
-    ["Vermont Cricket Club","Martin Doddrell","enc:ODI5IDgzMSA3MTQw","enc:dWEubW9jLnRla2NpcmN0bm9tcmV2QHNyb2ludWo="],
-    ["Vermont South","Jason Seedy","enc:MjU2IDM0MCAyMTQw","enc:dWEubW9jLnRlbnN1dHBvQHlkZWVzbm9zYWo="],
-    ["Warrandyte","Kris Trevena","enc:MzIyIDA2OCA5MDQw","enc:bW9jLmtvb2x0dW9AYW5ldmVydC5zaXJr"],
-    ["Wyclif","Christina Griffin","enc:Njk5IDUwMyA3MTQw","enc:bW9jLmxpYW10b2hAMDJuaWZmaXJnYw=="],
-    ["Yarraleen","Jack Dullard","enc:MTg2IDY3OCAyMTQw","enc:dWEubW9jLmNjbmVlbGFycmF5QHNyb2ludWo="]
+    ["Ainslie Park","Karen Ridley","0448 448 421",""],
+    ["Blackburn","Amanda Crossland","0419 356 581","juniors@blackburn.org.au"],
+    ["Blackburn South","Sonya O'Farrell","0416 126 476","sonyaofarrell@gmail.com"],
+    ["Box Hill North Super Kings","Jessie Fernando","0419 380 149","juniorcoordinator@superkingscricketacademy.com.au"],
+    ["Bulleen-Templestowe","Tim Moran","0438 502 539","tim.s.moran@gmail.com"],
+    ["Burwood Districts","Abishek Pratap","0402 957 612","abishek.p.singh5@gmail.com"],
+    ["Chirnside Park","David Hughes","0418 501 948","david.b.hughes@effem.com"],
+    ["Doncaster","Stephen Mears","0438 778 466","stmears@bigpond.com"],
+    ["Donvale","Steve Darmody","","donvalesecretary@gmail.com"],
+    ["East Box Hill","Paul Byrne","0414 467 694","juniors@ebhcc.com"],
+    ["East Burwood","Rob Robinson","0433 773 518","rfrobinsorascal@yahoo.com.au"],
+    ["East Ringwood","Ben Taylor","0407 344 818","eastringwoodjcc@gmail.com"],
+    ["Eildon Park","Brad Wilkins","0490 243 607","epccjuniors@gmail.com"],
+    ["Ferntree Gully Cricket Club","David Anstey","0439 152 301","david.anstey@omasystems.com.au"],
+    ["Ferntree Gully Footballers Cricket Club","Thomas Searle","","secretaryfootballerscc@gmail.com"],
+    ["Forest Hill","Marcus Ward","0412 802 107","juniors@foresthillcc.com.au"],
+    ["Glen Waverley","Paul Connaughton","0408 936 969","juniors.gwcc@gmail.com"],
+    ["Glen Waverley Cougars","Graham Oppy","","graham.oppy@monash.edu"],
+    ["Glen Waverley Hawks","Cameron Hocart","0419 133 832","camhocart@hotmail.com"],
+    ["Heatherdale","Justin Box","0438 502 915","juniors@heatherdalecricketclub.com.au"],
+    ["Heathmont","Trent Carr","0414 296 480","juniors@heathmontcc.org.au"],
+    ["Kerrimuir United","Michael Walsh","0457 545 570","kuccjuniors@gmail.com"],
+    ["Knox City","Naish Gadani","0423 346 596","naishadh.gadani@gmail.com"],
+    ["Koonung Heights","Matthew Christensen","0401 222 209","mchristensen@fuserecruitment.com"],
+    ["Laburnum","Michaela Thompson","0439 400 410","juniors.laburnumcricketclub@gmail.com"],
+    ["Lysterfield","Michelle Doherty","","juniors.laburnumcricketclub@gmail.com"],
+    ["Manningham","Liam O'Brien","0439 992 689","liam.r.obrien@gmail.com"],
+    ["Mazenod","Simon Dresser","0424 837 341","mocccjuniors@gmail.com"],
+    ["Mitcham","Steve Tully","0430 292 267","juniors@mitcham.cc"],
+    ["Monash Cricket Club","David James","0419 395 183","david_ski_copper@hotmail.com"],
+    ["Monash Glen Waverley Junior Cricketers","","","gwjcricket@gmail.com"],
+    ["Mountain Gate Cricket Club","Nathan Giulieri","0406 949 232","templton31@hotmail.com"],
+    ["Mulgrave - Wheelers Hill","Dilan Liyanage","0432 586 311","mwhccjunior@gmail.com"],
+    ["Mulgrave Cricket Club","Samuel Rupasinghe","","secretary@mulgravecricketclub.com.au"],
+    ["North Ringwood","Mark Wilkie","0438 563 017","mark@melbtest.com.au"],
+    ["Notting Hill / Brandon Park","Chris Hipwell","0499 923 309","chris.hipwell@hotmail.com"],
+    ["Nunawading","Rob Nurse","0451 143 761","juniors@nunawadingcc.com"],
+    ["Park Orchards","Dean Kruger","0417 110 258","dean@krugercorp.com.au"],
+    ["South Warrandyte Hawks","Josh Exley","0406 066 493","josh.exley@hotmail.com"],
+    ["St Andrew's","Shane Mayoh","0416 296 720","standrewscc.jnr@gmail.com"],
+    ["St David's","Paul Newman","0419 511 711","sammy33@bigpond.net.au"],
+    ["Surrey Hills","Barry Cull","","bazzacull@gmail.com"],
+    ["Templestowe","Gavin Dimitri","0451 308 380","gavin.dimitri@outlook.com"],
+    ["Templeton","Steve Tasevski","0410 516 881","juniors@templetoncc.com.au"],
+    ["Upway-Tecoma","Rebecca Jewell","0402 120 891","rebeccajewell01@outlook.com"],
+    ["Vermont Cricket Club","Martin Doddrell","0417 138 928","juniors@vermontcricket.com.au"],
+    ["Vermont South","Jason Seedy","0412 043 652","jasonseedy@optusnet.com.au"],
+    ["Warrandyte","Kris Trevena","0409 860 223","kris.trevena@outlook.com"],
+    ["Wyclif","Christina Griffin","0417 305 996","cgriffin20@hotmail.com"],
+    ["Yarraleen","Jack Dullard","0412 876 681","juniors@yarraleencc.com.au"]
   ].map(function (r) { return { club: r[0], contact: r[1], number: r[2], email: r[3] }; });
 
   // Sponsors & partners (from the association's sponsor wall)
@@ -319,7 +319,7 @@ window.BHRDCA_DATA = (function () {
   ];
 
   var childSafety = {
-    officer: { role: "Child Safety & Complaints Manager", name: "Ross Kainey", phone: "enc:NDc1IDgyOCA3NTQw", email: "enc:bW9jLmRub3BnaWJAeWVuaWFrLnNzb3I=" },
+    officer: { role: "Child Safety & Complaints Manager", name: "Ross Kainey", phone: "0457 828 574", email: "ross.kainey@bigpond.com" },
     complaints: null,
     policies: [
       { label: "Australian Cricket’s Policy for Safeguarding Children & Young People", url: "https://resources.playcommunity.pulselive.com/playcommunity/document/2024/11/27/9ddd3384-e1e0-4488-9d3a-dc25eaeefa71/Australian-Cricket-s-Policy-for-Safeguarding-Children-Young-People.pdf" },

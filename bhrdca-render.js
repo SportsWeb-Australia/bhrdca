@@ -13,18 +13,12 @@
   }
   function tel(p){ return p ? p.replace(/[^0-9+]/g,"") : ""; }
 
-  /* contact obfuscation helpers live in bhrdca-components.js (window.BHRDCA_CX),
-     shared by every page + inline script; the reveal click-handler is registered
-     there once. These thin wrappers just delegate. */
-  function dec(v){ return (window.BHRDCA_CX ? window.BHRDCA_CX.dec(v) : (v || "")); }
-  function cx(type, enc, label){ return window.BHRDCA_CX ? window.BHRDCA_CX.cx(type, enc, label) : ""; }
-
   function contactCard(c){
     var out = '<div class="bh-ccard">';
     out += '<div class="role">' + esc(c.role) + '</div>';
     out += '<div class="nm">' + esc(c.name || "TBC") + '</div>';
-    if (c.phone) out += cx("tel", c.phone);
-    if (c.email) out += cx("mail", c.email);
+    if (c.phone) out += '<a href="tel:' + tel(c.phone) + '"><i class="ti ti-phone"></i> ' + esc(c.phone) + '</a>';
+    if (c.email) out += '<a href="mailto:' + esc(c.email) + '"><i class="ti ti-mail"></i> ' + esc(c.email) + '</a>';
     out += '</div>';
     return out;
   }
@@ -93,8 +87,8 @@
           + '<div class="ch-row"><span class="ch-role">Secretary</span><span class="ch-val">' + (sec ? esc(sec.name) : "TBC") + '</span></div>'
           + '<div class="ch-row"><span class="ch-role">Treasurer</span><span class="ch-val">' + (treas ? esc(treas.name) : "TBC") + '</span></div>'
           + '<div class="ch-row"><span class="ch-role">Junior Coordinator</span><span class="ch-val">' + (jun ? esc(jun.name) : (jc ? esc(jc.contact) : "TBC")) + '</span></div>'
-          + (jun && jun.email ? '<div class="ch-contact">' + cx("mail", jun.email) + '</div>' : (jc && jc.email ? '<div class="ch-contact">' + cx("mail", jc.email) + '</div>' : ''))
-          + (jun && jun.phone ? '<div class="ch-contact">' + cx("tel", jun.phone) + '</div>' : (jc && jc.number ? '<div class="ch-contact">' + cx("tel", jc.number) + '</div>' : ''))
+          + (jun && jun.email ? '<div class="ch-contact"><i class="ti ti-mail"></i><span>' + esc(jun.email).replace(/([@.])/g, '$1<wbr>') + '</span></div>' : (jc && jc.email ? '<div class="ch-contact"><i class="ti ti-mail"></i><span>' + esc(jc.email).replace(/([@.])/g, '$1<wbr>') + '</span></div>' : ''))
+          + (jun && jun.phone ? '<div class="ch-contact"><i class="ti ti-phone"></i><span>' + esc(jun.phone) + '</span></div>' : (jc && jc.number ? '<div class="ch-contact"><i class="ti ti-phone"></i><span>' + esc(jc.number) + '</span></div>' : ''))
           + (anyReal ? '' : '<div class="ch-flag">Committee details to be confirmed with the club</div>')
           + '</div>';
         var crest = c.logo
@@ -225,8 +219,8 @@
       var m = $(sel); if (!m) return;
       var rows = D.clubContacts || [];
       var body = rows.map(function (r) {
-        var email = r.email ? cx("mail", r.email) : '<span style="color:var(--muted)">&mdash;</span>';
-        var phone = r.number ? cx("tel", r.number) : '<span style="color:var(--muted)">&mdash;</span>';
+        var email = r.email ? '<a href="mailto:' + esc(r.email.split(" ")[0]) + '">' + esc(r.email) + '</a>' : '<span style="color:var(--muted)">&mdash;</span>';
+        var phone = r.number ? '<a href="tel:' + tel(r.number) + '">' + esc(r.number) + '</a>' : '<span style="color:var(--muted)">&mdash;</span>';
         return '<tr><td class="club-nm">' + esc(r.club) + '</td><td>' + esc(r.contact || "&mdash;") + '</td><td>' + phone + '</td><td>' + email + '</td></tr>';
       }).join("");
       m.innerHTML =
@@ -259,8 +253,8 @@
             ? '<div class="spon-logo' + (s.plate ? ' plate' : '') + '"><img src="' + esc(s.logo) + '" alt="' + esc(s.name) + ' logo" loading="lazy" onerror="this.parentNode.classList.add(\'no-img\');this.parentNode.setAttribute(\'data-ini\',\'' + ini + '\');this.remove()"></div>'
             : '<div class="spon-logo no-img" data-ini="' + ini + '"></div>';
           var details = "";
-          if (s.phone)   details += '<div class="spon-row">' + cx("tel", s.phone) + '</div>';
-          if (s.email)   details += '<div class="spon-row">' + cx("mail", s.email) + '</div>';
+          if (s.phone)   details += '<div class="spon-row"><i class="ti ti-phone"></i><a href="tel:' + tel(s.phone) + '">' + esc(s.phone) + '</a></div>';
+          if (s.email)   details += '<div class="spon-row"><i class="ti ti-mail"></i><a href="mailto:' + esc(s.email) + '">' + esc(s.email) + '</a></div>';
           if (s.address) details += '<div class="spon-row"><i class="ti ti-map-pin"></i><span>' + esc(s.address) + '</span></div>';
           return '<div class="spon-card">'
             + logo

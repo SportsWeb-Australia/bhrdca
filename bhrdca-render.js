@@ -288,14 +288,14 @@
       var m = $(sel); if (!m) return;
       var s = (D.sections || {})[key]; if (!s) return;
       var out = '<div class="bh-secintro">'
-        + '<div><div class="block-hed">' + esc(s.name) + ' Cricket</div>'
+        + '<div class="bh-secintro-l"><div class="block-hed">' + esc(s.name) + ' Cricket</div>'
         + '<div class="block-sub" style="font-size:14px;line-height:1.7">' + esc(s.blurb) + '</div>'
         + '<div style="margin-top:16px"><a class="btn btn-red" href="' + esc(D.links.playhq) + '" target="_blank" rel="noopener"><i class="ti ti-scoreboard"></i> Fixtures, Results &amp; Ladders</a></div>'
+        + '<div class="block-hed" style="margin-top:26px">Who to contact</div>'
+        + '<div class="bh-cgrid">' + s.contacts.map(contactCard).join("") + '</div>'
         + '</div>'
         + '<div class="ph">' + (s.image ? '<img src="' + esc(s.image) + '" alt="' + esc(s.name) + ' cricket in the BHRDCA" loading="lazy">' : '<i class="ti ' + esc(s.icon) + '"></i>') + '</div>'
         + '</div>';
-      out += '<div class="block-hed" style="margin-top:34px">Who to contact</div>';
-      out += '<div class="bh-cgrid">' + s.contacts.map(contactCard).join("") + '</div>';
       if (s.resources && s.resources.length) {
         out += '<div class="block-hed" style="margin-top:34px">Resources &amp; Rules</div>';
         out += '<div class="bh-reslist">' + s.resources.map(function (r) {

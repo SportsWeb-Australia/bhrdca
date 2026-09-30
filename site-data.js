@@ -57,6 +57,10 @@ window.BHRDCA_DATA = (function () {
   var sections = {
     juniors: {
       key: "juniors", name: "Juniors", icon: "ti-friends", image: "/sections/juniors-field.webp", imagePos: "center 50%",
+      fixtures: [
+        { label: "Junior Competition — Fixtures & Ladders", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/bhrdca-junior-competition-summer-202627/383bad37" },
+        { label: "Junior Girls — Fixtures & Ladders", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/bhrdca-junior-girls-summer-202627/dc6ca9e3" }
+      ],
       blurb: "Boys & Girls cricket across more than 20 junior grades, playing Friday nights, Saturday and Sunday mornings. New players are always welcome — contact the Junior Section Manager or your local club.",
       contacts: [
         { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" }
@@ -80,6 +84,7 @@ window.BHRDCA_DATA = (function () {
     },
     seniors: {
       key: "seniors", name: "Seniors", icon: "ti-trophy", image: "/gallery/full/img-17-9-12-t20-a-glen-waverley-hawks-v-bhnsk18.webp",
+      fixtures: [{ label: "Fixtures, Results & Ladders", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/bhrdca-senior-competition-summer-202627/77fbfe27" }],
       blurb: "More than 12 Senior grades on Saturdays, plus a mid-week twilight T20 competition. For information on Senior cricket, contact the Competition Assistant or your local club.",
       contacts: [ { role: "Senior Cricket", name: "Beau Nixon", phone: "61 3 9085 8846", email: "bnixon@cricketvictoria.com.au" } ],
       resources: [
@@ -105,6 +110,10 @@ window.BHRDCA_DATA = (function () {
     },
     womens: {
       key: "womens", name: "Women's", icon: "ti-cricket", image: "/sections/womens-helmet.webp",
+      fixtures: [
+        { label: "Senior Women — Fixtures & Ladders", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/bhrdca-senior-women-summer-202627/2b81babd" },
+        { label: "Women's Smash Series — Fixtures & Ladders", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/bhrdca-womens-smash-series-summer-202627/0caf79ce" }
+      ],
       blurb: "Women’s and girls’ cricket is a growing part of the BHRDCA. For information on Women’s cricket, get in touch with our Women’s Cricket contact.",
       contacts: [ { role: "Women's Cricket", name: "Lynda Richardson", phone: "0499 784 888", email: "bhrdca.femalecricket@gmail.com" } ],
       resources: [
@@ -118,6 +127,7 @@ window.BHRDCA_DATA = (function () {
     },
     veterans: {
       key: "veterans", name: "Veterans", icon: "ti-medal", image: "/gallery/full/img-14-7-12-vets-action000000149.webp",
+      fixtures: [{ label: "Eastern Vets — Fixtures & Ladders", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/eastern-veterans-competition-bhrdcardca-summer-202627/72fc8a77" }],
       blurb: "Over 40 & Over 50 Veterans cricket across 8 grades, played Sunday afternoons. A great way to keep playing the game you love.",
       contacts: [ { role: "Veterans Cricket", name: "Michael Whitehead", phone: "0419 523 183", email: "mick_019@msn.com" } ],
       resources: [
@@ -270,7 +280,7 @@ window.BHRDCA_DATA = (function () {
     { name: "Kookaburra Sport", url: "https://www.kookaburrasport.com.au/cricket/", tier: "Premier", logo: "/sponsor-logos/kookaburra-sport.webp" },
     { name: "Cricket Victoria", url: "https://www.cricketvictoria.com.au/", tier: "Premier", logo: "/sponsor-logos/cricket-victoria.webp", plate: true },
     { name: "Field of View Sports Photography", url: "https://www.fieldofview.com.au/", tier: "Premier", logo: "/sponsor-logos/field-of-view.webp" },
-    { name: "SportsWeb Australia", url: "https://sportsweb.com.au", tier: "Premier", logo: "/sponsor-logos/sportsweb-one.webp" },
+    { name: "SportsWeb Australia", url: "https://sportsweb.com.au", tier: "Premier", logo: "/sponsor-logos/sportsweb-one.webp", plate: true },
     { name: "Topline Cricket", url: "https://www.toplinecricket.com.au/", tier: "Partner", logo: "/sponsor-logos/topline-cricket.webp", plate: true },
     { name: "Top Notch Trophies", url: "https://www.topnotchtrophies.com.au/", tier: "Partner", logo: "/sponsor-logos/top-notch-trophies.webp", plate: true },
     { name: "Box Hill Indoor Sports", url: "https://boxhillindoorsports.com.au/sports-and-activities/indoor-cricket/", tier: "Partner", logo: "/sponsor-logos/box-hill-indoor-sports.webp" },
@@ -281,9 +291,9 @@ window.BHRDCA_DATA = (function () {
     { name: "Altegra", url: "https://www.altegra.com.au/", tier: "Community", logo: "/sponsor-logos/altegra.webp", plate: true },
     { name: "Good Sports", url: "https://goodsports.com.au/", tier: "Community", logo: "/sponsor-logos/good-sports.webp" },
     { name: "Child Safe", url: "https://www.childsafe.org.au/", tier: "Community", logo: "/sponsor-logos/child-safe.svg" },
-    { name: "Compare & Connect", url: "https://www.compareandconnect.com.au/", tier: "Premier", logo: "/sponsor-logos/compare-and-connect.webp" },
+    { name: "Compare & Connect", url: "https://www.compareandconnect.com.au/", tier: "Premier", logo: "/sponsor-logos/compare-and-connect.webp", plate: true },
     { name: "LCF Linemarking & Logos", url: "https://grassup.com.au/services", tier: "Partner", logo: "/sponsor-logos/lcf-linemarking.webp", plate: true },
-    { name: "Modern Orthodontics", url: "https://www.modernorthodontics.com.au/", tier: "Premier", logo: "/sponsor-logos/modern-orthodontics.webp" },
+    { name: "Modern Orthodontics", url: "https://www.modernorthodontics.com.au/", tier: "Premier", logo: "/sponsor-logos/modern-orthodontics.webp", plate: true },
     { name: "3WBC Radio", url: "https://www.3wbc.org.au/shows/the-cordon/", tier: "Community", logo: "/sponsor-logos/3wbc-radio.webp" }
   ];
 

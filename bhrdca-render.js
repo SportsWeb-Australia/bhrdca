@@ -290,7 +290,7 @@
       var out = '<div class="bh-secintro">'
         + '<div class="bh-secintro-l"><div class="block-hed">' + esc(s.name) + ' Cricket</div>'
         + '<div class="block-sub" style="font-size:14px;line-height:1.7">' + esc(s.blurb) + '</div>'
-        + '<div style="margin-top:16px"><a class="btn btn-red" href="' + esc(D.links.playhq) + '" target="_blank" rel="noopener"><i class="ti ti-scoreboard"></i> Fixtures, Results &amp; Ladders</a></div>'
+        + '<div class="bh-fixtures" style="margin-top:16px">' + (s.fixtures && s.fixtures.length ? s.fixtures : [{ label: "Fixtures, Results & Ladders", url: D.links.playhq }]).map(function (b) { return '<a class="btn btn-red" href="' + esc(b.url) + '" target="_blank" rel="noopener"><i class="ti ti-scoreboard"></i> ' + esc(b.label) + '</a>'; }).join("") + '</div>'
         + '<div class="block-hed" style="margin-top:26px">Who to contact</div>'
         + '<div class="bh-cgrid">' + s.contacts.map(contactCard).join("") + '</div>'
         + '</div>'

@@ -105,7 +105,7 @@ window.BHRDCA_DATA = (function () {
       ]
     },
     womens: {
-      key: "womens", name: "Women's", icon: "ti-cricket",
+      key: "womens", name: "Women's", icon: "ti-cricket", image: "/sections/womens-helmet.webp",
       blurb: "Women’s and girls’ cricket is a growing part of the BHRDCA. For information on Women’s cricket, get in touch with our Women’s Cricket contact.",
       contacts: [ { role: "Women's Cricket", name: "Lynda Richardson", phone: "0499 784 888", email: "bhrdca.femalecricket@gmail.com" } ],
       resources: [

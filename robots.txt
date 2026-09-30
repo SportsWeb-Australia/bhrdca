@@ -1,3 +1,5 @@
+Sitemap: https://bhrdca.com.au/sitemap.xml
+
 # BHRDCA — Box Hill Reporter District Cricket Association
 # Normal search engines are welcome (helps people find the association).
 # AI/LLM training crawlers and known content harvesters are opted out below.

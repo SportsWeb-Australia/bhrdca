@@ -1,0 +1,36 @@
+# Legacy Wix URLs -> new pages (preserve SEO). Cloudflare Pages auto-serves clean
+# URLs and 301s *.html -> clean, so only remapped/renamed paths are listed here.
+/rules-regulations            /rules            301
+/photo-gallery                /photos           301
+/childsafety                  /child-safety     301
+/history-records              /honours          301
+/past-meetings                /honours          301
+/join-miling-list             /contact          301
+/senior-resources             /seniors          301
+/womens-resources             /womens           301
+/veterans-resources           /veterans         301
+/umpires-resources            /umpires          301
+/resources-juniors            /juniors          301
+/policies                     /rules            301
+/policies-1                   /rules            301
+/match-ratio-ladders          /rules            301
+/match-permits                /rules            301
+/match-day                    /rules            301
+/forms                        /rules            301
+/tribunal                     /rules            301
+/laws-of-cricket              /rules            301
+/events                       /news             301
+/blog                         /news             301
+/items                        /news             301
+/items-1                      /news             301
+/my-cricket                   /                 301
+/copy-of-my-cricket           /                 301
+/vmcu                         /                 301
+/bhrdca                       /about            301
+/copy-of-clubs                /clubs            301
+/copy-of-podcasts             /podcasts         301
+/copy-of-biographies          /biographies      301
+/copy-of-bhrdca-contacts      /contacts         301
+/copy-of-resources            /rules            301
+/copy-of-representative-cricket     /juniors    301
+/copy-of-representative-cricket-24  /juniors    301

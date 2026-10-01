@@ -27,7 +27,8 @@
     M: { lbl: "Men's / Seniors", cls: "gm" },
     F: { lbl: "Women's / Girls", cls: "gf" },
     J: { lbl: "Juniors", cls: "gj" },
-    V: { lbl: "Veterans", cls: "gv" }
+    V: { lbl: "Veterans", cls: "gv" },
+    JG: { lbl: "Junior Girls", cls: "gjg" }
   };
   function normClub(s){ return String(s || "").toLowerCase().replace(/cricket club|c\.c\.c?\.?/g,"").replace(/[^a-z0-9]/g,""); }
   function findClubContact(name){
@@ -119,6 +120,7 @@
     + '<span class="grade-legend-item"><span class="grade-badge gm">M</span> Men\'s / Seniors</span>'
     + '<span class="grade-legend-item"><span class="grade-badge gf">F</span> Women\'s / Girls</span>'
     + '<span class="grade-legend-item"><span class="grade-badge gj">J</span> Juniors</span>'
+    + '<span class="grade-legend-item"><span class="grade-badge gjg">JG</span> Junior Girls</span>'
     + '<span class="grade-legend-item"><span class="grade-badge gv">V</span> Veterans</span>'
     + '<span class="grade-legend-note">Indicative &mdash; to be confirmed with each club. Hover a club for committee contacts.</span>'
     + '</div>';

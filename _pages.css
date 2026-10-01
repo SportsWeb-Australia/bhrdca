@@ -854,6 +854,7 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .grade-badge.gf{background:#c2185b}
 .grade-badge.gj{background:#2e7d32}
 .grade-badge.gv{background:#6a4c93}
+.grade-badge.gjg{background:#ec407a;font-size:8px}
 .grade-badge.gx{background:var(--muted)}
 
 /* club hover card (President/Secretary/Treasurer/Junior Coordinator preview) */

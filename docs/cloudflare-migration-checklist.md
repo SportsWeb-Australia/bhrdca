@@ -8,7 +8,12 @@ Target: move the static site from Vercel staging to **Cloudflare Pages**, live o
 - **robots.txt** — `Sitemap:` line added; normal search engines allowed; AI/harvester crawlers opted out.
 - **_redirects** — 35 legacy Wix URLs 301 → matching new pages (Cloudflare Pages reads this file natively).
 - **404.html** — branded, `noindex`; Cloudflare Pages serves it automatically.
-- **Mobile:** sticky nav fixed (overflow-x clip), tap targets ≥ ~40px, totals collapse on small phones.
+- **Mobile:** sticky nav fixed (overflow-x clip), tap targets ≥ ~40px, totals collapse on small phones. Full sweep (21 pages @ 375/768/1024) = zero horizontal overflow.
+- **Structured data (JSON-LD):** site-wide SportsOrganization + WebSite on every page, plus a per-page BreadcrumbList (navigable ancestors only), injected from `bhrdca-components.js`.
+- **Clean internal links:** all internal links use clean URLs (`/juniors`, home = `/`) — match the canonicals, no redirect hop. External links + `sw.js` precache untouched.
+- **SitePulse feedback widget:** REMOVED from all pages (was `data-website-status="draft"`).
+- **Archive page:** `archive/index-classic-scoreboard.html` set `noindex` + canonical → `/` (was a crawlable homepage-title duplicate).
+- **Meta descriptions:** all pages now in the ~120-160 char range.
 
 ## Cutover steps (do at migration)
 1. **Create the Cloudflare Pages project** from the `SportsWeb-Australia/bhrdca` GitHub repo (production branch = `main`, no build command, output dir = repo root). It auto-picks up `_redirects` and `404.html`.
@@ -24,7 +29,8 @@ Target: move the static site from Vercel staging to **Cloudflare Pages**, live o
   (a) **One-click** in the Pages project → Analytics → enable Web Analytics (no code, no token) — recommended; leave `CF_ANALYTICS_TOKEN` empty; or
   (b) paste the token from Cloudflare dashboard → Web Analytics → JS snippet into `CF_ANALYTICS_TOKEN`.
   Do NOT do both (double-counts). *(task chip created.)*
-- **SitePulse widget** — every page loads `sportsweb-one-v1.vercel.app/sitepulse-widget.js` with `data-website-status="draft"`. Decide whether to keep it live and flip to "published", or remove for launch.
-- **Internal links use `/foo.html`** — Cloudflare Pages 301s these to `/foo`, so they work with one extra hop. Optional polish: rewrite internal links to clean URLs.
+- **Google Search Console** — after DNS cutover, add `bhrdca.com.au` and submit `https://bhrdca.com.au/sitemap.xml`. Same domain, new host → do NOT use Change of Address. *(reminder chip created.)*
+- **PWA push samples (non-blocker)** — `pwa.js` sample notifications reference placeholder pages `/notices.html` and `/competition.html` that don't exist. Push isn't wired to a real sender, so these never fire and aren't crawlable. Point them at real pages if/when push goes live.
+- **Three contact pages (minor)** — `contact.html`, `contacts.html`, `club-contacts.html` all index with distinct titles; topically close. Consider consolidating later; not a cutover blocker.
 - **Old Wix URLs not in the sitemap** (e.g. individual blog posts / dynamic items) — if any had traffic, add extra 301s to `_redirects`.
 - **PlayHQ stats Worker** stays on Cloudflare (already there); no change needed.

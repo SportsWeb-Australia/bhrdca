@@ -380,7 +380,7 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
       return '<div class="lbb-slide">' + inner + '</div>';
     }
     function render(list){
-      list = (list || []).filter(Boolean).slice(0, 3);
+      list = (list || []).filter(Boolean).slice(0, 4);
       if (timer) { clearInterval(timer); timer = null; }
       if (!list.length){ el.hidden = true; el.innerHTML = ""; return; }
       el.hidden = false;

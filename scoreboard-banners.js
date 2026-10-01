@@ -1,6 +1,6 @@
 /* ============================================================================
    BHRDCA — Association Scoreboard rotating banners.
-   Up to 3 banners rotate in the slot above the totals on the homepage board,
+   Up to 4 banners rotate in the slot above the totals on the homepage board,
    the same way the team line-up banners rotate.
 
    MANAGEMENT: for now, banners are set here. The homepage ALSO accepts a
@@ -20,5 +20,7 @@ window.BHRDCA_SCOREBOARD_BANNERS = [
   { title: "139 Seasons of Cricket", sub: "Victoria's longest-running association · Est. 1890", cta: "Our story",
     url: "/about" },
   { title: "Find a Club Near You", sub: "29 clubs across Melbourne's east — Juniors to Veterans", cta: "Browse clubs",
-    url: "/clubs" }
+    url: "/clubs" },
+  { title: "Advertise Here", sub: "Put your brand in front of 3,500+ players & families — partner with the Association", cta: "Enquire now",
+    url: "mailto:bhrdca.media@gmail.com?subject=Advertising%20%26%20Sponsorship%20Enquiry%20-%20BHRDCA" }
 ];

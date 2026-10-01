@@ -263,6 +263,7 @@
             + logo
             + '<div class="spon-body">'
             + '<h3 class="spon-name">' + esc(s.name) + '</h3>'
+            + (s.tag ? '<div class="spon-tag">' + esc(s.tag) + '</div>' : '')
             + (details ? '<div class="spon-details">' + details + '</div>' : '')
             + '<a class="btn btn-red spon-btn" href="' + esc(s.url) + '" target="_blank" rel="noopener">Visit Sponsor <i class="ti ti-arrow-up-right"></i></a>'
             + '</div>'

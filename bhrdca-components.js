@@ -96,7 +96,7 @@
     ["Kookaburra Sport","https://www.kookaburrasport.com.au/cricket/","/sponsor-logos/kookaburra-sport.webp",1],
     ["Cricket Victoria","https://www.cricketvictoria.com.au/","/sponsor-logos/cricket-victoria.webp"],
     ["Field of View Sports Photography","https://www.fieldofview.com.au/","/sponsor-logos/field-of-view.webp"],
-    ["SportsWeb Australia","https://sportsweb.com.au","/sponsor-logos/sportsweb-one.webp"],
+    ["SportsWeb Australia","https://sportsweb.com.au","/sponsor-logos/sportsweb-one.webp",0,"Cricket Websites"],
     ["Topline Cricket","https://www.toplinecricket.com.au/","/sponsor-logos/topline-cricket.webp"],
     ["Top Notch Trophies","https://www.topnotchtrophies.com.au/","/sponsor-logos/top-notch-trophies.webp"],
     ["Box Hill Indoor Sports","https://boxhillindoorsports.com.au/sports-and-activities/indoor-cricket/","/sponsor-logos/box-hill-indoor-sports.webp"],
@@ -117,7 +117,8 @@
       var inner = s[2]
         ? '<img src="' + s[2] + '" alt="' + s[0] + '" loading="lazy" onerror="this.parentNode.classList.add(\'scitxt\');this.parentNode.classList.remove(\'sci-dark\');this.replaceWith(document.createTextNode(\'' + s[0].replace(/'/g, "\\'") + '\'))">'
         : s[0];
-      return '<a href="' + s[1] + '" target="_blank" rel="noopener" class="sci' + (s[2] ? '' : ' scitxt') + (s[3] ? ' sci-dark' : '') + '">' + inner + '</a>';
+      if (s[4]) inner += '<span class="sci-cap">' + s[4] + '</span>';
+      return '<a href="' + s[1] + '" target="_blank" rel="noopener" class="sci' + (s[2] ? '' : ' scitxt') + (s[3] ? ' sci-dark' : '') + (s[4] ? ' sci-cap-tile' : '') + '">' + inner + '</a>';
     }).join("");
     return set + set; // doubled for seamless loop
   }

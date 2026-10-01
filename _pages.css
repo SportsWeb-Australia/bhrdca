@@ -1042,6 +1042,7 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 .lb-val{grid-row:1/3;grid-column:4;align-self:center;font-family:"Bebas Neue",sans-serif;font-size:23px;color:var(--gold);letter-spacing:.02em;text-shadow:0 0 20px rgba(246,194,28,.28)}
 .lb-row-lead .lb-val{font-size:26px}
 .lb-tabs{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:14px}
+.lb-rider{margin:14px auto 2px;max-width:780px;text-align:center;font-size:11.5px;line-height:1.65;color:rgba(255,255,255,.5);font-weight:500}
 .lb-tab{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.8);font-family:"DM Sans",sans-serif;font-weight:600;font-size:12px;letter-spacing:.02em;padding:7px 13px;border-radius:20px;cursor:pointer;transition:all .15s}
 .lb-tab:hover{background:rgba(255,255,255,.1);color:#fff}
 .lb-tab.active{background:var(--gold);border-color:var(--gold);color:var(--ink-gold)}

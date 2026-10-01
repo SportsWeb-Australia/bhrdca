@@ -96,7 +96,7 @@
     ["Kookaburra Sport","https://www.kookaburrasport.com.au/cricket/","/sponsor-logos/kookaburra-sport.webp",1],
     ["Cricket Victoria","https://www.cricketvictoria.com.au/","/sponsor-logos/cricket-victoria.webp"],
     ["Field of View Sports Photography","https://www.fieldofview.com.au/","/sponsor-logos/field-of-view.webp"],
-    ["SportsWeb Australia","https://sportsweb.com.au","/sponsor-logos/sportsweb-one.webp",0,"Cricket Websites"],
+    ["SportsWeb Australia","https://sportsweb.com.au","/sponsor-logos/sportsweb-cricket.webp"],
     ["Topline Cricket","https://www.toplinecricket.com.au/","/sponsor-logos/topline-cricket.webp"],
     ["Top Notch Trophies","https://www.topnotchtrophies.com.au/","/sponsor-logos/top-notch-trophies.webp"],
     ["Box Hill Indoor Sports","https://boxhillindoorsports.com.au/sports-and-activities/indoor-cricket/","/sponsor-logos/box-hill-indoor-sports.webp"],

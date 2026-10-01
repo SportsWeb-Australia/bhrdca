@@ -110,7 +110,17 @@
     el.querySelector(".rdca-pwa-x").onclick = function () { remember(); close(el); };
   }
 
-  if (isStandalone() || dismissedRecently()) return;
+  // Only offer the app install on phones & tablets — not desktop.
+  function isMobileOrTablet() {
+    var ua = navigator.userAgent || "";
+    var mobileUA = /Android|iPhone|iPad|iPod|Mobile|Tablet|Silk|Kindle|PlayBook|BlackBerry|Opera Mini|IEMobile/i.test(ua);
+    // iPadOS 13+ masquerades as Mac — catch it via touch points
+    var iPadOS = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+    var coarse = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+    return mobileUA || iPadOS || (coarse && (navigator.maxTouchPoints || 0) > 0);
+  }
+
+  if (isStandalone() || dismissedRecently() || !isMobileOrTablet()) return;
 
   window.addEventListener("beforeinstallprompt", function (e) {
     e.preventDefault();

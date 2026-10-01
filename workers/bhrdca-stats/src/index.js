@@ -138,29 +138,33 @@ function extractGame(summary) {
 // Long is safe for completed seasons; shorten when a LIVE season needs fresh results.
 const LIST_TTL = 21600; // 6 hours
 
+// Hard season cutover. BEFORE this instant the board stays locked to last
+// season's COMPLETED stats (so a single early FINAL in the new season can't
+// collapse the board to one game). AT/AFTER it the board switches to the
+// current season and fills in as that round's games are scored.
+// Default = Sat 3 Oct 2026 00:00 AEST (i.e. end of Fri 2 Oct). Override without
+// a code change via the SEASON_CUTOVER env var (any ISO-8601 instant).
+const SEASON_CUTOVER_DEFAULT = "2026-10-02T14:00:00Z"; // Sat 3 Oct 2026 00:00 AEST (UTC+10)
+
 /* ------------- resolve the active season per competition --------------- */
-// newest season with >=1 FINAL game, else newest COMPLETED (last-season-first).
+// Clock-based, NOT finals-driven. Before SEASON_CUTOVER: newest COMPLETED season
+// (last season's full board) — a stray early FINAL in the new season can't flip
+// it. At/after SEASON_CUTOVER: newest non-COMPLETED season (the one now being
+// played), which then fills in as games are scored.
 async function resolveSeason(phq, env, seasons, tab) {
-  const ck = `season:${tab.key}`;
+  const cutover = Date.parse(env.SEASON_CUTOVER || SEASON_CUTOVER_DEFAULT);
+  const past = Number.isFinite(cutover) && Date.now() >= cutover;
+  // Era is baked into the cache key so the switch can't be masked by a season
+  // cached just before the cutover instant.
+  const ck = `season:${tab.key}:${past ? "n" : "c"}`;
   const cached = await env.STATS.get(ck, "json");
   if (cached) return cached;
   const mine = seasons
     .filter((s) => tab.match(s.competition ? s.competition.name : ""))
     .sort((a, b) => String(b.name).localeCompare(String(a.name))); // "Summer 2026/27" > "2025/26"
-  let chosen = null;
-  for (const s of mine) {
-    if (s.status === "COMPLETED") { chosen = s; break; }     // completed always has finals
-    const grades = await phq.getAll(`/v1/seasons/${s.id}/grades`, (j) => j.data);
-    let hasFinal = false;
-    for (const g of grades.slice(0, 3)) {
-      let fx = null;
-      try { fx = await phq.get(`/v2/grades/${g.id}/games`); }
-      catch (e) { if (phq.get.isBudgetError(e)) throw e; }  // budget: abort tab, resume next run
-      if (fx && (fx.rounds || []).some((r) => (r.games || []).some((gm) => gm.status === "FINAL"))) { hasFinal = true; break; }
-    }
-    if (hasFinal) { chosen = s; break; }
-  }
-  chosen = chosen || mine[0] || null;
+  const chosen = past
+    ? (mine.find((s) => s.status !== "COMPLETED") || mine[0] || null)
+    : (mine.find((s) => s.status === "COMPLETED") || mine[0] || null);
   if (chosen) await env.STATS.put(ck, JSON.stringify({ id: chosen.id, name: chosen.name, status: chosen.status }), { expirationTtl: LIST_TTL });
   return chosen;
 }

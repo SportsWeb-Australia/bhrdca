@@ -305,7 +305,7 @@ window.BHRDCA_DATA = (function () {
     { label: "BHRDCA Statistics", desc: "Batting, bowling and premiership records, 2008/09 to 2025/26.", icon: "ti-chart-histogram", url: "/documents/bhrdca-statistics-2008-2026.pdf" },
     { label: "Premiership Count", desc: "129 seasons of Top Grade premiership winners, since 1890/91.", icon: "ti-trophy-filled", url: "/documents/bhrdca-premiership-count.pdf" },
     { label: "Life Members", desc: "Those honoured for outstanding service.", icon: "ti-award", url: "/documents/bhrdca-life-members-2026.pdf" },
-    { label: "Biographies", desc: "Profiles of the people who shaped the Association.", icon: "ti-user-star", url: "/biographies.html" },
+    { label: "Biographies", desc: "Profiles of the people who shaped the Association.", icon: "ti-user-star", url: "/biographies" },
     { label: "Hall of Fame", desc: "The BHRDCA's most celebrated cricketers.", icon: "ti-trophy", url: "https://www.bhrdca.com.au/_files/ugd/23872a_a728ad62055d40ae85fb29d05e7a8794.pdf" }
   ];
 

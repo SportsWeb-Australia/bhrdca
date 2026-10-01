@@ -18,7 +18,7 @@ window.BHRDCA_SCOREBOARD_BANNERS = [
   { title: "Fixtures, Results & Ladders", sub: "Live all season on PlayHQ", cta: "Open PlayHQ",
     url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/f8c1124c" },
   { title: "139 Seasons of Cricket", sub: "Victoria's longest-running association · Est. 1890", cta: "Our story",
-    url: "/about.html" },
+    url: "/about" },
   { title: "Find a Club Near You", sub: "29 clubs across Melbourne's east — Juniors to Veterans", cta: "Browse clubs",
-    url: "/clubs.html" }
+    url: "/clubs" }
 ];

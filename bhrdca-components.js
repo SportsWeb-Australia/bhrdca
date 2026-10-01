@@ -58,15 +58,28 @@
     ];
     var crumb = document.querySelector(".crumb");
     if (crumb) {
-      var tail = crumb.textContent.replace(/\s+/g, " ").replace(/^\s*Home\s*/, "").trim();
-      var pageName = tail ? tail.split("·").pop().trim() : "";
-      if (pageName) {
+      // Walk the crumb nodes: each <a> is a navigable ancestor (Home, Honours,
+      // Podcasts, Media...); the final text node is the current page. Plain-text
+      // category labels (e.g. "Cricket", "BHRDCA") are non-navigable and dropped.
+      var trail = [], lastText = "";
+      for (var n = crumb.firstChild; n; n = n.nextSibling) {
+        if (n.nodeType === 1 && n.tagName === "A") {
+          var hv = n.getAttribute("href") || "";
+          trail.push({ name: (n.textContent || "").trim(), item: hv.charAt(0) === "/" ? ORIGIN + hv : hv });
+          lastText = "";
+        } else if (n.nodeType === 3) {
+          var t = n.textContent.replace(/\s+/g, " ").trim();
+          if (t) lastText = t; // remember most recent text; final one is the current page
+        }
+      }
+      var pageName = lastText ? lastText.split("·").pop().trim() : ""; // strip "Category ·" prefix
+      if (pageName) trail.push({ name: pageName, item: canon });
+      if (trail.length > 1) {
         graph.push({
           "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": ORIGIN + "/" },
-            { "@type": "ListItem", "position": 2, "name": pageName, "item": canon }
-          ]
+          "itemListElement": trail.map(function (it, i) {
+            return { "@type": "ListItem", "position": i + 1, "name": it.name, "item": it.item };
+          })
         });
       }
     }
@@ -131,28 +144,28 @@
       + '<div style="display:flex;align-items:center;gap:10px"><img src="' + LOGO + '" alt="BHRDCA" style="width:38px;height:38px;object-fit:contain"><div style="font-family:\'Bebas Neue\',sans-serif;font-size:20px;color:#fff">BHRDCA</div></div>'
       + '<button onclick="document.getElementById(\'mob-menu\').classList.remove(\'open\')" style="background:rgba(255,255,255,.1);border:none;color:#fff;width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center"><i class="ti ti-x" style="font-size:18px"></i></button>'
       + '</div>'
-      + '<a href="/index.html" class="mob-link active"><i class="ti ti-home"></i> Home</a>'
+      + '<a href="/" class="mob-link active"><i class="ti ti-home"></i> Home</a>'
       + '<a href="' + PLAYHQ + '" target="_blank" rel="noopener" class="mob-link"><i class="ti ti-scoreboard"></i> Fixtures, Results &amp; Ladders</a>'
       + '<div class="mob-group">Cricket</div>'
-      + '<a href="/juniors.html" class="mob-link"><i class="ti ti-friends"></i> Juniors</a>'
-      + '<a href="/seniors.html" class="mob-link"><i class="ti ti-trophy"></i> Senior Men</a>'
-      + '<a href="/womens.html" class="mob-link"><i class="ti ti-cricket"></i> Senior Women</a>'
-      + '<a href="/veterans.html" class="mob-link"><i class="ti ti-medal"></i> Veterans</a>'
-      + '<a href="/umpires.html" class="mob-link"><i class="ti ti-gavel"></i> Umpires</a>'
+      + '<a href="/juniors" class="mob-link"><i class="ti ti-friends"></i> Juniors</a>'
+      + '<a href="/seniors" class="mob-link"><i class="ti ti-trophy"></i> Senior Men</a>'
+      + '<a href="/womens" class="mob-link"><i class="ti ti-cricket"></i> Senior Women</a>'
+      + '<a href="/veterans" class="mob-link"><i class="ti ti-medal"></i> Veterans</a>'
+      + '<a href="/umpires" class="mob-link"><i class="ti ti-gavel"></i> Umpires</a>'
       + '<div class="mob-group">Clubs &amp; Community</div>'
-      + '<a href="/clubs.html" class="mob-link"><i class="ti ti-buildings"></i> Our Clubs</a>'
-      + '<a href="/club-contacts.html" class="mob-link"><i class="ti ti-address-book"></i> Club Contacts</a>'
-      + '<a href="/communications.html" class="mob-link"><i class="ti ti-broadcast"></i> Media</a>'
-      + '<a href="/sponsors.html" class="mob-link"><i class="ti ti-heart-handshake"></i> Sponsors &amp; Partners</a>'
-      + '<a href="/news.html" class="mob-link"><i class="ti ti-news"></i> News</a>'
-      + '<a href="/podcasts.html" class="mob-link"><i class="ti ti-microphone"></i> Podcasts</a>'
+      + '<a href="/clubs" class="mob-link"><i class="ti ti-buildings"></i> Our Clubs</a>'
+      + '<a href="/club-contacts" class="mob-link"><i class="ti ti-address-book"></i> Club Contacts</a>'
+      + '<a href="/communications" class="mob-link"><i class="ti ti-broadcast"></i> Media</a>'
+      + '<a href="/sponsors" class="mob-link"><i class="ti ti-heart-handshake"></i> Sponsors &amp; Partners</a>'
+      + '<a href="/news" class="mob-link"><i class="ti ti-news"></i> News</a>'
+      + '<a href="/podcasts" class="mob-link"><i class="ti ti-microphone"></i> Podcasts</a>'
       + '<div class="mob-group">The Association</div>'
-      + '<a href="/about.html" class="mob-link"><i class="ti ti-info-circle"></i> About</a>'
-      + '<a href="/contacts.html" class="mob-link"><i class="ti ti-users"></i> BHRDCA Contacts</a>'
-      + '<a href="/rules.html" class="mob-link"><i class="ti ti-file-text"></i> Rules &amp; Regulations</a>'
-      + '<a href="/child-safety.html" class="mob-link"><i class="ti ti-shield-check"></i> Child Safety</a>'
-      + '<a href="/honours.html" class="mob-link"><i class="ti ti-award"></i> Honours &amp; History</a>'
-      + '<a href="/contact.html" class="mob-link"><i class="ti ti-mail"></i> Contact</a>'
+      + '<a href="/about" class="mob-link"><i class="ti ti-info-circle"></i> About</a>'
+      + '<a href="/contacts" class="mob-link"><i class="ti ti-users"></i> BHRDCA Contacts</a>'
+      + '<a href="/rules" class="mob-link"><i class="ti ti-file-text"></i> Rules &amp; Regulations</a>'
+      + '<a href="/child-safety" class="mob-link"><i class="ti ti-shield-check"></i> Child Safety</a>'
+      + '<a href="/honours" class="mob-link"><i class="ti ti-award"></i> Honours &amp; History</a>'
+      + '<a href="/contact" class="mob-link"><i class="ti ti-mail"></i> Contact</a>'
       + '<div style="margin-top:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)">'
       + '<a class="btn btn-red" style="width:100%;justify-content:center" href="' + PLAYHQ + '" target="_blank" rel="noopener"><i class="ti ti-user-plus"></i> Register / Play</a>'
       + '</div>'
@@ -160,34 +173,34 @@
 
     "header-nav": '<nav class="nav-wrap">'
       + '<div class="nav-inner">'
-      + '<a class="nav-brand" href="/index.html"><img src="' + LOGO + '" alt="BHRDCA" class="nav-logo-img"><div><div class="brand-name">BHRDCA</div><div class="brand-sub">Box Hill Reporter District Cricket Association</div></div></a>'
+      + '<a class="nav-brand" href="/"><img src="' + LOGO + '" alt="BHRDCA" class="nav-logo-img"><div><div class="brand-name">BHRDCA</div><div class="brand-sub">Box Hill Reporter District Cricket Association</div></div></a>'
       + '<div class="nav-links">'
-      + '<a class="nav-link active" href="/index.html">Home</a>'
+      + '<a class="nav-link active" href="/">Home</a>'
       + '<div class="nav-item">'
-      + '<a class="nav-link nav-drop-toggle" href="/seniors.html">Cricket <i class="ti ti-chevron-down" style="font-size:12px"></i></a>'
+      + '<a class="nav-link nav-drop-toggle" href="/seniors">Cricket <i class="ti ti-chevron-down" style="font-size:12px"></i></a>'
       + '<div class="nav-drop">'
-      + '<a href="/juniors.html">Juniors</a>'
-      + '<a href="/seniors.html">Senior Men</a>'
-      + '<a href="/womens.html">Senior Women</a>'
-      + '<a href="/veterans.html">Veterans</a>'
-      + '<a href="/umpires.html">Umpires</a>'
+      + '<a href="/juniors">Juniors</a>'
+      + '<a href="/seniors">Senior Men</a>'
+      + '<a href="/womens">Senior Women</a>'
+      + '<a href="/veterans">Veterans</a>'
+      + '<a href="/umpires">Umpires</a>'
       + '</div>'
       + '</div>'
-      + '<a class="nav-link" href="/clubs.html">Clubs</a>'
-      + '<a class="nav-link" href="/communications.html">Media</a>'
-      + '<a class="nav-link" href="/news.html">News</a>'
-      + '<a class="nav-link" href="/honours.html">Honours</a>'
-      + '<a class="nav-link" href="/child-safety.html">Child Safety</a>'
+      + '<a class="nav-link" href="/clubs">Clubs</a>'
+      + '<a class="nav-link" href="/communications">Media</a>'
+      + '<a class="nav-link" href="/news">News</a>'
+      + '<a class="nav-link" href="/honours">Honours</a>'
+      + '<a class="nav-link" href="/child-safety">Child Safety</a>'
       + '<div class="nav-item">'
-      + '<a class="nav-link nav-drop-toggle" href="/about.html">Association <i class="ti ti-chevron-down" style="font-size:12px"></i></a>'
+      + '<a class="nav-link nav-drop-toggle" href="/about">Association <i class="ti ti-chevron-down" style="font-size:12px"></i></a>'
       + '<div class="nav-drop">'
-      + '<a href="/about.html">About</a>'
-      + '<a href="/contacts.html">BHRDCA Contacts</a>'
-      + '<a href="/club-contacts.html">Club Contacts</a>'
-      + '<a href="/rules.html">Rules &amp; Regulations</a>'
-      + '<a href="/sponsors.html">Sponsors &amp; Partners</a>'
-      + '<a href="/podcasts.html">Podcasts</a>'
-      + '<a href="/contact.html">Contact</a>'
+      + '<a href="/about">About</a>'
+      + '<a href="/contacts">BHRDCA Contacts</a>'
+      + '<a href="/club-contacts">Club Contacts</a>'
+      + '<a href="/rules">Rules &amp; Regulations</a>'
+      + '<a href="/sponsors">Sponsors &amp; Partners</a>'
+      + '<a href="/podcasts">Podcasts</a>'
+      + '<a href="/contact">Contact</a>'
       + '</div>'
       + '</div>'
       + '</div>'
@@ -222,7 +235,7 @@
       + '<div class="footer-top">'
       + '<div>'
       + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">'
-      + '<a href="/index.html" aria-label="BHRDCA home" style="display:inline-flex"><img src="' + LOGO + '" alt="BHRDCA" style="width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))"></a>'
+      + '<a href="/" aria-label="BHRDCA home" style="display:inline-flex"><img src="' + LOGO + '" alt="BHRDCA" style="width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))"></a>'
       + '<div><div style="font-family:\'Bebas Neue\',sans-serif;font-size:20px;color:#fff;letter-spacing:.5px">BHRDCA</div><div style="font-size:10px;color:rgba(255,255,255,.82)">Box Hill Reporter District Cricket Association</div></div>'
       + '</div>'
       + '<div style="font-size:12px;color:rgba(255,255,255,.85);line-height:1.7;max-width:250px;margin-bottom:14px">The longest-running cricket association in Victoria — proudly serving Melbourne\'s eastern suburbs since 1890.</div>'
@@ -233,15 +246,15 @@
       + '</div>'
       + '<div>'
       + '<div class="f-hd">Cricket</div>'
-      + '<a class="f-link" href="/juniors.html">Juniors</a><a class="f-link" href="/seniors.html">Senior Men</a><a class="f-link" href="/womens.html">Senior Women</a><a class="f-link" href="/veterans.html">Veterans</a><a class="f-link" href="/umpires.html">Umpires</a>'
+      + '<a class="f-link" href="/juniors">Juniors</a><a class="f-link" href="/seniors">Senior Men</a><a class="f-link" href="/womens">Senior Women</a><a class="f-link" href="/veterans">Veterans</a><a class="f-link" href="/umpires">Umpires</a>'
       + '</div>'
       + '<div>'
       + '<div class="f-hd">Clubs &amp; Community</div>'
-      + '<a class="f-link" href="/clubs.html">Our Clubs</a><a class="f-link" href="/club-contacts.html">Club Contacts</a><a class="f-link" href="/communications.html">Media</a><a class="f-link" href="/sponsors.html">Sponsors &amp; Partners</a><a class="f-link" href="/news.html">News</a><a class="f-link" href="/podcasts.html">Podcasts</a>'
+      + '<a class="f-link" href="/clubs">Our Clubs</a><a class="f-link" href="/club-contacts">Club Contacts</a><a class="f-link" href="/communications">Media</a><a class="f-link" href="/sponsors">Sponsors &amp; Partners</a><a class="f-link" href="/news">News</a><a class="f-link" href="/podcasts">Podcasts</a>'
       + '</div>'
       + '<div>'
       + '<div class="f-hd">The Association</div>'
-      + '<a class="f-link" href="/about.html">About</a><a class="f-link" href="/contacts.html">BHRDCA Contacts</a><a class="f-link" href="/rules.html">Rules &amp; Regulations</a><a class="f-link" href="/child-safety.html">Child Safety</a><a class="f-link" href="/honours.html">Honours &amp; History</a><a class="f-link" href="/contact.html">Contact</a>'
+      + '<a class="f-link" href="/about">About</a><a class="f-link" href="/contacts">BHRDCA Contacts</a><a class="f-link" href="/rules">Rules &amp; Regulations</a><a class="f-link" href="/child-safety">Child Safety</a><a class="f-link" href="/honours">Honours &amp; History</a><a class="f-link" href="/contact">Contact</a>'
       + '</div>'
       + '</div>'
       + '<div style="border-top:1px solid rgba(255,255,255,.06);padding:14px 20px">'

@@ -25,6 +25,58 @@
     document.head.appendChild(cfb);
   }
 
+  /* --- Structured data (JSON-LD) for Google -------------------------------
+     Site-wide SportsOrganization + WebSite on every page, plus a per-page
+     BreadcrumbList built from the visible ".crumb" trail. One source of truth;
+     Google renders this site's JS to read its (JS-injected) content anyway. */
+  function injectSchema() {
+    if (!document.head || document.getElementById("bhrdca-jsonld")) return;
+    var ORIGIN = "https://bhrdca.com.au";
+    var canon = (document.querySelector('link[rel="canonical"]') || {}).href ||
+                (ORIGIN + location.pathname.replace(/index\.html$/, "").replace(/\.html$/, ""));
+    var graph = [
+      {
+        "@type": "SportsOrganization",
+        "@id": ORIGIN + "/#org",
+        "name": "Box Hill Reporter District Cricket Association",
+        "alternateName": "BHRDCA",
+        "url": ORIGIN + "/",
+        "logo": ORIGIN + "/icon-512.png",
+        "image": ORIGIN + "/bhrdca-hero-sm.webp",
+        "foundingDate": "1890",
+        "sport": "Cricket",
+        "areaServed": "Eastern suburbs of Melbourne, Victoria, Australia",
+        "sameAs": [FB, IG, PLAYHQ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": ORIGIN + "/#website",
+        "url": ORIGIN + "/",
+        "name": "BHRDCA — Box Hill Reporter District Cricket Association",
+        "publisher": { "@id": ORIGIN + "/#org" }
+      }
+    ];
+    var crumb = document.querySelector(".crumb");
+    if (crumb) {
+      var tail = crumb.textContent.replace(/\s+/g, " ").replace(/^\s*Home\s*/, "").trim();
+      var pageName = tail ? tail.split("·").pop().trim() : "";
+      if (pageName) {
+        graph.push({
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": ORIGIN + "/" },
+            { "@type": "ListItem", "position": 2, "name": pageName, "item": canon }
+          ]
+        });
+      }
+    }
+    var s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.id = "bhrdca-jsonld";
+    s.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
+    document.head.appendChild(s);
+  }
+
   // sponsor names for the moving carousel (static chrome, matches association wall)
   var SPONSORS = [
     ["Century Cricket Centre","https://www.cricketcentre.com.au/","/sponsor-logos/century-cricket-centre.webp"],
@@ -264,6 +316,7 @@
     }
     wireNav();
     initCarousel();
+    injectSchema();
   }
 
   window.BHRDCA = window.BHRDCA || {};

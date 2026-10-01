@@ -214,6 +214,7 @@ window.BHRDCA_DATA = (function () {
     { name: "Templestowe", url: "https://www.templestowecc.com/", logo: "/club-logos/templestowe.png", grades: ["M", "F", "J"] },
     { name: "Eley Park", url: "https://www.epcc.com.au/", logo: "/club-logos/eley-park.webp", grades: ["M"] },
     { name: "Glen Waverley Hawks", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/f8c1124c", logo: "/club-logos/glen-waverley-hawks.webp", grades: ["M", "F", "J"] },
+    { name: "Heathmont", url: "https://www.heathmontcc.org.au/", grades: ["JG"] },
     { name: "Monash Morrow", url: "https://monashmorrowcc.org/", logo: "/club-logos/monash-morrow.webp", grades: ["M", "F", "J"] },
     { name: "Mulgrave Wheelers Hill", url: "https://www.mwhcc.com.au/", logo: "/club-logos/mulgrave-wheelers-hill.webp", grades: ["M", "F", "J"] },
     { name: "Vermont South", url: "https://www.vscc.com.au/", logo: "/club-logos/vermont-south.webp", grades: ["M", "F", "J"] },

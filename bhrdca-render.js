@@ -30,17 +30,19 @@
     V: { lbl: "Veterans", cls: "gv" },
     JG: { lbl: "Junior Girls", cls: "gjg" }
   };
-  function normClub(s){ return String(s || "").toLowerCase().replace(/cricket club|c\.c\.c?\.?/g,"").replace(/[^a-z0-9]/g,""); }
+  // Normalise a club name for matching: strip punctuation/spaces, then drop a
+  // trailing "cricket club" / "cc" so "Blackburn North CC" == "Blackburn North".
+  function normClub(s){ return String(s || "").toLowerCase().replace(/[^a-z0-9]/g,"").replace(/(cricketclub|cc)$/,""); }
+  // EXACT match only — prefix matching wrongly pulled another club's details
+  // (e.g. "Blackburn North" -> "Blackburn", "Bulleen Templestowe" -> "Bulleen").
   function findClubContact(name){
     var list = D.clubContacts || [];
     var target = normClub(name);
     if (!target) return null;
-    var hit = null;
     for (var i = 0; i < list.length; i++) {
-      var rn = normClub(list[i].club);
-      if (rn === target || rn.indexOf(target) === 0 || target.indexOf(rn) === 0) { hit = list[i]; break; }
+      if (normClub(list[i].club) === target) return list[i];
     }
-    return hit;
+    return null;
   }
 
   var CC = window.BHRDCA_CLUB_CONTACTS || null;
@@ -48,8 +50,7 @@
     var target = normClub(name);
     if (!target || !list) return null;
     for (var i = 0; i < list.length; i++) {
-      var rn = normClub(list[i].club);
-      if (rn === target || rn.indexOf(target) === 0 || target.indexOf(rn) === 0) return list[i];
+      if (normClub(list[i].club) === target) return list[i];
     }
     return null;
   }

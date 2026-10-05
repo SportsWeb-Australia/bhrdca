@@ -266,7 +266,14 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
         return '<button class="lb-tab" type="button" role="tab" data-grade="' + g.key + '">' + esc(g.label) + '</button>';
       }).join("");
       tabBtns = tabsWrap.querySelectorAll(".lb-tab");
-      tabBtns.forEach(function(b){ b.addEventListener("click", function(){ renderGrade(b.getAttribute("data-grade")); }); });
+      tabBtns.forEach(function(b){ b.addEventListener("click", function(){
+        renderGrade(b.getAttribute("data-grade"));
+        // Tabs change the board's height (empty new-season grades are short), which
+        // reflows the page and can slide the socials below into view. Re-anchor the
+        // board to the top so switching grades always stays on the scoreboard.
+        var board = document.querySelector(".lb-board");
+        if (board) board.scrollIntoView({ block: "start" });
+      }); });
     }
 
     function rowsHTML(list){

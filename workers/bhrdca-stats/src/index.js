@@ -255,6 +255,7 @@ async function buildTab(phq, env, tab, seasons, budget) {
   return {
     label: tab.label,
     seasonName: season.name,
+    seasonStatus: season.status,                        // so a rolled-over board can drop grades with no current season
     roundName: roundName,
     totals: { runs: runs.toLocaleString("en-US"), overs: ballsToOvers(balls), wkts: String(wkts) },
     totalsRaw: { runs, balls, wkts },                  // for the combined "All Grades" tab
@@ -292,6 +293,8 @@ async function aggregate(env) {
   // ONE shared subrequest budget for the whole run (see SUBREQUEST_BUDGET_PER_RUN)
   const budget = { left: SUBREQUEST_BUDGET_PER_RUN };
   const phq = makeClient(env, budget);
+  const cutover = Date.parse(env.SEASON_CUTOVER || SEASON_CUTOVER_DEFAULT);
+  const past = Number.isFinite(cutover) && Date.now() >= cutover;
   let seasons = await env.STATS.get("seasons:all", "json");
   if (!seasons) {
     seasons = await phq.getAll(`/v1/organisations/${env.ORG_ID}/seasons`, (j) => j.data);
@@ -310,7 +313,18 @@ async function aggregate(env) {
   for (const tab of order) {
     const built = await buildTab(phq, env, tab, seasons, budget).catch((e) => (phq.get.isBudgetError(e) ? "BUDGET" : null));
     if (built === "BUDGET") continue;   // out of budget: this tab resumes next run
-    if (!built || (!built.bat.length && !built.bowl.length)) continue;
+    if (!built) continue;               // no matching season / error: keep the previous board's data
+    // Post-cutover, a grade whose only season is last season's (COMPLETED) has no current
+    // season yet (e.g. T20 not created for the new season) — drop it entirely rather than
+    // show stale leaderboards or pollute the All Grades total.
+    if (past && /completed/i.test(built.seasonStatus || "")) { delete data[tab.key]; continue; }
+    // Keep a non-empty previous result ONLY when the new build is empty AND it's the SAME
+    // season — that protects a budget-limited partial run from wiping a finished tab, without
+    // pinning the board to last season once the season rolls over (a new, game-less season
+    // must replace last season's leaderboards, not be discarded).
+    const pt = prev.data && prev.data[tab.key];
+    if (!built.bat.length && !built.bowl.length && pt && pt.seasonName === built.seasonName
+        && ((pt.bat && pt.bat.length) || (pt.bowl && pt.bowl.length))) continue;
     seen[tab.key] = true;
     data[tab.key] = { label: tab.label, seasonName: built.seasonName, roundName: built.roundName, totals: built.totals, bat: built.bat, bowl: built.bowl };
     builtFull.push(built);

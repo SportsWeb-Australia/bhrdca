@@ -49,8 +49,7 @@ window.BHRDCA_DATA = (function () {
 
   var subCommittees = [
     { name: "Disciplinary Tribunal", members: ["David Cowell", "Don Edwards", "Andrew Gill", "Ross Kainey", "Michael Long", "Kevin Rose’meyer"] },
-    { name: "Heritage Committee", members: ["Stephen Tully — Chairman", "Andy Lambert — Historian", "Tristan Davidson (ECA)", "Michael Dwyer", "Warren Earl", "John Toogood", "Nick Tsiotinas", "Michael Van Zuyden"] },
-    { name: "Umpire Appointments Committee", members: ["Trevor McGary — Umpires Appointments"] }
+    { name: "Heritage Committee", members: ["Stephen Tully — Chairman", "Andy Lambert — Historian", "Tristan Davidson (ECA)", "Michael Dwyer", "Warren Earl", "John Toogood", "Nick Tsiotinas", "Michael Van Zuyden"] }
   ];
 
   // Playing sections
@@ -166,8 +165,7 @@ window.BHRDCA_DATA = (function () {
       blurb: "The BHRDCA Umpires Association (BHRDCA UA) supports and appoints umpires across the competition. New umpires and officials are always welcome.",
       contacts: [
         { role: "UA President", name: "Phil Hermann", phone: "0402 384 642", email: "hermanndianne@hotmail.com" },
-        { role: "UA Secretary", name: "Mick Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" },
-        { role: "Umpires Appointments", name: "Trevor McGarry", phone: "0488 287 676", email: "trevormcgary6@gmail.com" }
+        { role: "UA Secretary", name: "Mick Moon", phone: "0481 199 083", email: "secretarybhrdcua2025@gmail.com" }
       ],
       resources: [
         { label: "Umpire Fees", url: "/documents/bhrdca-umpire-fees.pdf" },

@@ -92,7 +92,7 @@
 
   // sponsor names for the moving carousel (static chrome, matches association wall)
   var SPONSORS = [
-    ["Century Cricket Centre","https://www.cricketcentre.com.au/","/sponsor-logos/century-cricket-centre.webp"],
+    ["Greg Chappell Cricket Centre","https://www.cricketcentre.com.au/","/sponsor-logos/century-cricket-centre.webp"],
     ["Kookaburra Sport","https://www.kookaburrasport.com.au/cricket/","/sponsor-logos/kookaburra-sport.webp",1],
     ["Cricket Victoria","https://www.cricketvictoria.com.au/","/sponsor-logos/cricket-victoria.webp"],
     ["Field of View Sports Photography","https://www.fieldofview.com.au/","/sponsor-logos/field-of-view.webp"],

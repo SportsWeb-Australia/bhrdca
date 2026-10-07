@@ -65,10 +65,10 @@ window.BHRDCA_DATA = (function () {
         { role: "Junior Section Manager", name: "Michael Crooks", phone: "0414 603 717", email: "bhrdca.juniormanager@gmail.com" }
       ],
       resources: [
-        { label: "Coaches Code of Behaviour", url: "/documents/bhrdca-coaches-code-of-behaviour.pdf" },
-        { label: "U12 Rules Summary", url: "/documents/bhrdca-u12-rules-summary.pdf" },
-        { label: "U14 Rules Summary", url: "/documents/bhrdca-u14-rules-summary.pdf" },
-        { label: "U16/U18 Rules Summary", url: "/documents/bhrdca-u16-u18-rules-summary.pdf" },
+        { label: "Coaches Code of Behaviour", url: "/documents/bhrdca-coaches-code-of-behaviour-oct2026.pdf" },
+        { label: "U12 Rules Summary", url: "/documents/bhrdca-u12-rules-summary-oct2026.pdf" },
+        { label: "U14 Rules Summary", url: "/documents/bhrdca-u14-rules-summary-oct2026.pdf" },
+        { label: "U16/U18 Rules Summary", url: "/documents/bhrdca-u16-u18-rules-summary-oct2026.pdf" },
         { label: "Cricket Balls Policy", url: "/documents/bhrdca-cricket-balls-2026.pdf" },
         { label: "Attire Policy", url: "/documents/bhrdca-attire-policy.pdf" },
         { label: "2026 Competition Rules", url: "/documents/bhrdca-2026-competition-rules.pdf" },

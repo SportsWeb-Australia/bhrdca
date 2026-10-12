@@ -115,6 +115,7 @@
     </div>
     <div class="lb-tabs" id="lb-tabs" role="tablist"></div>
     <p class="lb-rider">Leaderboards and totals reset at the start of each season and build week by week as results are confirmed in PlayHQ &mdash; so figures are light in the opening rounds and grow as the season goes on. Updates automatically.</p>
+    <div class="lb-updated" id="lb-updated" hidden></div>
   </div>
 
   <aside class="social" aria-label="BHRDCA social feeds">
@@ -362,6 +363,14 @@ window.BHRDCA_STATS_API = "https://bhrdca-stats.carson-cfd.workers.dev/scoreboar
           current = SB.grades[0].key;
           buildTabs();
           renderGrade(current);
+          // "Last updated" stamp from the Worker's meta (Melbourne time)
+          var upd = document.getElementById("lb-updated");
+          if (upd && live.meta && live.meta.updatedAt) {
+            try {
+              upd.textContent = "Last updated " + new Date(live.meta.updatedAt).toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Australia/Melbourne" });
+              upd.hidden = false;
+            } catch (e) {}
+          }
           // SW1-managed banners override the local defaults when the board provides them
           if (live.banners && window.__bhrdcaSetBanners) window.__bhrdcaSetBanners(live.banners);
         })

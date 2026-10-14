@@ -1,0 +1,9 @@
+# Revalidate CSS & JS on every load so a deploy is seen immediately (the ETag
+# returns 304 when unchanged, so this is cheap). Without this, Cloudflare Pages'
+# default max-age=14400 cached the stylesheet/scripts in the browser for 4 hours,
+# so visitors kept seeing the previous deploy's styling until a hard refresh.
+# Images keep the default long cache — they're cache-busted by filename on change.
+/*.css
+  Cache-Control: public, max-age=0, must-revalidate
+/*.js
+  Cache-Control: public, max-age=0, must-revalidate

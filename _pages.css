@@ -960,7 +960,7 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 @media (max-width:640px){#scoreboard-section::before{opacity:.10;border-radius:18px}}
 
 /* Social feeds (communications page) */
-.social-feeds{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+.social-feeds{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px;margin-bottom:48px}
 .social-feed{display:flex;flex-direction:column;gap:12px}
 .social-feed-hd{display:flex;align-items:center;gap:9px;font-family:"Bebas Neue",sans-serif;letter-spacing:.05em;font-size:22px;color:var(--ink-gold);line-height:1}
 .social-feed-frame{background:var(--card);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow2);overflow:hidden;min-height:160px}
@@ -1064,7 +1064,7 @@ body[data-page="umpires"] .bh-secintro .ph{min-height:480px}
 }
 /* Homepage social "Newsroom" block below the board (branded frame around the
    live Facebook page plugin + follow rail) */
-.social{max-width:1152px;margin:40px auto 56px}
+.social{max-width:1152px;margin:40px auto 64px}
 .social-hd{text-align:center;margin-bottom:20px}
 .social-eyebrow{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
 .social-title{font-family:"Bebas Neue",sans-serif;letter-spacing:.03em;font-size:34px;line-height:1;color:var(--navy);margin-top:6px}

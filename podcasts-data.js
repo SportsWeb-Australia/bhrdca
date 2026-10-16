@@ -20,6 +20,7 @@ window.BHRDCA_PODCASTS = {
   host: "Hosted by Paul Hooper, live on 3WBC 94.1FM.",
 
   episodes: [
+    { title: "Episode 3 — 2026/27", date: "Oct 2026", url: "https://open.spotify.com/episode/0a0D4Ywa3zYzFb31m9Ugkq" },
     { title: "Episode 2 — 2026/27", date: "Oct 2026", url: "https://open.spotify.com/episode/1MUULb9rD6OKdd5tujefle" },
     { title: "Episode 1 — 2026/27", date: "Sep 2026", url: "https://open.spotify.com/episode/56g0Fzs3YgeP4gNGBZpAY3" }
   ],

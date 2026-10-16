@@ -197,7 +197,8 @@ window.BHRDCA_DATA = (function () {
   };
 
   // Junior Rep Cricket — duplicates the Juniors section content under its own title.
-  sections.juniorRep = Object.assign({}, sections.juniors, { key: "juniorRep", name: "Junior Rep", image: "/sections/juniors-rep.webp", imagePos: "center top" });
+  sections.juniorRep = Object.assign({}, sections.juniors, { key: "juniorRep", name: "Junior Rep", image: "/sections/juniors-rep.webp", imagePos: "center top",
+    contacts: [ { role: "Representative Cricket", name: "Lynda Richardson", phone: "0499 784 888", email: "bhrdca.treasurer@gmail.com" } ] });
 
   // Member clubs (recognised on the association's "Our Clubs" wall) with websites.
   // NOTE: full 28-club member set + official club logos to be confirmed with BHRDCA.

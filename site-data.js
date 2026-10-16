@@ -228,7 +228,7 @@ window.BHRDCA_DATA = (function () {
     { name: "Glen Waverley Hawks", url: "https://www.playhq.com/cricket-australia/org/box-hill-reporter-district-cricket-association/f8c1124c", logo: "/club-logos/glen-waverley-hawks.webp", grades: ["M", "F", "J"] },
     { name: "Monash Morrow", url: "https://monashmorrowcc.org/", logo: "/club-logos/monash-morrow.webp", grades: ["M", "F", "J"] },
     { name: "Mulgrave Wheelers Hill", url: "https://www.mwhcc.com.au/", logo: "/club-logos/mulgrave-wheelers-hill.webp", grades: ["M", "F", "J"] },
-    { name: "Vermont South", url: "https://www.vscc.com.au/", logo: "/club-logos/vermont-south.webp", grades: ["M", "F", "J"] },
+    { name: "Vermont South", url: "https://www.vscc.com.au/", logo: "/club-logos/vermont-south-hawk.webp", grades: ["M", "F", "J"] },
     { name: "Wyclif", url: "https://www.wyclif.com.au/", logo: "/club-logos/wyclif.webp", grades: ["M", "F", "J"] },
     { name: "Yarraleen", url: "https://www.yarraleencc.com.au/", logo: "/club-logos/yarraleen.webp", grades: ["M", "J"] }
   ];
